@@ -407,12 +407,12 @@ const mockEducation = [
     field_of_study: "Software Development",
     school: "Southern Alberta Institute of Technology",
     start_date: "2024-01-01",
-    end_date: "2026-03-01",
+    end_date: "2025-12-01",
     is_current: true,
     location: "Calgary, AB",
-    achievements: ["Expected Graduation: March 2026", "Focus on Full-Stack Development", "Hands-on Project Experience"],
+    achievements: ["Expected Graduation: December 2025", "Focus on Full-Stack Development", "Hands-on Project Experience"],
     description:
-      "Comprehensive program covering modern software development practices, full-stack web development, and industry-standard tools and technologies.",
+      "Comprehensive diploma program focused on modern software development practices, covering full-stack web development, mobile application development, database management, and software engineering principles. Gained hands-on experience with industry-standard tools and technologies including React, React Native, .NET MAUI, Python, C#, MySQL, PostgreSQL, and modern development workflows using Git, Jira, and Agile methodologies.",
   },
   {
     id: 2,
@@ -422,15 +422,16 @@ const mockEducation = [
     start_date: "2012-06-01",
     end_date: "2017-05-01",
     is_current: false,
-    location: "Philippines",
+    location: "Manila, Philippines",
     achievements: [
       "Dean Lister (2014-2016)",
       "Emerson Scholarship Program",
       "Bobby Eusebio Scholarship Program",
       "College of Engineering and Industrial Technology Business Manager",
+      "Broadkast ng Talino 2017 (Top 20 Finalist)",
     ],
     description:
-      "Comprehensive engineering program with focus on electronics systems, circuit design, and engineering principles.",
+      "Comprehensive engineering degree program specializing in electronics systems design, circuit analysis, microcontroller programming, and telecommunications. Developed strong analytical and problem-solving skills through rigorous coursework in mathematics, physics, and engineering principles. Recognized for academic excellence as a consistent Dean Lister and recipient of prestigious scholarship programs. Served as Business Manager for the College of Engineering and Industrial Technology, demonstrating leadership and organizational capabilities.",
   },
 ]
 
