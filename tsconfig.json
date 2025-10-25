@@ -37,7 +37,6 @@
   ],
   "exclude": [
     "node_modules",
-    "FitMindAI_App/**",
     "lib/supabase/**"
   ]
 }
