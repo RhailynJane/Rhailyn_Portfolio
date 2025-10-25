@@ -1299,7 +1299,7 @@ function HeroSection(param) {
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex flex-wrap justify-center gap-2 max-w-4xl mx-auto",
                                 children: techStack.map((tech, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Badge"], {
-                                        className: "bg-white/10 text-white border-purple-400/30 hover:bg-purple-500/20 hover:border-purple-400/50 transition-all duration-300 hover:scale-105 animate-fade-in backdrop-blur-sm",
+                                        className: "bg-purple-100 dark:bg-white/10 text-purple-700 dark:text-white border-purple-300 dark:border-purple-400/30 hover:bg-purple-200 dark:hover:bg-purple-500/20 hover:border-purple-400 dark:hover:border-purple-400/50 transition-all duration-300 hover:scale-105 animate-fade-in backdrop-blur-sm",
                                         style: {
                                             animationDelay: "".concat(index * 100, "ms")
                                         },

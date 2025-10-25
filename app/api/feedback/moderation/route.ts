@@ -14,8 +14,9 @@ export async function GET(req: Request) {
   try {
     const feedback = await prisma.feedback.findMany({ orderBy: { createdAt: "desc" } })
     return NextResponse.json(feedback)
-  } catch {
-    return NextResponse.json({ error: "Failed" }, { status: 500 })
+  } catch (e) {
+    console.error("Database error in moderation GET:", e)
+    return NextResponse.json([])
   }
 }
 
@@ -25,8 +26,9 @@ export async function PATCH(req: Request) {
     const body = await req.json()
     await prisma.feedback.update({ where: { id: body.id }, data: { approved: true } })
     return NextResponse.json({ success: true })
-  } catch {
-    return NextResponse.json({ error: "Failed" }, { status: 500 })
+  } catch (e) {
+    console.error("Database error in moderation PATCH:", e)
+    return NextResponse.json({ success: false, error: "Database unavailable" }, { status: 500 })
   }
 }
 
@@ -37,7 +39,8 @@ export async function DELETE(req: Request) {
     const id = searchParams.get("id") as string
     await prisma.feedback.delete({ where: { id } })
     return NextResponse.json({ success: true })
-  } catch {
-    return NextResponse.json({ error: "Failed" }, { status: 500 })
+  } catch (e) {
+    console.error("Database error in moderation DELETE:", e)
+    return NextResponse.json({ success: false, error: "Database unavailable" }, { status: 500 })
   }
 }

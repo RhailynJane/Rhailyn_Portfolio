@@ -106,7 +106,7 @@ export function HeroSection({ onScrollToAbout, translations }: HeroSectionProps)
             {techStack.map((tech, index) => (
               <Badge
                 key={tech}
-                className={`bg-white/10 text-white border-purple-400/30 hover:bg-purple-500/20 hover:border-purple-400/50 transition-all duration-300 hover:scale-105 animate-fade-in backdrop-blur-sm`}
+                className={`bg-purple-100 dark:bg-white/10 text-purple-700 dark:text-white border-purple-300 dark:border-purple-400/30 hover:bg-purple-200 dark:hover:bg-purple-500/20 hover:border-purple-400 dark:hover:border-purple-400/50 transition-all duration-300 hover:scale-105 animate-fade-in backdrop-blur-sm`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {tech}
