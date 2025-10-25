@@ -14,10 +14,11 @@ A modern, responsive portfolio website built with Next.js, featuring dynamic con
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Next.js 14, React, TypeScript
+- **Frontend**: Next.js 15, React 19, TypeScript
 - **Styling**: Tailwind CSS, Radix UI Components
-- **Database**: Supabase (PostgreSQL)
-- **Deployment**: Vercel
+- **Database**: PostgreSQL via Prisma ORM
+- **Authentication**: HTTP Basic Auth for admin
+- **Deployment**: Vercel-ready
 - **Icons**: Lucide React
 - **Fonts**: Geist, Manrope
 
@@ -27,60 +28,55 @@ A modern, responsive portfolio website built with Next.js, featuring dynamic con
 
 - Node.js 18+ 
 - npm or yarn
-- Supabase account
+- PostgreSQL database
 
 ### Installation
 
 1. **Clone the repository**
-   \`\`\`bash
+   ```bash
    git clone https://github.com/yourusername/portfolio.git
    cd portfolio
-   \`\`\`
+   ```
 
 2. **Install dependencies**
-   \`\`\`bash
+   ```bash
    npm install
-   \`\`\`
+   ```
 
 3. **Set up environment variables**
    Create a `.env.local` file in the root directory:
-   \`\`\`env
-   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-   \`\`\`
+   ```env
+   DATABASE_URL="postgresql://user:password@host:port/database"
+   ADMIN_USER=admin
+   ADMIN_PASSWORD=your_secure_password
+   ```
 
-4. **Set up Supabase database**
-   Run the SQL scripts in your Supabase dashboard in this order:
-   \`\`\`sql
-   scripts/01-create-projects-table.sql
-   scripts/02-create-blogs-table.sql
-   scripts/03-create-feedback-table.sql
-   scripts/04-create-skills-tables.sql
-   scripts/05-create-experience-table.sql
-   scripts/06-create-education-table.sql
-   scripts/07-create-certifications-table.sql
-   \`\`\`
+4. **Set up database**
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
 
 5. **Run the development server**
-   \`\`\`bash
+   ```bash
    npm run dev
-   \`\`\`
+   ```
 
    Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 
 ## 📁 Project Structure
 
-\`\`\`
+```
 ├── app/                    # Next.js app directory
-│   ├── blog/[id]/         # Dynamic blog post pages
+│   ├── admin/             # Admin moderation panel
+│   ├── api/               # API routes (feedback)
 │   ├── projects/[id]/     # Dynamic project detail pages
 │   ├── globals.css        # Global styles and animations
 │   ├── layout.tsx         # Root layout with theme provider
 │   └── page.tsx           # Main portfolio page
 ├── components/            # React components
-│   ├── ui/               # Reusable UI components
+│   ├── ui/               # Reusable UI components (shadcn/ui)
 │   ├── about-section.tsx # About section with experience
-│   ├── blog-section.tsx  # Blog listing and management
 │   ├── contact-section.tsx # Contact form and info
 │   ├── feedback-section.tsx # Testimonials and feedback
 │   ├── hero-section.tsx  # Animated hero section
@@ -88,13 +84,16 @@ A modern, responsive portfolio website built with Next.js, featuring dynamic con
 │   ├── sidebar-navigation.tsx # Mobile drawer navigation
 │   └── skills-section.tsx # Skills and technologies
 ├── lib/                  # Utility functions
-│   ├── supabase/        # Supabase client configuration
-│   ├── data-service.ts  # Database operations
+│   ├── prisma.ts        # Prisma client singleton
+│   ├── data-service.ts  # Data access layer
 │   └── translations.ts  # Multi-language content
+├── prisma/              # Database schema and migrations
+│   ├── schema.prisma    # Prisma schema definition
+│   └── seed.ts          # Database seed script
 ├── hooks/               # Custom React hooks
-├── scripts/            # Database setup scripts
-└── public/            # Static assets
-\`\`\`
+├── middleware.ts        # Next.js middleware (auth)
+└── public/              # Static assets
+```
 
 ## 🌐 Multi-language Support
 
@@ -115,10 +114,14 @@ The color scheme is defined in `app/globals.css`:
 
 ### Adding Content
 
-1. **Projects**: Add entries to the `projects` table in Supabase
-2. **Blog Posts**: Add entries to the `blogs` table
-3. **Skills**: Update the `skill_categories` and `skills` tables
-4. **Experience**: Add work history to the `experience` table
+Content is managed through `lib/data-service.ts`. You can:
+1. **Projects**: Update the projects array with your work
+2. **Skills**: Modify skill categories and items
+3. **Experience**: Add your work history
+4. **Education**: Update your educational background
+5. **Certifications**: Add professional certifications
+
+For dynamic content via database, use Prisma to manage the Feedback model.
 
 ## 🚀 Deployment
 
@@ -126,22 +129,23 @@ The color scheme is defined in `app/globals.css`:
 
 1. **Connect your repository** to Vercel
 2. **Add environment variables** in Vercel dashboard:
-   - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `DATABASE_URL` (PostgreSQL connection string)
+   - `ADMIN_USER` (for moderation panel)
+   - `ADMIN_PASSWORD` (for moderation panel)
 3. **Deploy** - Vercel will automatically build and deploy your portfolio
 
 ### Database Setup
-Ensure all SQL scripts are executed in your Supabase project before deployment.
+Ensure your PostgreSQL database has the Feedback table created via `npx prisma db push` before deployment.
 
 ## 📱 Features Overview
 
 - **Hero Section**: Animated introduction with contact information
 - **About**: Professional background, education, and certifications
 - **Skills**: Interactive skill categories with proficiency levels
-- **Projects**: Detailed project showcase with GitHub links
-- **Blog**: Article management system with search and categories
-- **Contact**: Functional contact form with social media links
-- **Feedback**: Testimonial system for client reviews
+- **Projects**: Detailed project showcase with GitHub and Figma links
+- **Contact**: Contact information with social media links
+- **Feedback**: Testimonial system with admin moderation
+- **Admin Panel**: Secure moderation dashboard at `/admin` (HTTP Basic Auth)
 
 ## 🤝 Contributing
 
@@ -165,7 +169,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - Built with [Next.js](https://nextjs.org/)
-- UI components from [Radix UI](https://radix-ui.com/)
+- UI components from [Radix UI](https://radix-ui.com/) and [shadcn/ui](https://ui.shadcn.com/)
 - Styled with [Tailwind CSS](https://tailwindcss.com/)
-- Database powered by [Supabase](https://supabase.com/)
+- Database powered by [Prisma](https://prisma.io/) + PostgreSQL
 - Deployed on [Vercel](https://vercel.com/)
