@@ -6,73 +6,88 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, Github, ExternalLink, Play, Calendar, Users, Code } from "lucide-react"
 import { useRouter, useParams } from "next/navigation"
 import { useTranslation } from "@/hooks/use-translation"
+import { dataService } from "@/lib/data-service"
+import { useEffect, useState } from "react"
 
-// Mock project data - in a real app, this would come from a database or API
-const projects = [
-  {
-    id: "library-management",
-    title: "Library Management Application",
-    description:
-      "A comprehensive library management system built with Python featuring book search, borrowing, and inventory tracking capabilities.",
-    longDescription:
-      "This application was developed as part of the SAIT Level Up Project, focusing on core library management functionalities. The system allows users to search for books by title, author, ISBN, or genre, and includes comprehensive borrowing and returning features with real-time availability tracking. The project demonstrates proficiency in object-oriented programming, file handling, and version control workflows.",
-    image: "/library-management-system.png",
-    technologies: ["Python", "Object-Oriented Programming", "File Handling", "CSV", "Git", "GitHub"],
-    category: "Backend Development",
-    github: "https://github.com/ConaRhai/library_management_app.git",
-    demo: "",
-    videoUrl: "/placeholder.mp4?query=library management system demo video",
-    features: [
-      "Book search by multiple criteria (title, author, ISBN, genre)",
-      "Borrowing and returning system with availability tracking",
-      "Inventory management and book cataloging",
-      "CSV file handling for persistent data storage",
-      "User-friendly command-line interface",
-    ],
-    challenges:
-      "Implementing efficient search algorithms and managing data persistence without a traditional database.",
-    outcome:
-      "Successfully delivered a fully functional library management system that demonstrates core programming principles and effective project management.",
-    duration: "2 months",
-    team: "Solo Project",
-    date: "August 2024",
-  },
-  {
-    id: "dog-care",
-    title: "Dog Care Project",
-    description:
-      "A responsive web application for dog care services with interactive UI elements and cross-device compatibility.",
-    longDescription:
-      "This project showcases modern web development practices with a focus on responsive design and user experience. Built using HTML, CSS, and JavaScript, the application provides an engaging interface for dog care services with dynamic elements and interactive features.",
-    image: "/dog-care-website.png",
-    technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Git", "GitHub"],
-    category: "Frontend Development",
-    github: "https://github.com/RhailynJane/Project_DogCare.git",
-    demo: "",
-    videoUrl: "/placeholder.mp4?query=dog care website demo with responsive design",
-    features: [
-      "Fully responsive design for all device sizes",
-      "Interactive UI elements and animations",
-      "Modern CSS layouts and styling",
-      "Cross-browser compatibility",
-      "Optimized performance and loading times",
-    ],
-    challenges:
-      "Ensuring consistent user experience across different devices and browsers while maintaining performance.",
-    outcome: "Created an engaging, responsive web application that demonstrates proficiency in frontend technologies.",
-    duration: "1 month",
-    team: "Solo Project",
-    date: "August 2024",
-  },
-  // Add more projects as needed
-]
+interface Project {
+  id: string
+  title: string
+  description: string
+  longDescription: string
+  image: string
+  technologies: string[]
+  category: string
+  github: string
+  demo: string
+  videoUrl: string
+  features: string[]
+  challenges: string
+  outcome: string
+  duration: string
+  team: string
+  date: string
+}
 
 export default function ProjectDetailPage() {
   const router = useRouter()
   const params = useParams()
   const { t } = useTranslation()
 
-  const project = projects.find((p) => p.id === params.id)
+  const [project, setProject] = useState<Project | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        setLoading(true)
+        const projectData = await dataService.getProjectById(params.id as string)
+        if (projectData) {
+          // Transform the data to match the expected interface
+          const transformedProject: Project = {
+            id: projectData.id,
+            title: projectData.title,
+            description: projectData.description,
+            longDescription: projectData.long_description || projectData.description,
+            image: projectData.image_url || "/placeholder.svg",
+            technologies: projectData.technologies || [],
+            category: projectData.category,
+            github: projectData.github_url || "",
+            demo: projectData.demo_url || "",
+            videoUrl: projectData.video_url || "",
+            features: (projectData as any).features || [],
+            challenges:
+              (projectData as any).challenges || "Various technical challenges were overcome during development.",
+            outcome: (projectData as any).outcome || "Successfully completed project meeting all requirements.",
+            duration: (projectData as any).duration || "Not specified",
+            team: (projectData as any).team_size || "Solo Project",
+            date:
+              new Date(projectData.created_at).toLocaleDateString("en-US", { month: "long", year: "numeric" }) ||
+              "Not specified",
+          }
+          setProject(transformedProject)
+        }
+      } catch (error) {
+        console.error("Error fetching project:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (params.id) {
+      fetchProject()
+    }
+  }, [params.id])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading project details...</p>
+        </div>
+      </div>
+    )
+  }
 
   if (!project) {
     return (
@@ -143,17 +158,19 @@ export default function ProjectDetailPage() {
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground font-serif leading-relaxed">{project.longDescription}</p>
 
-                <div>
-                  <h4 className="font-semibold mb-2">Key Features:</h4>
-                  <ul className="space-y-2">
-                    {project.features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                        <span className="text-muted-foreground font-serif">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {project.features && project.features.length > 0 && (
+                  <div>
+                    <h4 className="font-semibold mb-2">Key Features:</h4>
+                    <ul className="space-y-2">
+                      {project.features.map((feature, index) => (
+                        <li key={index} className="flex items-start gap-2">
+                          <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
+                          <span className="text-muted-foreground font-serif">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
                 <div>
                   <h4 className="font-semibold mb-2">Challenges & Solutions:</h4>
@@ -223,6 +240,7 @@ export default function ProjectDetailPage() {
                       View on GitHub
                     </a>
                   </Button>
+                  
                 )}
                 {project.demo && (
                   <Button asChild variant="outline" className="w-full bg-transparent">

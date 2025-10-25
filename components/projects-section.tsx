@@ -3,9 +3,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Github, Calendar, Code } from "lucide-react"
+import { Github, Calendar, ExternalLink } from "lucide-react"
 import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
 import { dataService } from "@/lib/data-service"
 import type { Translation } from "@/lib/translations"
 
@@ -16,10 +15,11 @@ interface Project {
   long_description?: string
   technologies: string[]
   category: string
-  github_url?: string
-  demo_url?: string
-  video_url?: string
-  image_url?: string
+  github_url?: string | null
+  demo_url?: string | null
+  video_url?: string | null
+  image_url?: string | null
+  figma_url?: string | null
   featured: boolean
   status: string
   created_at: string
@@ -33,7 +33,6 @@ interface ProjectsSectionProps {
 export function ProjectsSection({ translations }: ProjectsSectionProps) {
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
-  const router = useRouter()
 
   useEffect(() => {
     const loadProjects = async () => {
@@ -50,16 +49,12 @@ export function ProjectsSection({ translations }: ProjectsSectionProps) {
     loadProjects()
   }, [])
 
-  const handleViewDetails = (projectId: string) => {
-    router.push(`/projects/${projectId}`)
-  }
-
   if (loading) {
     return (
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center">
-            <p className="text-muted-foreground">Loading projects...</p>
+            <p className="text-white ">Loading projects...</p>
           </div>
         </div>
       </section>
@@ -71,8 +66,8 @@ export function ProjectsSection({ translations }: ProjectsSectionProps) {
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-bold text-foreground font-sans">{translations.projects.title}</h2>
-          <p className="text-xl text-muted-foreground font-serif max-w-3xl mx-auto">{translations.projects.subtitle}</p>
+          <h2 className="text-4xl lg:text-5xl font-bold text-white  font-sans">{translations.projects.title}</h2>
+          <p className="text-xl text-white  font-serif max-w-3xl mx-auto">{translations.projects.subtitle}</p>
         </div>
 
         {/* Projects Grid */}
@@ -110,15 +105,29 @@ export function ProjectsSection({ translations }: ProjectsSectionProps) {
                 </div>
 
                 <div className="flex gap-2 pt-2">
-                  <Button variant="default" size="sm" className="flex-1" onClick={() => handleViewDetails(project.id)}>
-                    <Code className="h-4 w-4 mr-2" />
-                    {translations.projects.viewDetails}
-                  </Button>
+                  {project.demo_url && project.demo_url !== "#" && (
+                    <Button variant="default" size="sm" className="flex-1" asChild>
+                      <a href={project.demo_url} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        View Demo
+                      </a>
+                    </Button>
+                  )}
 
                   {project.github_url && project.github_url !== "#" && (
-                    <Button variant="outline" size="sm" asChild>
+                    <Button variant="outline" size="sm" asChild className={project.demo_url && project.demo_url !== "#" ? "" : "flex-1"}>
                       <a href={project.github_url} target="_blank" rel="noopener noreferrer">
-                        <Github className="h-4 w-4" />
+                        <Github className="h-4 w-4 mr-2" />
+                        GitHub
+                      </a>
+                    </Button>
+                  )}
+
+                  {project.figma_url && (
+                    <Button variant="outline" size="sm" asChild>
+                      <a href={project.figma_url} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        Figma
                       </a>
                     </Button>
                   )}

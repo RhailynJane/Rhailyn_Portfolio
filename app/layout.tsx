@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { Geist } from "next/font/google"
 import { Manrope } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeContextProvider } from "@/components/theme-context"
 import { Toaster } from "@/components/toaster"
 
 const geist = Geist({
@@ -31,10 +31,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable} ${manrope.variable} antialiased`} suppressHydrationWarning={true}>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+        <ThemeContextProvider>
           {children}
           <Toaster />
-        </ThemeProvider>
+        </ThemeContextProvider>
       </body>
     </html>
   )

@@ -4,8 +4,8 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
-import { Home, User, Code, FolderOpen, BookOpen, Mail, MessageSquare, Menu, Sun, Moon, Languages } from "lucide-react"
-import { useTheme } from "next-themes"
+import { Home, User, Code, FolderOpen, Mail, MessageSquare, Menu, Sun, Moon, Languages } from "lucide-react"
+import { useThemeContext } from "@/components/theme-context"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import type { Translation } from "@/lib/translations"
 
@@ -14,7 +14,6 @@ const navigationItems = [
   { id: "about", label: "about", icon: User },
   { id: "skills", label: "skills", icon: Code },
   { id: "projects", label: "projects", icon: FolderOpen },
-  { id: "blogs", label: "blogs", icon: BookOpen },
   { id: "contact", label: "contact", icon: Mail },
   { id: "feedbacks", label: "feedbacks", icon: MessageSquare },
 ]
@@ -40,7 +39,7 @@ export function SidebarNavigation({
   onLanguageChange,
   translations,
 }: SidebarNavigationProps) {
-  const { theme, setTheme } = useTheme()
+  const { theme, toggleTheme } = useThemeContext()
   const [isOpen, setIsOpen] = useState(false)
 
   const NavigationContent = () => (
@@ -88,7 +87,7 @@ export function SidebarNavigation({
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          onClick={toggleTheme}
           className="w-full justify-start gap-3 text-gray-300 hover:bg-white/10 hover:text-white"
         >
           {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}

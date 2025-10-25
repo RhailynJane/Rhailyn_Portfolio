@@ -1,0 +1,9 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/api/feedback/route": "/api/feedback",
+  "/api/feedback/moderation/route": "/api/feedback/moderation",
+  "/favicon.ico/route": "/favicon.ico",
+  "/projects/[id]/page": "/projects/[id]",
+  "/page": "/",
+  "/admin/page": "/admin"
+}

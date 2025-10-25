@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Mail, Phone, MapPin, Linkedin, Github, Send, MessageSquare } from "lucide-react"
+import { Mail, MapPin, Linkedin, Github, Send, MessageSquare } from "lucide-react"
 import { useState } from "react"
 import { useToast } from "../components/ui/use-toast"
 import type { Translation } from "@/lib/translations"
@@ -50,15 +50,15 @@ export function ContactSection({ translations }: ContactSectionProps) {
   const contactInfo = [
     {
       icon: Mail,
-      label: translations.contact.email,
+      label: "Personal Email",
       value: "crhailynjane@gmail.com",
       href: "mailto:crhailynjane@gmail.com",
     },
     {
-      icon: Phone,
-      label: "Phone",
-      value: "+(1403)-540-9188",
-      href: "tel:+14035409188",
+      icon: Mail,
+      label: "Professional Email",
+      value: "contact@rhailyncona.dev",
+      href: "mailto:contact@rhailyncona.dev",
     },
     {
       icon: MapPin,
@@ -83,8 +83,8 @@ export function ContactSection({ translations }: ContactSectionProps) {
     },
     {
       icon: Mail,
-      label: translations.contact.email,
-      href: "mailto:crhailynjane@gmail.com",
+      label: "Email",
+      href: "mailto:contact@rhailyncona.dev",
       color: "text-red-600",
     },
   ]
@@ -94,8 +94,8 @@ export function ContactSection({ translations }: ContactSectionProps) {
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-bold text-foreground font-sans">{translations.contact.title}</h2>
-          <p className="text-xl text-muted-foreground font-serif max-w-3xl mx-auto">{translations.contact.subtitle}</p>
+          <h2 className="text-4xl lg:text-5xl font-bold text-white font-sans">{translations.contact.title}</h2>
+          <p className="text-xl text-white font-serif max-w-3xl mx-auto">{translations.contact.subtitle}</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
@@ -245,24 +245,6 @@ export function ContactSection({ translations }: ContactSectionProps) {
                       </Button>
                     )
                   })}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Availability */}
-            <Card className="border-primary/20 shadow-lg bg-gradient-to-r from-primary/5 to-secondary/5">
-              <CardContent className="pt-6">
-                <div className="text-center space-y-3">
-                  <h3 className="font-semibold font-sans">{translations.contact.currentlyAvailable}</h3>
-                  <p className="text-sm text-muted-foreground font-serif">
-                    {translations.contact.availabilityDescription}
-                  </p>
-                  <div className="flex justify-center gap-2">
-                    <Button variant="outline" size="sm">
-                      {translations.contact.viewResume}
-                    </Button>
-                    <Button size="sm">{translations.contact.scheduleCall}</Button>
-                  </div>
                 </div>
               </CardContent>
             </Card>

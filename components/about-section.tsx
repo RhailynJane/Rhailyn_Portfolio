@@ -39,13 +39,23 @@ export function AboutSection({ translations }: AboutSectionProps) {
     fetchData()
   }, [])
 
-  const formatPeriod = (startDate: string, endDate: string | null, isCurrent: boolean) => {
-    const start = new Date(startDate).toLocaleDateString("en-US", { month: "2-digit", year: "numeric" })
-    if (isCurrent || !endDate) {
-      return `${start} - Present`
+const formatPeriod = (startDate: string, endDate: string | null, isCurrent: boolean) => {
+    // Parse date string directly to avoid timezone issues
+    const parseDate = (dateString: string) => {
+      const [year, month, day] = dateString.split("-").map(Number)
+      return new Date(year, month - 1, day) // month - 1 because Date constructor expects 0-based months
     }
-    const end = new Date(endDate).toLocaleDateString("en-US", { month: "2-digit", year: "numeric" })
-    return `${start} - ${end}`
+
+    const start = parseDate(startDate)
+    const startFormatted = `${String(start.getMonth() + 1).padStart(2, "0")}/${start.getFullYear()}`
+
+    if (isCurrent || !endDate) {
+      return `${startFormatted} - Present`
+    }
+
+    const end = parseDate(endDate)
+    const endFormatted = `${String(end.getMonth() + 1).padStart(2, "0")}/${end.getFullYear()}`
+    return `${startFormatted} - ${endFormatted}`
   }
 
   if (loading) {
@@ -74,7 +84,7 @@ export function AboutSection({ translations }: AboutSectionProps) {
             <div className="relative">
               <div className="w-64 h-64 rounded-2xl overflow-hidden shadow-2xl shadow-purple-500/20 border-4 border-purple-500/30">
                 <img
-                  src="/filipino-software-developer-headshot.png"
+                  src="/rhailyn-cona.jpg"
                   alt="Rhailyn Jane Cona - Software Developer"
                   className="w-full h-full object-cover"
                 />
@@ -137,19 +147,7 @@ export function AboutSection({ translations }: AboutSectionProps) {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <p className="text-gray-400 font-serif">{exp.description}</p>
-                  {exp.responsibilities && exp.responsibilities.length > 0 && (
-                    <div>
-                      <h4 className="text-sm font-semibold text-purple-300 mb-2">Key Responsibilities:</h4>
-                      <ul className="text-sm text-gray-400 space-y-1">
-                        {exp.responsibilities.map((responsibility: string, idx: number) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <span className="text-purple-400 mt-1">•</span>
-                            <span>{responsibility}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
+                  {/* Removed Key Responsibilities as requested */}
                   <div className="flex flex-wrap gap-2">
                     {exp.skills &&
                       exp.skills.map((skill: string) => (
@@ -168,7 +166,47 @@ export function AboutSection({ translations }: AboutSectionProps) {
           </div>
         </div>
 
-        {/* Education */}
+          {/* Technologies I Use */}
+          <div className="space-y-6">
+            <h3 className="text-3xl font-bold text-white font-sans flex items-center gap-2">
+              <Globe className="h-6 w-6 text-purple-400" />
+              Technologies I Use
+            </h3>
+            <Card className="hover:shadow-lg transition-shadow duration-300 bg-white/5 backdrop-blur-sm border-purple-500/20">
+              <CardContent className="pt-6">
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "JavaScript",
+                    "TypeScript",
+                    "React",
+                    "Next.js",
+                    "React Native",
+                    "Node.js",
+                    "Python",
+                    "C#",
+                    "MySQL",
+                    "PostgreSQL",
+                    "Tailwind CSS",
+                    "Jenkins",
+                    "Cypress",
+                    "TestRail",
+                    "Jira",
+                    "Confluence",
+                  ].map((tech) => (
+                    <Badge
+                      key={tech}
+                      variant="secondary"
+                      className="text-xs bg-purple-500/20 text-purple-300 border-purple-500/30"
+                    >
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Education */}
         <div className="space-y-6">
           <h3 className="text-3xl font-bold text-white font-sans flex items-center gap-2">
             <GraduationCap className="h-6 w-6 text-purple-400" />

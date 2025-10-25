@@ -36,15 +36,21 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
   useEffect(() => {
     const fetchSkillsData = async () => {
       try {
+        console.log("Starting to fetch skills data...")
         const [categoriesData, toolsData] = await Promise.all([
           dataService.getAllSkillsWithCategories(),
           dataService.getTools(),
         ])
+        console.log("Skills data fetched:", { categoriesData, toolsData })
         setSkillCategories(categoriesData)
         setTools(toolsData)
       } catch (error) {
-        console.error("[ ] Error fetching skills data:", error)
+        console.error("Error fetching skills data:", error)
+        console.log("Using fallback mock data for skills")
+        setSkillCategories([])
+        setTools([])
       } finally {
+        console.log("Setting loading to false")
         setLoading(false)
       }
     }
@@ -67,8 +73,23 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center space-y-4">
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground font-sans">{translations.skills.title}</h2>
-            <p className="text-xl text-muted-foreground font-serif max-w-3xl mx-auto">Loading skills...</p>
+            <h2 className="text-4xl lg:text-5xl font-bold text-white  font-sans">{translations.skills.title}</h2>
+            <p className="text-xl text-muted-white  font-serif max-w-3xl mx-auto">Loading skills...</p>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  if (skillCategories.length === 0 && tools.length === 0) {
+    return (
+      <section className="py-20 px-4">
+        <div className="max-w-6xl mx-auto space-y-12">
+          <div className="text-center space-y-4">
+            <h2 className="text-4xl lg:text-5xl font-bold text-white  font-sans">{translations.skills.title}</h2>
+            <p className="text-xl text-muted-white  font-serif max-w-3xl mx-auto">
+              Skills data is currently unavailable. Please check back later.
+            </p>
           </div>
         </div>
       </section>
@@ -80,8 +101,8 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-bold text-foreground font-sans">{translations.skills.title}</h2>
-          <p className="text-xl text-muted-foreground font-serif max-w-3xl mx-auto">{translations.skills.subtitle}</p>
+          <h2 className="text-4xl lg:text-5xl font-bold text-white font-sans">{translations.skills.title}</h2>
+          <p className="text-xl text-white font-serif max-w-3xl mx-auto">{translations.skills.subtitle}</p>
         </div>
 
         {/* Skills Categories */}
@@ -101,7 +122,7 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
                     <div key={skill.id} className="space-y-2">
                       <div className="flex justify-between items-center">
                         <span className="font-serif text-sm font-medium">{skill.name}</span>
-                        <span className="text-sm text-muted-foreground font-mono">{skill.level}%</span>
+                        <span className="text-sm text-muted-white  font-mono">{skill.level}%</span>
                       </div>
                       <Progress
                         value={skill.level}
@@ -121,7 +142,7 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
         {/* Tools & Technologies */}
         <div className="space-y-6">
           <div className="text-center">
-            <h3 className="text-3xl font-bold text-foreground font-sans flex items-center justify-center gap-2">
+            <h3 className="text-3xl font-bold text-white  font-sans flex items-center justify-center gap-2">
               <Wrench className="h-6 w-6 text-primary" />
               {translations.skills.toolsTechnologies}
             </h3>

@@ -149,17 +149,18 @@ export const translations: Record<string, Translation> = {
     hero: {
       title: "Rhailyn Jane Cona",
       subtitle: "Software Development Student & QA Engineer",
-      description: "Passionate about creating innovative solutions and ensuring high-quality software delivery",
+      description:
+        "Dedicated Software Development student with QA engineering and technical support background. Experienced in defect discovery, cross-team collaboration, and delivering high‑quality software. Bilingual (Filipino/English) and committed to continuous learning and innovation.",
       learnMore: "Learn More About Me",
       techStack: "Technologies I work with:",
     },
     about: {
       title: "About Me",
       subtitle:
-        "Dedicated and results-driven Software Development student with a solid foundation in technical support, Software QA Engineering, and electronics engineering.",
+        "Results-driven Software Development student with a strong foundation in QA engineering, technical support, and electronics—focused on building reliable, user-centered solutions.",
       profileSummary: "Profile Summary",
       profileDescription:
-        "Experienced in identifying and resolving software defects through effective teamwork and collaboration, ensuring the delivery of high-quality solutions. Adept at adapting to dynamic work environments, with a passion for continuous learning and innovation.",
+        "Experienced in identifying and resolving software defects, collaborating across teams, and improving product quality. Adaptable in dynamic environments with a passion for continuous learning and innovation.",
       experience: "Professional Experience",
       education: "Education",
       certifications: "Certifications & Achievements",

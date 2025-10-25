@@ -1,320 +1,276 @@
-// Data service layer for projects, blogs, feedback, experience, education, and certifications
-// This can easily be switched to use Supabase when integrated
+// Data service layer (Supabase removed). Returns mock data for most resources and
+// uses API endpoints for feedback operations.
 
-// Mock data that matches the database schema
-const mockProjects = [
+export type Project = {
+  id: string
+  title: string
+  description: string
+  long_description?: string
+  technologies: string[]
+  category: string
+  github_url?: string | null
+  demo_url?: string | null
+  video_url?: string | null
+  image_url?: string | null
+  figma_url?: string | null
+  featured: boolean
+  status: string
+  created_at: string
+  updated_at: string
+}
+
+const mockProjects: Project[] = [
   {
     id: "1",
-    title: "Library Management Application",
-    description: "A comprehensive library management system built with Python",
+    title: "SafeSpace Mobile App",
+    description: "Mobile application prototype for safe space community platform",
     long_description:
-      "Designed and implemented core functionalities, including book search by title, author, ISBN, or genre. Developed borrowing and returning features with availability tracking to manage book inventory. Built with Object-Oriented Programming principles and file handling for persistent storage.",
-    technologies: ["Python", "OOP", "File Handling", "CSV"],
+      "Mobile application prototype designed for safe space community platform with community safety features and user-friendly interface.",
+    technologies: ["React Native", "JavaScript", "Mobile Development"],
+    category: "Mobile Application",
+    github_url: null,
+    demo_url: null,
+    video_url: null,
+    image_url: "/safespace-mobile.png",
+    figma_url:
+      "https://www.figma.com/design/4fuzNHukJNygOXylaNqjct/Mobile?node-id=0-1&t=GuSJCPJG8kJr0xwn-1",
+    featured: true,
+    status: "completed",
+    created_at: "2024-01-01T00:00:00Z",
+    updated_at: "2024-01-01T00:00:00Z",
+  },
+  {
+    id: "2",
+    title: "SafeSpace Web Platform",
+    description: "Web version of the SafeSpace community safety platform",
+    long_description:
+      "Web version of the SafeSpace community safety platform with cross-browser compatibility and accessible design.",
+    technologies: ["JavaScript", "Web Development", "Responsive Design"],
+    category: "Web Application",
+    github_url: null,
+    demo_url: null,
+    video_url: null,
+    image_url: "/safespace-web.png",
+    figma_url:
+      "https://www.figma.com/design/1uxJlnu19gOZCK47oarQXh/SafeSpace-Figma-Template?node-id=0-1&t=kNckyJSiOUD5zrDv-1",
+    featured: true,
+    status: "completed",
+    created_at: "2024-01-15T00:00:00Z",
+    updated_at: "2024-01-15T00:00:00Z",
+  },
+  {
+    id: "3",
+    title: "Rural Alberta Health Connect Website",
+    description: "Healthcare platform connecting rural Alberta communities with medical services",
+    long_description:
+      "Healthcare platform designed to connect rural Alberta communities with medical services, featuring healthcare service integration and community connectivity.",
+    technologies: ["Web Development", "JavaScript"],
+    category: "Web Application",
+    github_url: null,
+    demo_url: null,
+    video_url: null,
+    image_url: "/rural-health-web.png",
+    figma_url:
+      "https://www.figma.com/design/2CyCUUXxpupNyevQsLoByj/AlbertaHealthConnect?node-id=0-1&t=DmOYSaEEOWPvALYu-1",
+    featured: true,
+    status: "completed",
+    created_at: "2024-02-01T00:00:00Z",
+    updated_at: "2024-02-01T00:00:00Z",
+  },
+  {
+    id: "4",
+    title: "Rural Alberta Health Connect Mobile",
+    description: "Mobile application for healthcare access in rural Alberta",
+    long_description:
+      "Mobile application designed for healthcare access in rural Alberta with healthcare service integration and mobile optimization.",
+    technologies: ["React Native", "Mobile Development"],
+    category: "Mobile Application",
+    github_url: null,
+    demo_url: null,
+    video_url: null,
+    image_url: "/rural-health-mobile.png",
+    figma_url:
+      "https://www.figma.com/design/2CyCUUXxpupNyevQsLoByj/AlbertaHealthConnect?node-id=0-1&t=DmOYSaEEOWPvALYu-1",
+    featured: true,
+    status: "completed",
+    created_at: "2024-02-15T00:00:00Z",
+    updated_at: "2024-02-15T00:00:00Z",
+  },
+  {
+    id: "5",
+    title: "Professional Portfolio",
+    description: "Personal portfolio showcasing projects and skills",
+    long_description:
+      "Personal portfolio website showcasing projects and skills with responsive design and project showcase features.",
+    technologies: ["JavaScript", "Web Development"],
+    category: "Web Application",
+    github_url: "https://github.com/RhailynJane/Portfolio",
+    demo_url: null,
+    video_url: null,
+    image_url: "/portfolio.png",
+    figma_url: null,
+    featured: true,
+    status: "completed",
+    created_at: "2024-03-01T00:00:00Z",
+    updated_at: "2024-03-01T00:00:00Z",
+  },
+  {
+    id: "6",
+    title: "FitmindAI App",
+    description: "AI-powered fitness and mental wellness application",
+    long_description:
+      "AI-powered fitness and mental wellness application with AI recommendations and wellness tracking features.",
+    technologies: ["AI Integration", "Mobile/Web Development"],
+    category: "Mobile Application",
+    github_url: null,
+    demo_url: null,
+    video_url: null,
+    image_url: "/fitmindai.png",
+    figma_url:
+      "https://www.figma.com/design/PBGbOCOsVMEX1ul9a2Y2Ax/FitMindAI?node-id=0-1&t=UYXIqGsbavai9er8-1",
+    featured: true,
+    status: "completed",
+    created_at: "2024-04-01T00:00:00Z",
+    updated_at: "2024-04-01T00:00:00Z",
+  },
+  {
+    id: "7",
+    title: "Cinetracker Project",
+    description: "Movie and media tracking application",
+    technologies: ["Web Development", "JavaScript"],
+    category: "Web Application",
+    github_url: null,
+    demo_url: null,
+    video_url: null,
+    image_url: "/cinetracker.png",
+    figma_url: null,
+    featured: true,
+    status: "completed",
+    created_at: "2024-05-01T00:00:00Z",
+    updated_at: "2024-05-01T00:00:00Z",
+  },
+  {
+    id: "8",
+    title: "Library Management Application",
+    description: "Python-based application with book search, borrowing, and inventory management",
+    technologies: ["Python", "CSV", "Git", "VS Code"],
     category: "Desktop Application",
     github_url: "https://github.com/ConaRhai/library_management_app.git",
     demo_url: null,
     video_url: null,
     image_url: "/library-management-system.png",
+    figma_url: null,
     featured: true,
     status: "completed",
     created_at: "2024-08-01T00:00:00Z",
     updated_at: "2024-08-01T00:00:00Z",
   },
   {
-    id: "2",
+    id: "9",
     title: "Dog Care Project",
     description: "Responsive web application for dog care services",
-    long_description:
-      "Designed and implemented responsive web pages using HTML, CSS, and JavaScript, ensuring cross-device compatibility. Created an engaging user interface with dynamic elements for an interactive user experience.",
-    technologies: ["HTML", "CSS", "JavaScript", "Responsive Design"],
+    technologies: ["HTML", "CSS", "JavaScript"],
     category: "Web Application",
     github_url: "https://github.com/RhailynJane/Project_DogCare.git",
     demo_url: null,
     video_url: null,
     image_url: "/dog-care-website.png",
+    figma_url: null,
     featured: true,
     status: "completed",
     created_at: "2024-08-01T00:00:00Z",
     updated_at: "2024-08-01T00:00:00Z",
   },
   {
-    id: "3",
+    id: "10",
     title: "Travel Management Application",
-    description: "Cross-platform travel management solution",
-    long_description:
-      "Designed and implemented core modules for managing travel reservations and itineraries. Developed a responsive UI using .NET MAUI for cross-platform functionality.",
-    technologies: ["C#", ".NET MAUI", "Cross-platform"],
+    description: "Cross-platform travel reservation system",
+    technologies: ["C#", ".NET MAUI"],
     category: "Mobile Application",
     github_url: "https://github.com/RhailynJane/TravelessApp.git",
     demo_url: null,
     video_url: null,
     image_url: "/travel-management-app.png",
-    featured: false,
+    figma_url: null,
+    featured: true,
     status: "completed",
     created_at: "2024-10-01T00:00:00Z",
     updated_at: "2024-10-01T00:00:00Z",
   },
   {
-    id: "4",
+    id: "11",
     title: "House Utility Management System",
-    description: "Real-time utility tracking application",
-    long_description:
-      "Developed a dynamic web interface using HTML, CSS, and C# for real-time utility tracking. Integrated SQL Server Management Studio for data storage and management. Built back-end functionality with .NET MAUI to ensure efficient data processing.",
+    description: "Real-time utility tracking web application",
     technologies: ["HTML", "CSS", "C#", ".NET MAUI", "SQL Server"],
     category: "Web Application",
     github_url: "https://github.com/RhailynJane/HouseUtilityManagementSystem.git",
     demo_url: null,
     video_url: null,
     image_url: "/placeholder-2b24u.png",
-    featured: false,
+    figma_url: null,
+    featured: true,
     status: "completed",
     created_at: "2024-11-01T00:00:00Z",
     updated_at: "2024-11-01T00:00:00Z",
   },
   {
-    id: "5",
+    id: "12",
     title: "Rental Management System",
     description: "Web-based rental property management",
-    long_description:
-      "Designed and implemented a web-based interface using Blazor and C# and MySQL database schemas for storing rental and tenant information. Modeled system architecture using Software Ideas Modeler for efficient project planning.",
-    technologies: ["Blazor", "C#", "MySQL", "Software Ideas Modeler"],
+    technologies: ["Blazor", "C#", "MySQL", "Figma"],
     category: "Web Application",
     github_url: "https://github.com/RhailynJane/RentalManagementSystem.git",
     demo_url: null,
     video_url: null,
     image_url: "/rental-management-interface.png",
-    featured: false,
+    figma_url: null,
+    featured: true,
     status: "completed",
     created_at: "2024-11-01T00:00:00Z",
     updated_at: "2024-11-01T00:00:00Z",
-  },
-  {
-    id: "6",
-    title: "E-Learning Platform for Coders",
-    description: "Interactive learning platform design",
-    long_description:
-      "Designed and developed an engaging platform for coders to access tutorials and challenges. Created interactive prototypes and UI layouts using Figma with focus on user experience and accessibility.",
-    technologies: ["Figma", "UX/UI Design", "Prototyping"],
-    category: "Design Project",
-    github_url: "#",
-    demo_url: null,
-    video_url: null,
-    image_url: "/e-learning-platform.png",
-    featured: false,
-    status: "completed",
-    created_at: "2024-11-01T00:00:00Z",
-    updated_at: "2024-11-01T00:00:00Z",
-  },
-]
-
-const mockBlogs = [
-  {
-    id: "1",
-    title: "Getting Started with React Testing",
-    excerpt: "Learn the fundamentals of testing React components with modern tools and best practices.",
-    content: `Testing is a crucial part of React development. In this comprehensive guide, we'll explore different testing strategies, from unit tests to integration tests. We'll cover Jest, React Testing Library, and best practices for writing maintainable tests that give you confidence in your code.
-
-## Why Testing Matters
-
-Testing helps ensure your components work as expected and prevents regressions when you make changes. It also serves as documentation for how your components should behave.
-
-## Setting Up Your Testing Environment
-
-First, let's set up Jest and React Testing Library...`,
-    author: "Rhailyn Jane Cona",
-    category: "React",
-    tags: ["React", "Testing", "Jest", "Best Practices"],
-    image_url: "/react-testing-code.png",
-    featured: true,
-    published: true,
-    reading_time: 8,
-    created_at: "2024-01-15T00:00:00Z",
-    updated_at: "2024-01-15T00:00:00Z",
-  },
-  {
-    id: "2",
-    title: "Mastering TypeScript in 2024",
-    excerpt: "Advanced TypeScript patterns and techniques for building robust applications.",
-    content: `TypeScript has evolved significantly, and 2024 brings new features and patterns that can make your code more robust and maintainable. Let's explore advanced TypeScript techniques that every developer should know.
-
-## Advanced Type Patterns
-
-We'll cover conditional types, mapped types, and template literal types that can help you build more type-safe applications.
-
-## Real-World Examples
-
-Through practical examples, you'll learn how to apply these patterns in your daily development work...`,
-    author: "Rhailyn Jane Cona",
-    category: "TypeScript",
-    tags: ["TypeScript", "JavaScript", "Development"],
-    image_url: "/typescript-code-editor.png",
-    featured: true,
-    published: true,
-    reading_time: 12,
-    created_at: "2024-02-01T00:00:00Z",
-    updated_at: "2024-02-01T00:00:00Z",
-  },
-  {
-    id: "3",
-    title: "Building Scalable APIs with Node.js",
-    excerpt: "Best practices for creating maintainable and performant backend services.",
-    content: `Creating scalable APIs requires careful planning and implementation. In this post, we'll explore architectural patterns, performance optimization, and security best practices for Node.js APIs.
-
-## API Design Principles
-
-Good API design starts with understanding your users and their needs. We'll cover RESTful principles and when to consider GraphQL.
-
-## Performance Optimization
-
-Learn about caching strategies, database optimization, and monitoring techniques...`,
-    author: "Rhailyn Jane Cona",
-    category: "Backend",
-    tags: ["Node.js", "API", "Performance", "Architecture"],
-    image_url: "/nodejs-api-architecture.png",
-    featured: false,
-    published: true,
-    reading_time: 10,
-    created_at: "2024-02-15T00:00:00Z",
-    updated_at: "2024-02-15T00:00:00Z",
-  },
-  {
-    id: "4",
-    title: "The Future of Web Development",
-    excerpt: "Exploring emerging trends and technologies shaping the web development landscape.",
-    content: `Web development is constantly evolving. Let's look at the trends and technologies that are shaping the future of how we build web applications.
-
-## Emerging Technologies
-
-From WebAssembly to edge computing, new technologies are changing how we think about web development.
-
-## Developer Experience
-
-Tools and frameworks are focusing more on developer experience, making it easier to build complex applications...`,
-    author: "Rhailyn Jane Cona",
-    category: "Web Development",
-    tags: ["Trends", "Future", "Technology"],
-    image_url: "/future-web-development.png",
-    featured: false,
-    published: true,
-    reading_time: 6,
-    created_at: "2024-03-01T00:00:00Z",
-    updated_at: "2024-03-01T00:00:00Z",
-  },
-]
-
-const mockFeedback = [
-  {
-    id: "1",
-    name: "Sarah Johnson",
-    email: "sarah.j@techcorp.com",
-    company: "TechCorp Solutions",
-    position: "Senior Developer",
-    message:
-      "Rhailyn is an exceptional QA engineer with a keen eye for detail. Her testing strategies have significantly improved our product quality.",
-    rating: 5,
-    approved: true,
-    created_at: "2024-01-10T00:00:00Z",
-    updated_at: "2024-01-10T00:00:00Z",
-  },
-  {
-    id: "2",
-    name: "Michael Chen",
-    email: "mchen@innovate.io",
-    company: "Innovate Labs",
-    position: "Product Manager",
-    message:
-      "Working with Rhailyn has been a pleasure. Her technical expertise and collaborative approach make her a valuable team member.",
-    rating: 5,
-    approved: true,
-    created_at: "2024-01-20T00:00:00Z",
-    updated_at: "2024-01-20T00:00:00Z",
-  },
-  {
-    id: "3",
-    name: "Emily Rodriguez",
-    email: "emily.r@startup.com",
-    company: "StartupXYZ",
-    position: "CTO",
-    message:
-      "Rhailyn's ability to identify critical issues early in the development cycle has saved us countless hours and resources.",
-    rating: 4,
-    approved: true,
-    created_at: "2024-02-01T00:00:00Z",
-    updated_at: "2024-02-01T00:00:00Z",
   },
 ]
 
 const mockSkillCategories = [
-  {
-    id: 1,
-    title: "Frontend Development",
-    icon: "Code",
-    color: "text-blue-500",
-    display_order: 1,
-  },
-  {
-    id: 2,
-    title: "Backend Development",
-    icon: "Database",
-    color: "text-green-500",
-    display_order: 2,
-  },
-  {
-    id: 3,
-    title: "Design & UX",
-    icon: "Palette",
-    color: "text-purple-500",
-    display_order: 3,
-  },
-  {
-    id: 4,
-    title: "Leadership & Management",
-    icon: "Users",
-    color: "text-orange-500",
-    display_order: 4,
-  },
+  { id: 1, title: "Programming & Development", icon: "Code", color: "text-blue-500", display_order: 1 },
+  { id: 2, title: "Testing & QA", icon: "Code", color: "text-red-500", display_order: 2 },
 ]
 
 const mockSkills = [
-  { id: 1, category_id: 1, name: "React", level: 95, display_order: 1 },
-  { id: 2, category_id: 1, name: "TypeScript", level: 90, display_order: 2 },
-  { id: 3, category_id: 1, name: "Tailwind CSS", level: 92, display_order: 3 },
-  { id: 4, category_id: 1, name: "JavaScript", level: 94, display_order: 4 },
-  { id: 5, category_id: 2, name: "Python/Django", level: 78, display_order: 1 },
-  { id: 6, category_id: 2, name: "SQL", level: 75, display_order: 2 },
-  { id: 7, category_id: 2, name: "MySQL", level: 82, display_order: 3 },
-  { id: 8, category_id: 2, name: "REST APIs", level: 90, display_order: 4 },
-  { id: 9, category_id: 2, name: "ADK", level: 50, display_order: 5 },
-  { id: 10, category_id: 3, name: "Figma", level: 92, display_order: 1 },
-  { id: 11, category_id: 3, name: "UI Design", level: 88, display_order: 2 },
-  { id: 12, category_id: 3, name: "UX Research", level: 85, display_order: 3 },
-  { id: 13, category_id: 3, name: "Prototyping", level: 87, display_order: 4 },
-  { id: 14, category_id: 4, name: "Team Leadership", level: 93, display_order: 1 },
-  { id: 15, category_id: 4, name: "Project Management", level: 90, display_order: 2 },
-  { id: 16, category_id: 4, name: "Agile/Scrum", level: 88, display_order: 3 },
-  { id: 17, category_id: 4, name: "Strategic Planning", level: 85, display_order: 4 },
+  { id: 1, category_id: 1, name: "JavaScript", level: 95, display_order: 1 },
+  { id: 2, category_id: 1, name: "Python", level: 85, display_order: 2 },
+  { id: 3, category_id: 1, name: "C#", level: 80, display_order: 3 },
+  { id: 4, category_id: 1, name: "HTML5", level: 95, display_order: 4 },
+  { id: 5, category_id: 1, name: "CSS3", level: 90, display_order: 5 },
+  { id: 6, category_id: 1, name: "React", level: 92, display_order: 6 },
+  { id: 7, category_id: 1, name: "Node.js", level: 88, display_order: 7 },
+  { id: 8, category_id: 1, name: "TypeScript", level: 90, display_order: 8 },
+  { id: 9, category_id: 1, name: "React Native", level: 85, display_order: 9 },
+  { id: 10, category_id: 2, name: "Selenium", level: 85, display_order: 1 },
+  { id: 11, category_id: 2, name: "Cypress", level: 88, display_order: 2 },
+  { id: 12, category_id: 2, name: "Postman", level: 90, display_order: 3 },
 ]
 
 const mockTools = [
   "Git",
-  "Docker",
-  "Google Cloud",
   "Jira",
-  "VS Code",
-  "Python",
-  "JavaScript",
-  "TypeScript",
-  "HTML",
-  "CSS",
-  "Tailwind CSS",
-  "ADK",
-  "Vercel",
-  "ClickUp",
   "Figma",
-  "C#",
-  "Java",
-  "Laravel",
+  "PostgreSQL",
+  "WatermelonDB",
+  "Prisma",
+  "React Native",
+  "ESLint",
+  "Firebase",
+  ".NET MAUI",
+  "MySQL",
+  "Selenium",
+  "Cypress",
+  "Postman",
+  "Jenkins",
+  "Confluence",
 ]
+
+const mockFeedback: any[] = []
 
 const mockExperience = [
   {
@@ -332,7 +288,18 @@ const mockExperience = [
       "Created test plans and cases that enhance testing process consistency",
       "Worked closely with Product Team to review user stories and acceptance criteria",
     ],
-    skills: ["Manual Testing", "Regression Testing", "Smoke Testing", "Performance Testing", "Test Planning"],
+    skills: [
+      "Manual Testing",
+      "Regression Testing",
+      "Smoke Testing",
+      "Performance Testing",
+      "Test Planning",
+      "Jenkins",
+      "Cypress",
+      "TestRail",
+      "Jira",
+      "Confluence",
+    ],
     achievements: [
       "Improved software quality through comprehensive testing strategies",
       "Enhanced team communication and project outcomes",
@@ -451,261 +418,32 @@ const mockCertifications = [
   },
 ]
 
-import { createClient } from "./supabase/client"
-
-// Data service functions for Supabase database
 export const dataService = {
   // Projects
   async getProjects() {
-    try {
-      const supabase = createClient()
-      const { data: projects, error } = await supabase
-        .from("projects")
-        .select("*")
-        .order("created_at", { ascending: false })
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Projects table not found, using mock data")
-          return mockProjects
-        }
-        throw error
-      }
-      return projects || []
-    } catch (error) {
-      console.error("[ ] Error fetching projects:", error)
-      return mockProjects
-    }
+    return mockProjects
   },
-
   async getFeaturedProjects() {
-    try {
-      const supabase = createClient()
-      const { data: projects, error } = await supabase
-        .from("projects")
-        .select("*")
-        .eq("featured", true)
-        .order("created_at", { ascending: false })
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Projects table not found, using mock data")
-          return mockProjects.filter((project) => project.featured)
-        }
-        throw error
-      }
-      return projects || []
-    } catch (error) {
-      console.error("[ ] Error fetching featured projects:", error)
-      return mockProjects.filter((project) => project.featured)
-    }
+    return mockProjects.filter((p) => p.featured)
   },
-
   async getProjectById(id: string) {
-    try {
-      const supabase = createClient()
-      const { data: project, error } = await supabase.from("projects").select("*").eq("id", id).single()
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Projects table not found, using mock data")
-          return mockProjects.find((project) => project.id === id)
-        }
-        throw error
-      }
-      return project
-    } catch (error) {
-      console.error("[ ] Error fetching project by ID:", error)
-      return mockProjects.find((project) => project.id === id)
-    }
+    return mockProjects.find((p) => p.id === id)
   },
-
   async getProjectsByCategory(category: string) {
-    try {
-      const supabase = createClient()
-      const { data: projects, error } = await supabase
-        .from("projects")
-        .select("*")
-        .eq("category", category)
-        .order("created_at", { ascending: false })
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Projects table not found, using mock data")
-          return mockProjects.filter((project) => project.category === category)
-        }
-        throw error
-      }
-      return projects || []
-    } catch (error) {
-      console.error("[ ] Error fetching projects by category:", error)
-      return mockProjects.filter((project) => project.category === category)
-    }
+    return mockProjects.filter((p) => p.category === category)
   },
 
-  // Blogs
-  async getBlogs() {
-    try {
-      const supabase = createClient()
-      const { data: blogs, error } = await supabase
-        .from("blogs")
-        .select("*")
-        .eq("published", true)
-        .order("created_at", { ascending: false })
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Blogs table not found, using mock data")
-          return mockBlogs.filter((blog) => blog.published)
-        }
-        throw error
-      }
-      return blogs || []
-    } catch (error) {
-      console.error("[ ] Error fetching blogs:", error)
-      return mockBlogs.filter((blog) => blog.published)
-    }
-  },
-
-  async getFeaturedBlogs() {
-    try {
-      const supabase = createClient()
-      const { data: blogs, error } = await supabase
-        .from("blogs")
-        .select("*")
-        .eq("featured", true)
-        .eq("published", true)
-        .order("created_at", { ascending: false })
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Blogs table not found, using mock data")
-          return mockBlogs.filter((blog) => blog.featured && blog.published)
-        }
-        throw error
-      }
-      return blogs || []
-    } catch (error) {
-      console.error("[ ] Error fetching featured blogs:", error)
-      return mockBlogs.filter((blog) => blog.featured && blog.published)
-    }
-  },
-
-  async getBlogById(id: string) {
-    try {
-      const supabase = createClient()
-      const { data: blog, error } = await supabase.from("blogs").select("*").eq("id", id).single()
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Blogs table not found, using mock data")
-          return mockBlogs.find((blog) => blog.id === id)
-        }
-        throw error
-      }
-      return blog
-    } catch (error) {
-      console.error("[ ] Error fetching blog by ID:", error)
-      return mockBlogs.find((blog) => blog.id === id)
-    }
-  },
-
-  async getBlogsByCategory(category: string) {
-    try {
-      const supabase = createClient()
-      const { data: blogs, error } = await supabase
-        .from("blogs")
-        .select("*")
-        .eq("category", category)
-        .eq("published", true)
-        .order("created_at", { ascending: false })
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Blogs table not found, using mock data")
-          return mockBlogs.filter((blog) => blog.category === category && blog.published)
-        }
-        throw error
-      }
-      return blogs || []
-    } catch (error) {
-      console.error("[ ] Error fetching blogs by category:", error)
-      return mockBlogs.filter((blog) => blog.category === category && blog.published)
-    }
-  },
-
-  async searchBlogs(query: string) {
-    try {
-      const supabase = createClient()
-      const { data: blogs, error } = await supabase
-        .from("blogs")
-        .select("*")
-        .eq("published", true)
-        .or(`title.ilike.%${query}%,excerpt.ilike.%${query}%,content.ilike.%${query}%`)
-        .order("created_at", { ascending: false })
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Blogs table not found, using mock data")
-          const lowercaseQuery = query.toLowerCase()
-          return mockBlogs.filter(
-            (blog) =>
-              blog.published &&
-              (blog.title.toLowerCase().includes(lowercaseQuery) ||
-                blog.excerpt.toLowerCase().includes(lowercaseQuery) ||
-                blog.tags.some((tag) => tag.toLowerCase().includes(lowercaseQuery))),
-          )
-        }
-        throw error
-      }
-      return blogs || []
-    } catch (error) {
-      console.error("[ ] Error searching blogs:", error)
-      const lowercaseQuery = query.toLowerCase()
-      return mockBlogs.filter(
-        (blog) =>
-          blog.published &&
-          (blog.title.toLowerCase().includes(lowercaseQuery) ||
-            blog.excerpt.toLowerCase().includes(lowercaseQuery) ||
-            blog.tags.some((tag) => tag.toLowerCase().includes(lowercaseQuery))),
-      )
-    }
-  },
-
-  // Feedback
+  // Feedback via API endpoints
   async getApprovedFeedback() {
     try {
-      const supabase = createClient()
-      const { data: feedback, error } = await supabase
-        .from("feedback")
-        .select("*")
-        .eq("approved", true)
-        .order("created_at", { ascending: false })
-
-      if (error) throw error
-      return feedback || []
-    } catch (error) {
-      console.error("[ ] Error fetching approved feedback:", error)
-      return mockFeedback.filter((feedback) => feedback.approved)
+      const res = await fetch("/api/feedback", { cache: "no-store" })
+      if (!res.ok) throw new Error("Failed to fetch feedback")
+      return (await res.json()) as any[]
+    } catch (e) {
+      console.error("Error fetching approved feedback:", e)
+      return mockFeedback.filter((f) => f.approved)
     }
   },
-
-  async getAllFeedback() {
-    try {
-      const supabase = createClient()
-      const { data: feedback, error } = await supabase
-        .from("feedback")
-        .select("*")
-        .order("created_at", { ascending: false })
-
-      if (error) throw error
-      return feedback || []
-    } catch (error) {
-      console.error("[ ] Error fetching all feedback:", error)
-      return mockFeedback
-    }
-  },
-
   async submitFeedback(feedback: {
     name: string
     email: string
@@ -715,259 +453,52 @@ export const dataService = {
     rating: number
   }) {
     try {
-      const supabase = createClient()
-      const { data, error } = await supabase
-        .from("feedback")
-        .insert([
-          {
-            name: feedback.name,
-            email: feedback.email,
-            company: feedback.company || null,
-            position: feedback.position || null,
-            message: feedback.message,
-            rating: feedback.rating,
-            approved: false,
-          },
-        ])
-        .select()
-        .single()
-
-      if (error) throw error
+      const res = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(feedback),
+      })
+      if (!res.ok) throw new Error("Failed to submit feedback")
+      const data = await res.json()
       return { success: true, message: "Feedback submitted successfully!", id: data.id }
-    } catch (error) {
-      console.error("[ ] Error submitting feedback:", error)
+    } catch (e) {
+      console.error("Error submitting feedback:", e)
       return { success: false, message: "Failed to submit feedback. Please try again." }
-    }
-  },
-
-  async approveFeedback(id: string) {
-    try {
-      const supabase = createClient()
-      const { error } = await supabase.from("feedback").update({ approved: true }).eq("id", id)
-
-      if (error) throw error
-      return { success: true }
-    } catch (error) {
-      console.error("[ ] Error approving feedback:", error)
-      return { success: false }
-    }
-  },
-
-  async deleteFeedback(id: string) {
-    try {
-      const supabase = createClient()
-      const { error } = await supabase.from("feedback").delete().eq("id", id)
-
-      if (error) throw error
-      return { success: true }
-    } catch (error) {
-      console.error("[ ] Error deleting feedback:", error)
-      return { success: false }
     }
   },
 
   // Skills
   async getSkillCategories() {
-    try {
-      const supabase = createClient()
-      const { data: categories, error } = await supabase
-        .from("skill_categories")
-        .select("*")
-        .order("display_order", { ascending: true })
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Skill categories table not found, using mock data")
-          return mockSkillCategories
-        }
-        throw error
-      }
-      return categories || []
-    } catch (error) {
-      console.error("[ ] Error fetching skill categories:", error)
-      return mockSkillCategories
-    }
+    return mockSkillCategories
   },
-
   async getSkillsByCategory(categoryId: number) {
-    try {
-      const supabase = createClient()
-      const { data: skills, error } = await supabase
-        .from("skills")
-        .select("*")
-        .eq("category_id", categoryId)
-        .order("display_order", { ascending: true })
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Skills table not found, using mock data")
-          return mockSkills.filter((skill) => skill.category_id === categoryId)
-        }
-        throw error
-      }
-      return skills || []
-    } catch (error) {
-      console.error("[ ] Error fetching skills by category:", error)
-      return mockSkills.filter((skill) => skill.category_id === categoryId)
-    }
+    return mockSkills.filter((s) => s.category_id === categoryId)
   },
-
   async getAllSkillsWithCategories() {
-    try {
-      const categories = await this.getSkillCategories()
-      const skillsWithCategories = await Promise.all(
-        categories.map(async (category) => {
-          const skills = await this.getSkillsByCategory(category.id)
-          return {
-            ...category,
-            skills,
-          }
-        }),
-      )
-      return skillsWithCategories
-    } catch (error) {
-      console.error("[ ] Error fetching skills with categories:", error)
-      return mockSkillCategories.map((category) => ({
-        ...category,
-        skills: mockSkills.filter((skill) => skill.category_id === category.id),
-      }))
-    }
+    return mockSkillCategories.map((c) => ({ ...c, skills: mockSkills.filter((s) => s.category_id === c.id) }))
   },
-
   async getTools() {
-    try {
-      const supabase = createClient()
-      const { data: tools, error } = await supabase
-        .from("tools")
-        .select("name")
-        .order("display_order", { ascending: true })
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Tools table not found, using mock data")
-          return mockTools
-        }
-        throw error
-      }
-      return tools?.map((tool) => tool.name) || []
-    } catch (error) {
-      console.error("[ ] Error fetching tools:", error)
-      return mockTools
-    }
+    return mockTools
   },
 
   // Experience
   async getExperience() {
-    try {
-      const supabase = createClient()
-      const { data: experience, error } = await supabase
-        .from("experience")
-        .select("*")
-        .order("start_date", { ascending: false })
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Experience table not found, using mock data")
-          return mockExperience
-        }
-        throw error
-      }
-      return experience || []
-    } catch (error) {
-      console.error("[ ] Error fetching experience:", error)
-      return mockExperience
-    }
+    return mockExperience
   },
-
   async getCurrentExperience() {
-    try {
-      const supabase = createClient()
-      const { data: experience, error } = await supabase
-        .from("experience")
-        .select("*")
-        .eq("is_current", true)
-        .order("start_date", { ascending: false })
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Experience table not found, using mock data")
-          return mockExperience.filter((exp) => exp.is_current)
-        }
-        throw error
-      }
-      return experience || []
-    } catch (error) {
-      console.error("[ ] Error fetching current experience:", error)
-      return mockExperience.filter((exp) => exp.is_current)
-    }
+    return mockExperience.filter((e) => e.is_current)
   },
 
   // Education
   async getEducation() {
-    try {
-      const supabase = createClient()
-      const { data: education, error } = await supabase
-        .from("education")
-        .select("*")
-        .order("start_date", { ascending: false })
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Education table not found, using mock data")
-          return mockEducation
-        }
-        throw error
-      }
-      return education || []
-    } catch (error) {
-      console.error("[ ] Error fetching education:", error)
-      return mockEducation
-    }
+    return mockEducation
   },
 
   // Certifications
   async getCertifications() {
-    try {
-      const supabase = createClient()
-      const { data: certifications, error } = await supabase
-        .from("certifications")
-        .select("*")
-        .order("issue_date", { ascending: false })
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Certifications table not found, using mock data")
-          return mockCertifications
-        }
-        throw error
-      }
-      return certifications || []
-    } catch (error) {
-      console.error("[ ] Error fetching certifications:", error)
-      return mockCertifications
-    }
+    return mockCertifications
   },
-
   async getActiveCertifications() {
-    try {
-      const supabase = createClient()
-      const { data: certifications, error } = await supabase
-        .from("certifications")
-        .select("*")
-        .or("expiry_date.is.null,expiry_date.gt." + new Date().toISOString())
-        .order("issue_date", { ascending: false })
-
-      if (error) {
-        if (error.message.includes("Could not find the table")) {
-          console.log("[ ] Certifications table not found, using mock data")
-          return mockCertifications.filter((cert) => !cert.expiry_date || new Date(cert.expiry_date) > new Date())
-        }
-        throw error
-      }
-      return certifications || []
-    } catch (error) {
-      console.error("[ ] Error fetching active certifications:", error)
-      return mockCertifications.filter((cert) => !cert.expiry_date || new Date(cert.expiry_date) > new Date())
-    }
+    return mockCertifications.filter((c) => !c.expiry_date || new Date(c.expiry_date) > new Date())
   },
 }

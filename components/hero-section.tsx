@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ArrowDown, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react"
+import { ArrowDown, Github, Linkedin, Mail, MapPin } from "lucide-react"
 import { useEffect, useState } from "react"
 import type { Translation } from "@/lib/translations"
 
@@ -19,16 +19,24 @@ export function HeroSection({ onScrollToAbout, translations }: HeroSectionProps)
   }, [])
 
   const techStack = [
-    "React",
+    "JavaScript",
     "TypeScript",
+    "React",
     "Next.js",
+    "React Native",
+    "Node.js",
     "Python",
     "C#",
-    ".NET MAUI",
+    "HTML5",
+    "CSS3",
     "MySQL",
     "PostgreSQL",
     "Tailwind CSS",
-    "Node.js",
+    "Jenkins",
+    "Cypress",
+    "TestRail",
+    "Jira",
+    "Confluence",
   ]
 
   return (
@@ -87,8 +95,8 @@ export function HeroSection({ onScrollToAbout, translations }: HeroSectionProps)
             <span>crhailynjane@gmail.com</span>
           </div>
           <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-full backdrop-blur-sm">
-            <Phone className="h-4 w-4 text-purple-400" />
-            <span>+(1403)-540-9188</span>
+            <Mail className="h-4 w-4 text-purple-400" />
+            <span>contact@rhailyncona.dev</span>
           </div>
         </div>
 
@@ -121,6 +129,7 @@ export function HeroSection({ onScrollToAbout, translations }: HeroSectionProps)
               variant="outline"
               size="icon"
               className="border-purple-400/30 text-purple-400 hover:bg-purple-500/20 hover:border-purple-400/50 hover:scale-110 transition-all duration-300 bg-white/5 backdrop-blur-sm"
+              onClick={() => window.open('https://github.com/RhailynJane', '_blank')}
             >
               <Github className="h-4 w-4" />
             </Button>
@@ -128,6 +137,7 @@ export function HeroSection({ onScrollToAbout, translations }: HeroSectionProps)
               variant="outline"
               size="icon"
               className="border-purple-400/30 text-purple-400 hover:bg-purple-500/20 hover:border-purple-400/50 hover:scale-110 transition-all duration-300 bg-white/5 backdrop-blur-sm"
+              onClick={() => window.open('https://linkedin.com/in/rhailyn-cona/', '_blank')}
             >
               <Linkedin className="h-4 w-4" />
             </Button>
@@ -135,6 +145,7 @@ export function HeroSection({ onScrollToAbout, translations }: HeroSectionProps)
               variant="outline"
               size="icon"
               className="border-purple-400/30 text-purple-400 hover:bg-purple-500/20 hover:border-purple-400/50 hover:scale-110 transition-all duration-300 bg-white/5 backdrop-blur-sm"
+              onClick={() => window.location.href = 'mailto:contact@rhailyncona.dev'}
             >
               <Mail className="h-4 w-4" />
             </Button>
