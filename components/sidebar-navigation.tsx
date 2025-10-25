@@ -43,7 +43,7 @@ export function SidebarNavigation({
   const [isOpen, setIsOpen] = useState(false)
 
   const NavigationContent = () => (
-    <div className="flex flex-col h-full bg-gradient-to-br from-gray-900 via-black to-gray-800">
+    <div className="flex flex-col h-full bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-black dark:to-gray-800">
       <VisuallyHidden>
         <SheetTitle>Navigation Menu</SheetTitle>
       </VisuallyHidden>
