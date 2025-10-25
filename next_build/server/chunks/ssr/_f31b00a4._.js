@@ -1800,7 +1800,7 @@ const mockExperience = [
         end_date: null,
         is_current: true,
         location: "Remote",
-        description: "Assist quality assurance initiatives by executing comprehensive testing methodologies including regression, smoke, sanity, and performance testing to identify critical defects and ensure high-quality software delivery. Collaborate closely with developers to understand requirements and design specifications while creating detailed test plans and cases that enhance testing process consistency. Work with the Product Team to review user stories and acceptance criteria, ensuring product alignment with business requirements and improving overall communication and project outcomes. Transitioned to the automation team, contributing to automated testing efforts using Selenium and Cypress to improve testing efficiency and coverage.",
+        description: "Assist quality assurance initiatives by executing comprehensive testing methodologies including regression, smoke, sanity, and performance testing to identify critical defects and ensure high-quality software delivery. Collaborate closely with developers to understand requirements and design specifications while creating detailed test plans and cases that enhance testing process consistency. Work with the Product Team to review user stories and acceptance criteria, ensuring product alignment with business requirements and improving overall communication and project outcomes. Transitioned to the automation team, contributing to automated testing efforts using Cypress to improve testing efficiency and coverage.",
         skills: [
             "Manual Testing",
             "Automated Testing",
@@ -1809,7 +1809,6 @@ const mockExperience = [
             "Sanity Testing",
             "Performance Testing",
             "Test Planning",
-            "Selenium",
             "Cypress",
             "TestRail",
             "Jira",
