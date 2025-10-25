@@ -4,12 +4,9 @@ import type React from "react"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Mail, MapPin, Linkedin, Github, Send, MessageSquare } from "lucide-react"
-import { useState } from "react"
-import { useToast } from "../components/ui/use-toast"
+import { Badge } from "@/components/ui/badge"
+import { useToast } from "@/components/ui/use-toast"
+import { Mail, MapPin, Linkedin, Github, Copy } from "lucide-react"
 import type { Translation } from "@/lib/translations"
 
 interface ContactSectionProps {
@@ -17,35 +14,8 @@ interface ContactSectionProps {
 }
 
 export function ContactSection({ translations }: ContactSectionProps) {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  // Contact form removed per request; only contact info and social links remain.
   const { toast } = useToast()
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-
-    toast({
-      title: translations.contact.messageSent,
-      description: translations.contact.messageSentDescription,
-    })
-
-    setFormData({ name: "", email: "", subject: "", message: "" })
-    setIsSubmitting(false)
-  }
 
   const contactInfo = [
     {
@@ -89,6 +59,25 @@ export function ContactSection({ translations }: ContactSectionProps) {
     },
   ]
 
+  const copyToClipboard = async (text: string, label?: string) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      toast({
+        title: "Copied",
+        description: `${label ?? "Text"} copied to clipboard`,
+      })
+    } catch {
+      // Fallback
+      const ta = document.createElement("textarea")
+      ta.value = text
+      document.body.appendChild(ta)
+      ta.select()
+      document.execCommand("copy")
+      document.body.removeChild(ta)
+      toast({ title: "Copied", description: `${label ?? "Text"} copied to clipboard` })
+    }
+  }
+
   return (
     <section className="py-20 px-4">
       <div className="max-w-6xl mx-auto space-y-12">
@@ -96,94 +85,16 @@ export function ContactSection({ translations }: ContactSectionProps) {
         <div className="text-center space-y-4">
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white font-sans">{translations.contact.title}</h2>
           <p className="text-xl text-gray-700 dark:text-gray-300 font-serif max-w-3xl mx-auto">{translations.contact.subtitle}</p>
+          <div className="flex justify-center">
+            <Badge className="bg-green-600/15 text-green-600 dark:text-green-400 border border-green-600/20">
+              <span className="mr-2 inline-block h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+              Open to opportunities
+            </Badge>
+          </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <Card className="border-primary/20 shadow-lg">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 font-sans">
-                <MessageSquare className="h-5 w-5 text-primary" />
-                {translations.contact.sendMessage}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name" className="font-serif">
-                      {translations.contact.name} *
-                    </Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Your full name"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="font-serif">
-                      {translations.contact.email} *
-                    </Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="subject" className="font-serif">
-                    {translations.contact.subject} *
-                  </Label>
-                  <Input
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    required
-                    placeholder="What's this about?"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="message" className="font-serif">
-                    {translations.contact.message} *
-                  </Label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
-                    placeholder="Tell me more about your project or inquiry..."
-                    rows={6}
-                  />
-                </div>
-
-                <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? (
-                    translations.contact.sending
-                  ) : (
-                    <>
-                      <Send className="h-4 w-4 mr-2" />
-                      {translations.contact.sendButton}
-                    </>
-                  )}
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
-
+        <div className="max-w-3xl mx-auto space-y-8">
           {/* Contact Information */}
-          <div className="space-y-8">
             {/* Contact Details */}
             <Card className="border-primary/20 shadow-lg">
               <CardHeader>
@@ -197,7 +108,7 @@ export function ContactSection({ translations }: ContactSectionProps) {
                       <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
                         <Icon className="h-5 w-5 text-primary" />
                       </div>
-                      <div>
+                      <div className="flex-1 min-w-0">
                         <p className="font-semibold font-sans">{info.label}</p>
                         {info.href !== "#" ? (
                           <a
@@ -210,6 +121,18 @@ export function ContactSection({ translations }: ContactSectionProps) {
                           <p className="text-muted-foreground font-serif">{info.value}</p>
                         )}
                       </div>
+                      {String(info.href).startsWith("mailto:") && (
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="shrink-0 hover:bg-primary/5 hover:border-primary"
+                          onClick={() => copyToClipboard(info.value, info.label)}
+                          aria-label={`Copy ${info.label}`}
+                        >
+                          <Copy className="h-4 w-4" />
+                        </Button>
+                      )}
                     </div>
                   )
                 })}
@@ -231,7 +154,7 @@ export function ContactSection({ translations }: ContactSectionProps) {
                         variant="outline"
                         size="lg"
                         asChild
-                        className="flex-1 hover:scale-105 transition-transform bg-transparent"
+                        className="flex-1 transition-all bg-transparent hover:scale-[1.03] hover:border-primary hover:bg-primary/5 hover:shadow-lg hover:shadow-primary/25"
                       >
                         <a
                           href={social.href}
@@ -249,7 +172,6 @@ export function ContactSection({ translations }: ContactSectionProps) {
               </CardContent>
             </Card>
           </div>
-        </div>
       </div>
     </section>
   )
