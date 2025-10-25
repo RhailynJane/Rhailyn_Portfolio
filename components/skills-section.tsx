@@ -64,6 +64,7 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
       Database,
       Palette,
       Users,
+      Wrench,
     }
     return iconMap[iconName] || Code
   }
@@ -106,13 +107,13 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
         </div>
 
         {/* Skills Categories */}
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((category, index) => {
             const Icon = getIconComponent(category.icon)
             return (
-              <Card key={category.id} className="hover:shadow-lg transition-all duration-300 border-primary/20">
+              <Card key={category.id} className="hover:shadow-lg transition-all duration-300 border-primary/20 hover:border-primary/40">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 font-sans">
+                  <CardTitle className="flex items-center gap-3 font-sans text-lg">
                     <Icon className={`h-6 w-6 ${category.color}`} />
                     {category.title}
                   </CardTitle>

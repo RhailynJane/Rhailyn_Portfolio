@@ -1,4 +1,4 @@
-// Prisma schema for PostgreSQL
+// Prisma schema for MySQL/MariaDB
 
 generator client {
   provider = "prisma-client-js"
@@ -20,4 +20,117 @@ model Feedback {
   approved  Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+// Skills and Categories
+model SkillCategory {
+  id           Int      @id @default(autoincrement())
+  title        String
+  icon         String   // Icon name (Code, Database, Palette, Users, Wrench)
+  color        String   // Tailwind color class (text-blue-500, etc.)
+  displayOrder Int      @map("display_order")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  skills       Skill[]
+
+  @@map("skill_categories")
+}
+
+model Skill {
+  id           Int           @id @default(autoincrement())
+  categoryId   Int           @map("category_id")
+  name         String
+  level        Int           // 0-100
+  displayOrder Int           @map("display_order")
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  category     SkillCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@map("skills")
+}
+
+model Tool {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  category  String?  // Optional category grouping
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("tools")
+}
+
+// Projects
+model Project {
+  id              String   @id @default(uuid())
+  title           String
+  description     String   @db.Text
+  longDescription String?  @map("long_description") @db.Text
+  technologies    String[] // Array of technology names
+  category        String
+  githubUrl       String?  @map("github_url")
+  demoUrl         String?  @map("demo_url")
+  videoUrl        String?  @map("video_url")
+  imageUrl        String?  @map("image_url")
+  figmaUrl        String?  @map("figma_url")
+  featured        Boolean  @default(false)
+  status          String   @default("completed") // completed, in-progress, planned
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@map("projects")
+}
+
+// Experience/Work History
+model Experience {
+  id          Int      @id @default(autoincrement())
+  title       String
+  company     String
+  location    String
+  startDate   DateTime @map("start_date")
+  endDate     DateTime? @map("end_date")
+  isCurrent   Boolean  @default(false) @map("is_current")
+  description String   @db.Text
+  skills      String[] // Array of skills used
+  displayOrder Int     @default(0) @map("display_order")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("experience")
+}
+
+// Education
+model Education {
+  id             Int       @id @default(autoincrement())
+  degree         String
+  fieldOfStudy   String    @map("field_of_study")
+  school         String
+  location       String
+  startDate      DateTime  @map("start_date")
+  endDate        DateTime? @map("end_date")
+  isCurrent      Boolean   @default(false) @map("is_current")
+  description    String?   @db.Text
+  achievements   String[]  // Array of achievements
+  displayOrder   Int       @default(0) @map("display_order")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  @@map("education")
+}
+
+// Certifications
+model Certification {
+  id                  Int       @id @default(autoincrement())
+  name                String
+  issuingOrganization String    @map("issuing_organization")
+  issueDate           DateTime  @map("issue_date")
+  expiryDate          DateTime? @map("expiry_date")
+  credentialId        String?   @map("credential_id")
+  credentialUrl       String?   @map("credential_url")
+  description         String?   @db.Text
+  displayOrder        Int       @default(0) @map("display_order")
+  createdAt           DateTime  @default(now()) @map("created_at")
+  updatedAt           DateTime  @updatedAt @map("updated_at")
+
+  @@map("certifications")
 }

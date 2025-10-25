@@ -1,86 +1,27 @@
-"use client"
-
-import { useEffect, useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { prisma } from "@/lib/prisma"
+import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { revalidatePath } from "next/cache"
 
-type Feedback = {
-  id: string
-  name: string
-  email: string
-  company?: string | null
-  position?: string | null
-  message: string
-  rating: number
-  approved: boolean
-  createdAt: string
+async function approve(formData: FormData) {
+  "use server"
+  const id = formData.get("id") as string
+  if (!id) return
+  await prisma.feedback.update({ where: { id }, data: { approved: true } })
+  revalidatePath("/admin")
 }
 
-export default function AdminPage() {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [authed, setAuthed] = useState(false)
-  const [feedbacks, setFeedbacks] = useState<Feedback[]>([])
+async function remove(formData: FormData) {
+  "use server"
+  const id = formData.get("id") as string
+  if (!id) return
+  await prisma.feedback.delete({ where: { id } })
+  revalidatePath("/admin")
+}
 
-  useEffect(() => {
-    if (authed) loadFeedback()
-  }, [authed])
-
-  const authHeader = () => `Basic ${btoa(`${username}:${password}`)}`
-
-  const loadFeedback = async () => {
-    const res = await fetch("/api/feedback/moderation", { headers: { authorization: authHeader() } })
-    if (res.ok) {
-      const data = await res.json()
-      setFeedbacks(data)
-    }
-  }
-
-  const handleApprove = async (id: string) => {
-    const res = await fetch("/api/feedback/moderation", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json", authorization: authHeader() },
-      body: JSON.stringify({ id }),
-    })
-    if (res.ok) loadFeedback()
-  }
-
-  const handleDelete = async (id: string) => {
-    const res = await fetch(`/api/feedback/moderation?id=${id}`, {
-      method: "DELETE",
-      headers: { authorization: authHeader() },
-    })
-    if (res.ok) loadFeedback()
-  }
-
-  if (!authed) {
-    return (
-      <section className="py-20 px-4">
-        <div className="max-w-md mx-auto">
-          <Card>
-            <CardHeader>
-              <CardTitle>Admin Login</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label>Username</Label>
-                <Input value={username} onChange={(e) => setUsername(e.target.value)} />
-              </div>
-              <div className="space-y-2">
-                <Label>Password</Label>
-                <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-              </div>
-              <Button className="w-full" onClick={() => setAuthed(true)}>
-                Sign In
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-    )
-  }
+export default async function AdminPage() {
+  // This page is protected by middleware (HTTP Basic Auth)
+  const feedbacks = await prisma.feedback.findMany({ orderBy: { createdAt: "desc" } })
 
   return (
     <section className="py-20 px-4">
@@ -101,13 +42,15 @@ export default function AdminPage() {
                 <p className="text-sm italic">“{f.message}”</p>
                 <div className="flex gap-2 justify-end">
                   {!f.approved && (
-                    <Button size="sm" onClick={() => handleApprove(f.id)}>
-                      Approve
-                    </Button>
+                    <form action={approve}>
+                      <input type="hidden" name="id" value={f.id} />
+                      <Button size="sm" type="submit">Approve</Button>
+                    </form>
                   )}
-                  <Button variant="outline" size="sm" onClick={() => handleDelete(f.id)}>
-                    Delete
-                  </Button>
+                  <form action={remove}>
+                    <input type="hidden" name="id" value={f.id} />
+                    <Button variant="outline" size="sm" type="submit">Delete</Button>
+                  </form>
                 </div>
               </div>
             ))}

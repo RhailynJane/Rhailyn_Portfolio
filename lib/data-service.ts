@@ -1,6 +1,3 @@
-// Data service layer (Supabase removed). Returns mock data for most resources and
-// uses API endpoints for feedback operations.
-
 export type Project = {
   id: string
   title: string
@@ -232,42 +229,122 @@ const mockProjects: Project[] = [
 ]
 
 const mockSkillCategories = [
-  { id: 1, title: "Programming & Development", icon: "Code", color: "text-blue-500", display_order: 1 },
-  { id: 2, title: "Testing & QA", icon: "Code", color: "text-red-500", display_order: 2 },
+  { id: 1, title: "Frontend Development", icon: "Code", color: "text-blue-500", display_order: 1 },
+  { id: 2, title: "Backend & Database", icon: "Database", color: "text-green-500", display_order: 2 },
+  { id: 3, title: "Mobile Development", icon: "Code", color: "text-purple-500", display_order: 3 },
+  { id: 4, title: "Testing & Quality Assurance", icon: "Code", color: "text-red-500", display_order: 4 },
+  { id: 5, title: "UI/UX Design", icon: "Palette", color: "text-pink-500", display_order: 5 },
+  { id: 6, title: "DevOps & Tools", icon: "Wrench", color: "text-orange-500", display_order: 6 },
 ]
 
 const mockSkills = [
-  { id: 1, category_id: 1, name: "JavaScript", level: 95, display_order: 1 },
-  { id: 2, category_id: 1, name: "Python", level: 85, display_order: 2 },
-  { id: 3, category_id: 1, name: "C#", level: 80, display_order: 3 },
-  { id: 4, category_id: 1, name: "HTML5", level: 95, display_order: 4 },
-  { id: 5, category_id: 1, name: "CSS3", level: 90, display_order: 5 },
-  { id: 6, category_id: 1, name: "React", level: 92, display_order: 6 },
-  { id: 7, category_id: 1, name: "Node.js", level: 88, display_order: 7 },
-  { id: 8, category_id: 1, name: "TypeScript", level: 90, display_order: 8 },
-  { id: 9, category_id: 1, name: "React Native", level: 85, display_order: 9 },
-  { id: 10, category_id: 2, name: "Selenium", level: 85, display_order: 1 },
-  { id: 11, category_id: 2, name: "Cypress", level: 88, display_order: 2 },
-  { id: 12, category_id: 2, name: "Postman", level: 90, display_order: 3 },
+  // Frontend Development
+  { id: 1, category_id: 1, name: "HTML5 & CSS3", level: 95, display_order: 1 },
+  { id: 2, category_id: 1, name: "JavaScript (ES6+)", level: 95, display_order: 2 },
+  { id: 3, category_id: 1, name: "TypeScript", level: 90, display_order: 3 },
+  { id: 4, category_id: 1, name: "React.js", level: 92, display_order: 4 },
+  { id: 5, category_id: 1, name: "Next.js", level: 88, display_order: 5 },
+  { id: 6, category_id: 1, name: "Tailwind CSS", level: 90, display_order: 6 },
+  { id: 7, category_id: 1, name: "Responsive Design", level: 93, display_order: 7 },
+  
+  // Backend & Database
+  { id: 8, category_id: 2, name: "Node.js", level: 88, display_order: 1 },
+  { id: 9, category_id: 2, name: "Python", level: 85, display_order: 2 },
+  { id: 10, category_id: 2, name: "C# & .NET", level: 82, display_order: 3 },
+  { id: 11, category_id: 2, name: "SQL (MySQL/PostgreSQL)", level: 85, display_order: 4 },
+  { id: 12, category_id: 2, name: "Prisma ORM", level: 80, display_order: 5 },
+  { id: 13, category_id: 2, name: "RESTful APIs", level: 88, display_order: 6 },
+  
+  // Mobile Development
+  { id: 14, category_id: 3, name: "React Native", level: 85, display_order: 1 },
+  { id: 15, category_id: 3, name: ".NET MAUI", level: 80, display_order: 2 },
+  { id: 16, category_id: 3, name: "Cross-Platform Dev", level: 83, display_order: 3 },
+  { id: 17, category_id: 3, name: "Mobile UI/UX", level: 85, display_order: 4 },
+  
+  // Testing & QA
+  { id: 18, category_id: 4, name: "Cypress", level: 90, display_order: 1 },
+  { id: 19, category_id: 4, name: "Selenium", level: 85, display_order: 2 },
+  { id: 20, category_id: 4, name: "Postman/API Testing", level: 92, display_order: 3 },
+  { id: 21, category_id: 4, name: "Manual Testing", level: 95, display_order: 4 },
+  { id: 22, category_id: 4, name: "Test Planning", level: 90, display_order: 5 },
+  { id: 23, category_id: 4, name: "Regression Testing", level: 93, display_order: 6 },
+  
+  // UI/UX Design
+  { id: 24, category_id: 5, name: "Figma", level: 88, display_order: 1 },
+  { id: 25, category_id: 5, name: "Prototyping", level: 85, display_order: 2 },
+  { id: 26, category_id: 5, name: "Wireframing", level: 83, display_order: 3 },
+  { id: 27, category_id: 5, name: "User Research", level: 80, display_order: 4 },
+  
+  // DevOps & Tools
+  { id: 28, category_id: 6, name: "Git & GitHub", level: 92, display_order: 1 },
+  { id: 29, category_id: 6, name: "Agile/Scrum", level: 90, display_order: 2 },
+  { id: 30, category_id: 6, name: "CI/CD (Jenkins)", level: 80, display_order: 3 },
+  { id: 31, category_id: 6, name: "Jira & Confluence", level: 93, display_order: 4 },
 ]
 
 const mockTools = [
-  "Git",
-  "Jira",
-  "Figma",
-  "PostgreSQL",
-  "WatermelonDB",
+  // Development Tools
+  "VS Code",
+  "Git & GitHub",
+  "NPM & Yarn",
+  "Vite",
+  "Webpack",
+  
+  // Frontend Frameworks & Libraries
+  "React.js",
+  "Next.js",
+  "Tailwind CSS",
+  "shadcn/ui",
+  "Bootstrap",
+  
+  // Backend & Database
+  "Node.js",
+  "Express.js",
   "Prisma",
-  "React Native",
-  "ESLint",
-  "Firebase",
-  ".NET MAUI",
+  "PostgreSQL",
   "MySQL",
-  "Selenium",
+  "SQL Server",
+  "Firebase",
+  "Supabase",
+  "WatermelonDB",
+  
+  // Mobile Development
+  "React Native",
+  "Expo",
+  ".NET MAUI",
+  "Xamarin",
+  
+  // Testing Tools
   "Cypress",
+  "Selenium",
   "Postman",
-  "Jenkins",
+  "TestRail",
+  "Jest",
+  
+  // Design Tools
+  "Figma",
+  "Adobe XD",
+  "Canva",
+  
+  // Project Management & Collaboration
+  "Jira",
   "Confluence",
+  "Trello",
+  "Slack",
+  "Microsoft Teams",
+  
+  // DevOps & CI/CD
+  "Jenkins",
+  "Docker",
+  "Vercel",
+  "Netlify",
+  
+  // Other Tools
+  "ESLint",
+  "Prettier",
+  "Zendesk",
+  "Zoho Desk",
+  "Wireshark",
 ]
 
 const mockFeedback: any[] = []
@@ -472,18 +549,46 @@ const mockCertifications = [
 ]
 
 export const dataService = {
-  // Projects
+  // Projects - Fetch from API (database) with fallback to mock data
   async getProjects() {
-    return mockProjects
+    try {
+      const res = await fetch("/api/projects", { cache: "no-store" })
+      if (!res.ok) throw new Error("Failed to fetch projects")
+      return await res.json()
+    } catch (e) {
+      console.error("Error fetching projects, using mock data:", e)
+      return mockProjects
+    }
   },
   async getFeaturedProjects() {
-    return mockProjects.filter((p) => p.featured)
+    try {
+      const res = await fetch("/api/projects?featured=true", { cache: "no-store" })
+      if (!res.ok) throw new Error("Failed to fetch featured projects")
+      return await res.json()
+    } catch (e) {
+      console.error("Error fetching featured projects, using mock data:", e)
+      return mockProjects.filter((p) => p.featured)
+    }
   },
   async getProjectById(id: string) {
-    return mockProjects.find((p) => p.id === id)
+    try {
+      const res = await fetch(`/api/projects?id=${id}`, { cache: "no-store" })
+      if (!res.ok) throw new Error("Failed to fetch project")
+      return await res.json()
+    } catch (e) {
+      console.error("Error fetching project, using mock data:", e)
+      return mockProjects.find((p) => p.id === id)
+    }
   },
   async getProjectsByCategory(category: string) {
-    return mockProjects.filter((p) => p.category === category)
+    try {
+      const res = await fetch(`/api/projects?category=${encodeURIComponent(category)}`, { cache: "no-store" })
+      if (!res.ok) throw new Error("Failed to fetch projects by category")
+      return await res.json()
+    } catch (e) {
+      console.error("Error fetching projects by category, using mock data:", e)
+      return mockProjects.filter((p) => p.category === category)
+    }
   },
 
   // Feedback via API endpoints
@@ -520,38 +625,101 @@ export const dataService = {
     }
   },
 
-  // Skills
+  // Skills - Fetch from API (database) with fallback to mock data
   async getSkillCategories() {
-    return mockSkillCategories
+    try {
+      const res = await fetch("/api/skills", { cache: "no-store" })
+      if (!res.ok) throw new Error("Failed to fetch skills")
+      return await res.json()
+    } catch (e) {
+      console.error("Error fetching skills, using mock data:", e)
+      return mockSkillCategories
+    }
   },
   async getSkillsByCategory(categoryId: number) {
-    return mockSkills.filter((s) => s.category_id === categoryId)
+    try {
+      const categories = await this.getAllSkillsWithCategories()
+      const category = categories.find((c: any) => c.id === categoryId)
+      return category?.skills || []
+    } catch (e) {
+      console.error("Error fetching skills by category:", e)
+      return mockSkills.filter((s) => s.category_id === categoryId)
+    }
   },
   async getAllSkillsWithCategories() {
-    return mockSkillCategories.map((c) => ({ ...c, skills: mockSkills.filter((s) => s.category_id === c.id) }))
+    try {
+      const res = await fetch("/api/skills", { cache: "no-store" })
+      if (!res.ok) throw new Error("Failed to fetch skills")
+      return await res.json()
+    } catch (e) {
+      console.error("Error fetching skills, using mock data:", e)
+      return mockSkillCategories.map((c) => ({ ...c, skills: mockSkills.filter((s) => s.category_id === c.id) }))
+    }
   },
   async getTools() {
-    return mockTools
+    try {
+      const res = await fetch("/api/tools", { cache: "no-store" })
+      if (!res.ok) throw new Error("Failed to fetch tools")
+      return await res.json()
+    } catch (e) {
+      console.error("Error fetching tools, using mock data:", e)
+      return mockTools
+    }
   },
 
-  // Experience
+  // Experience - Fetch from API (database) with fallback to mock data
   async getExperience() {
-    return mockExperience
+    try {
+      const res = await fetch("/api/experience", { cache: "no-store" })
+      if (!res.ok) throw new Error("Failed to fetch experience")
+      return await res.json()
+    } catch (e) {
+      console.error("Error fetching experience, using mock data:", e)
+      return mockExperience
+    }
   },
   async getCurrentExperience() {
-    return mockExperience.filter((e) => e.is_current)
+    try {
+      const res = await fetch("/api/experience?current=true", { cache: "no-store" })
+      if (!res.ok) throw new Error("Failed to fetch current experience")
+      return await res.json()
+    } catch (e) {
+      console.error("Error fetching current experience, using mock data:", e)
+      return mockExperience.filter((e) => e.is_current)
+    }
   },
 
-  // Education
+  // Education - Fetch from API (database) with fallback to mock data
   async getEducation() {
-    return mockEducation
+    try {
+      const res = await fetch("/api/education", { cache: "no-store" })
+      if (!res.ok) throw new Error("Failed to fetch education")
+      return await res.json()
+    } catch (e) {
+      console.error("Error fetching education, using mock data:", e)
+      return mockEducation
+    }
   },
 
-  // Certifications
+  // Certifications - Fetch from API (database) with fallback to mock data
   async getCertifications() {
-    return mockCertifications
+    try {
+      const res = await fetch("/api/certifications", { cache: "no-store" })
+      if (!res.ok) throw new Error("Failed to fetch certifications")
+      return await res.json()
+    } catch (e) {
+      console.error("Error fetching certifications, using mock data:", e)
+      return mockCertifications
+    }
   },
   async getActiveCertifications() {
-    return mockCertifications.filter((c) => !c.expiry_date || new Date(c.expiry_date) > new Date())
+    try {
+      const res = await fetch("/api/certifications?active=true", { cache: "no-store" })
+      if (!res.ok) throw new Error("Failed to fetch active certifications")
+      return await res.json()
+    } catch (e) {
+      console.error("Error fetching active certifications, using mock data:", e)
+      return mockCertifications.filter((c) => !c.expiry_date || new Date(c.expiry_date) > new Date())
+    }
   },
 }

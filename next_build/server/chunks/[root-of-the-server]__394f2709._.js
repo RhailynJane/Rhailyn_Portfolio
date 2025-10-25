@@ -116,12 +116,9 @@ async function GET(req) {
             }
         });
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(feedback);
-    } catch  {
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            error: "Failed"
-        }, {
-            status: 500
-        });
+    } catch (e) {
+        console.error("Database error in moderation GET:", e);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json([]);
     }
 }
 async function PATCH(req) {
@@ -141,9 +138,11 @@ async function PATCH(req) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             success: true
         });
-    } catch  {
+    } catch (e) {
+        console.error("Database error in moderation PATCH:", e);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            error: "Failed"
+            success: false,
+            error: "Database unavailable"
         }, {
             status: 500
         });
@@ -164,9 +163,11 @@ async function DELETE(req) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             success: true
         });
-    } catch  {
+    } catch (e) {
+        console.error("Database error in moderation DELETE:", e);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            error: "Failed"
+            success: false,
+            error: "Database unavailable"
         }, {
             status: 500
         });

@@ -1586,8 +1586,6 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 
 var { k: __turbopack_refresh__, m: module } = __turbopack_context__;
 {
-// Data service layer (Supabase removed). Returns mock data for most resources and
-// uses API endpoints for feedback operations.
 __turbopack_context__.s({
     "dataService": ()=>dataService
 });
@@ -1840,122 +1838,327 @@ const mockProjects = [
 const mockSkillCategories = [
     {
         id: 1,
-        title: "Programming & Development",
+        title: "Frontend Development",
         icon: "Code",
         color: "text-blue-500",
         display_order: 1
     },
     {
         id: 2,
-        title: "Testing & QA",
+        title: "Backend & Database",
+        icon: "Database",
+        color: "text-green-500",
+        display_order: 2
+    },
+    {
+        id: 3,
+        title: "Mobile Development",
+        icon: "Code",
+        color: "text-purple-500",
+        display_order: 3
+    },
+    {
+        id: 4,
+        title: "Testing & Quality Assurance",
         icon: "Code",
         color: "text-red-500",
-        display_order: 2
+        display_order: 4
+    },
+    {
+        id: 5,
+        title: "UI/UX Design",
+        icon: "Palette",
+        color: "text-pink-500",
+        display_order: 5
+    },
+    {
+        id: 6,
+        title: "DevOps & Tools",
+        icon: "Wrench",
+        color: "text-orange-500",
+        display_order: 6
     }
 ];
 const mockSkills = [
+    // Frontend Development
     {
         id: 1,
         category_id: 1,
-        name: "JavaScript",
+        name: "HTML5 & CSS3",
         level: 95,
         display_order: 1
     },
     {
         id: 2,
         category_id: 1,
-        name: "Python",
-        level: 85,
+        name: "JavaScript (ES6+)",
+        level: 95,
         display_order: 2
     },
     {
         id: 3,
         category_id: 1,
-        name: "C#",
-        level: 80,
+        name: "TypeScript",
+        level: 90,
         display_order: 3
     },
     {
         id: 4,
         category_id: 1,
-        name: "HTML5",
-        level: 95,
+        name: "React.js",
+        level: 92,
         display_order: 4
     },
     {
         id: 5,
         category_id: 1,
-        name: "CSS3",
-        level: 90,
+        name: "Next.js",
+        level: 88,
         display_order: 5
     },
     {
         id: 6,
         category_id: 1,
-        name: "React",
-        level: 92,
+        name: "Tailwind CSS",
+        level: 90,
         display_order: 6
     },
     {
         id: 7,
         category_id: 1,
-        name: "Node.js",
-        level: 88,
+        name: "Responsive Design",
+        level: 93,
         display_order: 7
     },
+    // Backend & Database
     {
         id: 8,
-        category_id: 1,
-        name: "TypeScript",
-        level: 90,
-        display_order: 8
+        category_id: 2,
+        name: "Node.js",
+        level: 88,
+        display_order: 1
     },
     {
         id: 9,
-        category_id: 1,
-        name: "React Native",
+        category_id: 2,
+        name: "Python",
         level: 85,
-        display_order: 9
+        display_order: 2
     },
     {
         id: 10,
         category_id: 2,
-        name: "Selenium",
-        level: 85,
-        display_order: 1
+        name: "C# & .NET",
+        level: 82,
+        display_order: 3
     },
     {
         id: 11,
         category_id: 2,
-        name: "Cypress",
-        level: 88,
-        display_order: 2
+        name: "SQL (MySQL/PostgreSQL)",
+        level: 85,
+        display_order: 4
     },
     {
         id: 12,
         category_id: 2,
-        name: "Postman",
-        level: 90,
+        name: "Prisma ORM",
+        level: 80,
+        display_order: 5
+    },
+    {
+        id: 13,
+        category_id: 2,
+        name: "RESTful APIs",
+        level: 88,
+        display_order: 6
+    },
+    // Mobile Development
+    {
+        id: 14,
+        category_id: 3,
+        name: "React Native",
+        level: 85,
+        display_order: 1
+    },
+    {
+        id: 15,
+        category_id: 3,
+        name: ".NET MAUI",
+        level: 80,
+        display_order: 2
+    },
+    {
+        id: 16,
+        category_id: 3,
+        name: "Cross-Platform Dev",
+        level: 83,
         display_order: 3
+    },
+    {
+        id: 17,
+        category_id: 3,
+        name: "Mobile UI/UX",
+        level: 85,
+        display_order: 4
+    },
+    // Testing & QA
+    {
+        id: 18,
+        category_id: 4,
+        name: "Cypress",
+        level: 90,
+        display_order: 1
+    },
+    {
+        id: 19,
+        category_id: 4,
+        name: "Selenium",
+        level: 85,
+        display_order: 2
+    },
+    {
+        id: 20,
+        category_id: 4,
+        name: "Postman/API Testing",
+        level: 92,
+        display_order: 3
+    },
+    {
+        id: 21,
+        category_id: 4,
+        name: "Manual Testing",
+        level: 95,
+        display_order: 4
+    },
+    {
+        id: 22,
+        category_id: 4,
+        name: "Test Planning",
+        level: 90,
+        display_order: 5
+    },
+    {
+        id: 23,
+        category_id: 4,
+        name: "Regression Testing",
+        level: 93,
+        display_order: 6
+    },
+    // UI/UX Design
+    {
+        id: 24,
+        category_id: 5,
+        name: "Figma",
+        level: 88,
+        display_order: 1
+    },
+    {
+        id: 25,
+        category_id: 5,
+        name: "Prototyping",
+        level: 85,
+        display_order: 2
+    },
+    {
+        id: 26,
+        category_id: 5,
+        name: "Wireframing",
+        level: 83,
+        display_order: 3
+    },
+    {
+        id: 27,
+        category_id: 5,
+        name: "User Research",
+        level: 80,
+        display_order: 4
+    },
+    // DevOps & Tools
+    {
+        id: 28,
+        category_id: 6,
+        name: "Git & GitHub",
+        level: 92,
+        display_order: 1
+    },
+    {
+        id: 29,
+        category_id: 6,
+        name: "Agile/Scrum",
+        level: 90,
+        display_order: 2
+    },
+    {
+        id: 30,
+        category_id: 6,
+        name: "CI/CD (Jenkins)",
+        level: 80,
+        display_order: 3
+    },
+    {
+        id: 31,
+        category_id: 6,
+        name: "Jira & Confluence",
+        level: 93,
+        display_order: 4
     }
 ];
 const mockTools = [
-    "Git",
-    "Jira",
-    "Figma",
-    "PostgreSQL",
-    "WatermelonDB",
+    // Development Tools
+    "VS Code",
+    "Git & GitHub",
+    "NPM & Yarn",
+    "Vite",
+    "Webpack",
+    // Frontend Frameworks & Libraries
+    "React.js",
+    "Next.js",
+    "Tailwind CSS",
+    "shadcn/ui",
+    "Bootstrap",
+    // Backend & Database
+    "Node.js",
+    "Express.js",
     "Prisma",
-    "React Native",
-    "ESLint",
-    "Firebase",
-    ".NET MAUI",
+    "PostgreSQL",
     "MySQL",
-    "Selenium",
+    "SQL Server",
+    "Firebase",
+    "Supabase",
+    "WatermelonDB",
+    // Mobile Development
+    "React Native",
+    "Expo",
+    ".NET MAUI",
+    "Xamarin",
+    // Testing Tools
     "Cypress",
+    "Selenium",
     "Postman",
+    "TestRail",
+    "Jest",
+    // Design Tools
+    "Figma",
+    "Adobe XD",
+    "Canva",
+    // Project Management & Collaboration
+    "Jira",
+    "Confluence",
+    "Trello",
+    "Slack",
+    "Microsoft Teams",
+    // DevOps & CI/CD
     "Jenkins",
-    "Confluence"
+    "Docker",
+    "Vercel",
+    "Netlify",
+    // Other Tools
+    "ESLint",
+    "Prettier",
+    "Zendesk",
+    "Zoho Desk",
+    "Wireshark"
 ];
 const mockFeedback = [];
 const mockExperience = [
@@ -2151,18 +2354,54 @@ const mockCertifications = [
     }
 ];
 const dataService = {
-    // Projects
+    // Projects - Fetch from API (database) with fallback to mock data
     async getProjects () {
-        return mockProjects;
+        try {
+            const res = await fetch("/api/projects", {
+                cache: "no-store"
+            });
+            if (!res.ok) throw new Error("Failed to fetch projects");
+            return await res.json();
+        } catch (e) {
+            console.error("Error fetching projects, using mock data:", e);
+            return mockProjects;
+        }
     },
     async getFeaturedProjects () {
-        return mockProjects.filter((p)=>p.featured);
+        try {
+            const res = await fetch("/api/projects?featured=true", {
+                cache: "no-store"
+            });
+            if (!res.ok) throw new Error("Failed to fetch featured projects");
+            return await res.json();
+        } catch (e) {
+            console.error("Error fetching featured projects, using mock data:", e);
+            return mockProjects.filter((p)=>p.featured);
+        }
     },
     async getProjectById (id) {
-        return mockProjects.find((p)=>p.id === id);
+        try {
+            const res = await fetch("/api/projects?id=".concat(id), {
+                cache: "no-store"
+            });
+            if (!res.ok) throw new Error("Failed to fetch project");
+            return await res.json();
+        } catch (e) {
+            console.error("Error fetching project, using mock data:", e);
+            return mockProjects.find((p)=>p.id === id);
+        }
     },
     async getProjectsByCategory (category) {
-        return mockProjects.filter((p)=>p.category === category);
+        try {
+            const res = await fetch("/api/projects?category=".concat(encodeURIComponent(category)), {
+                cache: "no-store"
+            });
+            if (!res.ok) throw new Error("Failed to fetch projects by category");
+            return await res.json();
+        } catch (e) {
+            console.error("Error fetching projects by category, using mock data:", e);
+            return mockProjects.filter((p)=>p.category === category);
+        }
     },
     // Feedback via API endpoints
     async getApprovedFeedback () {
@@ -2201,39 +2440,118 @@ const dataService = {
             };
         }
     },
-    // Skills
+    // Skills - Fetch from API (database) with fallback to mock data
     async getSkillCategories () {
-        return mockSkillCategories;
+        try {
+            const res = await fetch("/api/skills", {
+                cache: "no-store"
+            });
+            if (!res.ok) throw new Error("Failed to fetch skills");
+            return await res.json();
+        } catch (e) {
+            console.error("Error fetching skills, using mock data:", e);
+            return mockSkillCategories;
+        }
     },
     async getSkillsByCategory (categoryId) {
-        return mockSkills.filter((s)=>s.category_id === categoryId);
+        try {
+            const categories = await this.getAllSkillsWithCategories();
+            const category = categories.find((c)=>c.id === categoryId);
+            return (category === null || category === void 0 ? void 0 : category.skills) || [];
+        } catch (e) {
+            console.error("Error fetching skills by category:", e);
+            return mockSkills.filter((s)=>s.category_id === categoryId);
+        }
     },
     async getAllSkillsWithCategories () {
-        return mockSkillCategories.map((c)=>({
-                ...c,
-                skills: mockSkills.filter((s)=>s.category_id === c.id)
-            }));
+        try {
+            const res = await fetch("/api/skills", {
+                cache: "no-store"
+            });
+            if (!res.ok) throw new Error("Failed to fetch skills");
+            return await res.json();
+        } catch (e) {
+            console.error("Error fetching skills, using mock data:", e);
+            return mockSkillCategories.map((c)=>({
+                    ...c,
+                    skills: mockSkills.filter((s)=>s.category_id === c.id)
+                }));
+        }
     },
     async getTools () {
-        return mockTools;
+        try {
+            const res = await fetch("/api/tools", {
+                cache: "no-store"
+            });
+            if (!res.ok) throw new Error("Failed to fetch tools");
+            return await res.json();
+        } catch (e) {
+            console.error("Error fetching tools, using mock data:", e);
+            return mockTools;
+        }
     },
-    // Experience
+    // Experience - Fetch from API (database) with fallback to mock data
     async getExperience () {
-        return mockExperience;
+        try {
+            const res = await fetch("/api/experience", {
+                cache: "no-store"
+            });
+            if (!res.ok) throw new Error("Failed to fetch experience");
+            return await res.json();
+        } catch (e) {
+            console.error("Error fetching experience, using mock data:", e);
+            return mockExperience;
+        }
     },
     async getCurrentExperience () {
-        return mockExperience.filter((e)=>e.is_current);
+        try {
+            const res = await fetch("/api/experience?current=true", {
+                cache: "no-store"
+            });
+            if (!res.ok) throw new Error("Failed to fetch current experience");
+            return await res.json();
+        } catch (e) {
+            console.error("Error fetching current experience, using mock data:", e);
+            return mockExperience.filter((e)=>e.is_current);
+        }
     },
-    // Education
+    // Education - Fetch from API (database) with fallback to mock data
     async getEducation () {
-        return mockEducation;
+        try {
+            const res = await fetch("/api/education", {
+                cache: "no-store"
+            });
+            if (!res.ok) throw new Error("Failed to fetch education");
+            return await res.json();
+        } catch (e) {
+            console.error("Error fetching education, using mock data:", e);
+            return mockEducation;
+        }
     },
-    // Certifications
+    // Certifications - Fetch from API (database) with fallback to mock data
     async getCertifications () {
-        return mockCertifications;
+        try {
+            const res = await fetch("/api/certifications", {
+                cache: "no-store"
+            });
+            if (!res.ok) throw new Error("Failed to fetch certifications");
+            return await res.json();
+        } catch (e) {
+            console.error("Error fetching certifications, using mock data:", e);
+            return mockCertifications;
+        }
     },
     async getActiveCertifications () {
-        return mockCertifications.filter((c)=>!c.expiry_date || new Date(c.expiry_date) > new Date());
+        try {
+            const res = await fetch("/api/certifications?active=true", {
+                cache: "no-store"
+            });
+            if (!res.ok) throw new Error("Failed to fetch active certifications");
+            return await res.json();
+        } catch (e) {
+            console.error("Error fetching active certifications, using mock data:", e);
+            return mockCertifications.filter((c)=>!c.expiry_date || new Date(c.expiry_date) > new Date());
+        }
     }
 };
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
@@ -3024,7 +3342,8 @@ function SkillsSection(param) {
             Code: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$code$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Code$3e$__["Code"],
             Database: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$database$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Database$3e$__["Database"],
             Palette: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$palette$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Palette$3e$__["Palette"],
-            Users: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$users$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Users$3e$__["Users"]
+            Users: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$users$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Users$3e$__["Users"],
+            Wrench: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$wrench$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Wrench$3e$__["Wrench"]
         };
         return iconMap[iconName] || __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$code$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Code$3e$__["Code"];
     };
@@ -3041,7 +3360,7 @@ function SkillsSection(param) {
                             children: translations.skills.title
                         }, void 0, false, {
                             fileName: "[project]/components/skills-section.tsx",
-                            lineNumber: 76,
+                            lineNumber: 77,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3049,23 +3368,23 @@ function SkillsSection(param) {
                             children: "Loading skills..."
                         }, void 0, false, {
                             fileName: "[project]/components/skills-section.tsx",
-                            lineNumber: 77,
+                            lineNumber: 78,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/skills-section.tsx",
-                    lineNumber: 75,
+                    lineNumber: 76,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/skills-section.tsx",
-                lineNumber: 74,
+                lineNumber: 75,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/components/skills-section.tsx",
-            lineNumber: 73,
+            lineNumber: 74,
             columnNumber: 7
         }, this);
     }
@@ -3082,7 +3401,7 @@ function SkillsSection(param) {
                             children: translations.skills.title
                         }, void 0, false, {
                             fileName: "[project]/components/skills-section.tsx",
-                            lineNumber: 89,
+                            lineNumber: 90,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3090,23 +3409,23 @@ function SkillsSection(param) {
                             children: "Skills data is currently unavailable. Please check back later."
                         }, void 0, false, {
                             fileName: "[project]/components/skills-section.tsx",
-                            lineNumber: 90,
+                            lineNumber: 91,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/skills-section.tsx",
-                    lineNumber: 88,
+                    lineNumber: 89,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/skills-section.tsx",
-                lineNumber: 87,
+                lineNumber: 88,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/components/skills-section.tsx",
-            lineNumber: 86,
+            lineNumber: 87,
             columnNumber: 7
         }, this);
     }
@@ -3123,7 +3442,7 @@ function SkillsSection(param) {
                             children: translations.skills.title
                         }, void 0, false, {
                             fileName: "[project]/components/skills-section.tsx",
-                            lineNumber: 104,
+                            lineNumber: 105,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3131,43 +3450,43 @@ function SkillsSection(param) {
                             children: translations.skills.subtitle
                         }, void 0, false, {
                             fileName: "[project]/components/skills-section.tsx",
-                            lineNumber: 105,
+                            lineNumber: 106,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/skills-section.tsx",
-                    lineNumber: 103,
+                    lineNumber: 104,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "grid lg:grid-cols-2 gap-8",
+                    className: "grid md:grid-cols-2 lg:grid-cols-3 gap-6",
                     children: skillCategories.map((category, index)=>{
                         const Icon = getIconComponent(category.icon);
                         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
-                            className: "hover:shadow-lg transition-all duration-300 border-primary/20",
+                            className: "hover:shadow-lg transition-all duration-300 border-primary/20 hover:border-primary/40",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardHeader"], {
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardTitle"], {
-                                        className: "flex items-center gap-3 font-sans",
+                                        className: "flex items-center gap-3 font-sans text-lg",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Icon, {
                                                 className: "h-6 w-6 ".concat(category.color)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/skills-section.tsx",
-                                                lineNumber: 116,
+                                                lineNumber: 117,
                                                 columnNumber: 21
                                             }, this),
                                             category.title
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/skills-section.tsx",
-                                        lineNumber: 115,
+                                        lineNumber: 116,
                                         columnNumber: 19
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/skills-section.tsx",
-                                    lineNumber: 114,
+                                    lineNumber: 115,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -3183,7 +3502,7 @@ function SkillsSection(param) {
                                                             children: skill.name
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/skills-section.tsx",
-                                                            lineNumber: 124,
+                                                            lineNumber: 125,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3194,13 +3513,13 @@ function SkillsSection(param) {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/skills-section.tsx",
-                                                            lineNumber: 125,
+                                                            lineNumber: 126,
                                                             columnNumber: 25
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/skills-section.tsx",
-                                                    lineNumber: 123,
+                                                    lineNumber: 124,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$progress$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Progress"], {
@@ -3211,30 +3530,30 @@ function SkillsSection(param) {
                                                     }
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/skills-section.tsx",
-                                                    lineNumber: 127,
+                                                    lineNumber: 128,
                                                     columnNumber: 23
                                                 }, this)
                                             ]
                                         }, skill.id, true, {
                                             fileName: "[project]/components/skills-section.tsx",
-                                            lineNumber: 122,
+                                            lineNumber: 123,
                                             columnNumber: 21
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/components/skills-section.tsx",
-                                    lineNumber: 120,
+                                    lineNumber: 121,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, category.id, true, {
                             fileName: "[project]/components/skills-section.tsx",
-                            lineNumber: 113,
+                            lineNumber: 114,
                             columnNumber: 15
                         }, this);
                     })
                 }, void 0, false, {
                     fileName: "[project]/components/skills-section.tsx",
-                    lineNumber: 109,
+                    lineNumber: 110,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3249,19 +3568,19 @@ function SkillsSection(param) {
                                         className: "h-6 w-6 text-primary"
                                     }, void 0, false, {
                                         fileName: "[project]/components/skills-section.tsx",
-                                        lineNumber: 146,
+                                        lineNumber: 147,
                                         columnNumber: 15
                                     }, this),
                                     translations.skills.toolsTechnologies
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/skills-section.tsx",
-                                lineNumber: 145,
+                                lineNumber: 146,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/skills-section.tsx",
-                            lineNumber: 144,
+                            lineNumber: 145,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -3279,39 +3598,39 @@ function SkillsSection(param) {
                                             children: tool
                                         }, tool, false, {
                                             fileName: "[project]/components/skills-section.tsx",
-                                            lineNumber: 154,
+                                            lineNumber: 155,
                                             columnNumber: 19
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/components/skills-section.tsx",
-                                    lineNumber: 152,
+                                    lineNumber: 153,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/skills-section.tsx",
-                                lineNumber: 151,
+                                lineNumber: 152,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/skills-section.tsx",
-                            lineNumber: 150,
+                            lineNumber: 151,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/skills-section.tsx",
-                    lineNumber: 143,
+                    lineNumber: 144,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/components/skills-section.tsx",
-            lineNumber: 101,
+            lineNumber: 102,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/components/skills-section.tsx",
-        lineNumber: 100,
+        lineNumber: 101,
         columnNumber: 5
     }, this);
 }
