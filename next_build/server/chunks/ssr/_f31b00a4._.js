@@ -4666,6 +4666,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$data$2d$service$2e$ts
 function FeedbackSection({ translations }) {
     const [approvedFeedbacks, setApprovedFeedbacks] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(true);
+    const [carouselApi, setCarouselApi] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [current, setCurrent] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    const [count, setCount] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
     const [newFeedback, setNewFeedback] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
         name: "",
         email: "",
@@ -4688,6 +4691,23 @@ function FeedbackSection({ translations }) {
         };
         loadFeedbacks();
     }, []);
+    // Carousel dots: track selected slide
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        if (!carouselApi) return;
+        const update = ()=>{
+            setCurrent(carouselApi.selectedScrollSnap());
+            setCount(carouselApi.scrollSnapList().length);
+        };
+        update();
+        carouselApi.on("select", update);
+        carouselApi.on("reInit", update);
+        return ()=>{
+            carouselApi.off("select", update);
+            carouselApi.off("reInit", update);
+        };
+    }, [
+        carouselApi
+    ]);
     const handleFeedbackSubmit = async (e)=>{
         e.preventDefault();
         try {
@@ -4721,7 +4741,7 @@ function FeedbackSection({ translations }) {
                 className: `h-4 w-4 ${i < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`
             }, i, false, {
                 fileName: "[project]/components/feedback-section.tsx",
-                lineNumber: 87,
+                lineNumber: 109,
                 columnNumber: 7
             }, this));
     };
@@ -4737,22 +4757,22 @@ function FeedbackSection({ translations }) {
                         children: "Loading feedback..."
                     }, void 0, false, {
                         fileName: "[project]/components/feedback-section.tsx",
-                        lineNumber: 96,
+                        lineNumber: 118,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/feedback-section.tsx",
-                    lineNumber: 95,
+                    lineNumber: 117,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/feedback-section.tsx",
-                lineNumber: 94,
+                lineNumber: 116,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/components/feedback-section.tsx",
-            lineNumber: 93,
+            lineNumber: 115,
             columnNumber: 7
         }, this);
     }
@@ -4769,7 +4789,7 @@ function FeedbackSection({ translations }) {
                             children: translations.feedback.title
                         }, void 0, false, {
                             fileName: "[project]/components/feedback-section.tsx",
-                            lineNumber: 108,
+                            lineNumber: 130,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -4777,13 +4797,13 @@ function FeedbackSection({ translations }) {
                             children: translations.feedback.subtitle
                         }, void 0, false, {
                             fileName: "[project]/components/feedback-section.tsx",
-                            lineNumber: 109,
+                            lineNumber: 131,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/feedback-section.tsx",
-                    lineNumber: 107,
+                    lineNumber: 129,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4794,292 +4814,258 @@ function FeedbackSection({ translations }) {
                             children: translations.feedback.testimonials
                         }, void 0, false, {
                             fileName: "[project]/components/feedback-section.tsx",
-                            lineNumber: 114,
+                            lineNumber: 136,
                             columnNumber: 11
                         }, this),
                         approvedFeedbacks.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "relative max-w-4xl mx-auto",
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$carousel$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Carousel"], {
-                                className: "w-full",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$carousel$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CarouselContent"], {
-                                        children: approvedFeedbacks.map((feedback)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$carousel$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CarouselItem"], {
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
-                                                    className: "border-purple-500/20 bg-white/5 dark:bg-white/5 backdrop-blur-sm hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardHeader"], {
-                                                            className: "space-y-4",
-                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                className: "flex items-start justify-between gap-4",
+                            className: "relative max-w-2xl mx-auto",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$carousel$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Carousel"], {
+                                    className: "w-full",
+                                    setApi: setCarouselApi,
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$carousel$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CarouselContent"], {
+                                            children: approvedFeedbacks.map((feedback)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$carousel$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CarouselItem"], {
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "px-2",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "p-[1px] rounded-3xl bg-gradient-to-br from-purple-500/25 via-transparent to-blue-500/25",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
+                                                                className: "relative rounded-3xl border border-gray-200/60 dark:border-white/10 bg-white/80 dark:bg-white/5 backdrop-blur-sm shadow-lg",
                                                                 children: [
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                        className: "flex items-center gap-4",
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardHeader"], {
+                                                                        className: "pt-6 pb-0 text-center space-y-2",
                                                                         children: [
-                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Avatar"], {
-                                                                                className: "h-14 w-14 border-2 border-purple-400/30",
-                                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AvatarFallback"], {
-                                                                                    className: "bg-gradient-to-br from-purple-600 to-blue-600 text-white font-bold text-lg",
-                                                                                    children: feedback.name.split(" ").map((n)=>n[0]).join("").toUpperCase()
+                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                                className: "mx-auto mb-2",
+                                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Avatar"], {
+                                                                                    className: "h-14 w-14 ring-2 ring-white/70 dark:ring-white/10 shadow",
+                                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AvatarFallback"], {
+                                                                                        className: "bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-200 font-semibold",
+                                                                                        children: feedback.name.split(" ").map((n)=>n[0]).join("").toUpperCase()
+                                                                                    }, void 0, false, {
+                                                                                        fileName: "[project]/components/feedback-section.tsx",
+                                                                                        lineNumber: 152,
+                                                                                        columnNumber: 33
+                                                                                    }, this)
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/feedback-section.tsx",
-                                                                                    lineNumber: 128,
-                                                                                    columnNumber: 33
+                                                                                    lineNumber: 151,
+                                                                                    columnNumber: 31
                                                                                 }, this)
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                                                lineNumber: 127,
+                                                                                lineNumber: 150,
+                                                                                columnNumber: 29
+                                                                            }, this),
+                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
+                                                                                className: "font-semibold text-gray-900 dark:text-white",
+                                                                                children: feedback.name
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/components/feedback-section.tsx",
+                                                                                lineNumber: 161,
+                                                                                columnNumber: 29
+                                                                            }, this),
+                                                                            (feedback.position || feedback.company) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                                className: "text-sm text-gray-600 dark:text-gray-400",
+                                                                                children: [
+                                                                                    feedback.position,
+                                                                                    feedback.company
+                                                                                ].filter(Boolean).join(" · ")
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/components/feedback-section.tsx",
+                                                                                lineNumber: 163,
                                                                                 columnNumber: 31
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                                children: [
-                                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
-                                                                                        className: "font-bold text-lg text-gray-900 dark:text-white font-sans",
-                                                                                        children: feedback.name
-                                                                                    }, void 0, false, {
-                                                                                        fileName: "[project]/components/feedback-section.tsx",
-                                                                                        lineNumber: 137,
-                                                                                        columnNumber: 33
-                                                                                    }, this),
-                                                                                    feedback.position && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                                        className: "text-sm text-gray-600 dark:text-gray-400 font-serif",
-                                                                                        children: [
-                                                                                            feedback.position,
-                                                                                            feedback.company && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
-                                                                                                children: [
-                                                                                                    " ",
-                                                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                                                        className: "text-purple-400",
-                                                                                                        children: "at"
-                                                                                                    }, void 0, false, {
-                                                                                                        fileName: "[project]/components/feedback-section.tsx",
-                                                                                                        lineNumber: 144,
-                                                                                                        columnNumber: 41
-                                                                                                    }, this),
-                                                                                                    " ",
-                                                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                                                        className: "text-purple-600 dark:text-purple-400 font-semibold",
-                                                                                                        children: feedback.company
-                                                                                                    }, void 0, false, {
-                                                                                                        fileName: "[project]/components/feedback-section.tsx",
-                                                                                                        lineNumber: 145,
-                                                                                                        columnNumber: 41
-                                                                                                    }, this)
-                                                                                                ]
-                                                                                            }, void 0, true)
-                                                                                        ]
-                                                                                    }, void 0, true, {
-                                                                                        fileName: "[project]/components/feedback-section.tsx",
-                                                                                        lineNumber: 139,
-                                                                                        columnNumber: 35
-                                                                                    }, this)
-                                                                                ]
-                                                                            }, void 0, true, {
+                                                                                className: "mx-auto flex items-center justify-center gap-1 text-yellow-500",
+                                                                                "aria-label": `Rating ${feedback.rating} out of 5`,
+                                                                                children: renderStars(feedback.rating)
+                                                                            }, void 0, false, {
                                                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                                                lineNumber: 136,
-                                                                                columnNumber: 31
+                                                                                lineNumber: 167,
+                                                                                columnNumber: 29
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/components/feedback-section.tsx",
-                                                                        lineNumber: 126,
-                                                                        columnNumber: 29
+                                                                        lineNumber: 148,
+                                                                        columnNumber: 27
                                                                     }, this),
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                        className: "flex items-center gap-1 flex-shrink-0",
-                                                                        children: renderStars(feedback.rating)
-                                                                    }, void 0, false, {
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardContent"], {
+                                                                        className: "pt-4",
+                                                                        children: [
+                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("blockquote", {
+                                                                                className: "text-gray-800 dark:text-gray-200 leading-relaxed text-lg italic text-center",
+                                                                                children: [
+                                                                                    "“",
+                                                                                    feedback.message,
+                                                                                    "”"
+                                                                                ]
+                                                                            }, void 0, true, {
+                                                                                fileName: "[project]/components/feedback-section.tsx",
+                                                                                lineNumber: 173,
+                                                                                columnNumber: 29
+                                                                            }, this),
+                                                                            (()=>{
+                                                                                const dateValue = feedback.createdAt ?? feedback.created_at ?? feedback.updatedAt ?? feedback.updated_at;
+                                                                                let formatted = "";
+                                                                                if (dateValue) {
+                                                                                    const d = new Date(dateValue);
+                                                                                    if (!Number.isNaN(d.getTime())) {
+                                                                                        formatted = d.toLocaleDateString("en-US", {
+                                                                                            month: "short",
+                                                                                            day: "numeric",
+                                                                                            year: "numeric"
+                                                                                        });
+                                                                                    }
+                                                                                }
+                                                                                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                                    className: "mt-6 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400",
+                                                                                    children: [
+                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                                            children: formatted
+                                                                                        }, void 0, false, {
+                                                                                            fileName: "[project]/components/feedback-section.tsx",
+                                                                                            lineNumber: 187,
+                                                                                            columnNumber: 35
+                                                                                        }, this),
+                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                                            className: "font-medium text-gray-600 dark:text-gray-300",
+                                                                                            children: [
+                                                                                                feedback.rating,
+                                                                                                "/5"
+                                                                                            ]
+                                                                                        }, void 0, true, {
+                                                                                            fileName: "[project]/components/feedback-section.tsx",
+                                                                                            lineNumber: 188,
+                                                                                            columnNumber: 35
+                                                                                        }, this)
+                                                                                    ]
+                                                                                }, void 0, true, {
+                                                                                    fileName: "[project]/components/feedback-section.tsx",
+                                                                                    lineNumber: 186,
+                                                                                    columnNumber: 33
+                                                                                }, this);
+                                                                            })()
+                                                                        ]
+                                                                    }, void 0, true, {
                                                                         fileName: "[project]/components/feedback-section.tsx",
-                                                                        lineNumber: 154,
-                                                                        columnNumber: 29
+                                                                        lineNumber: 171,
+                                                                        columnNumber: 27
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                                lineNumber: 125,
-                                                                columnNumber: 27
+                                                                lineNumber: 147,
+                                                                columnNumber: 25
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/feedback-section.tsx",
-                                                            lineNumber: 124,
-                                                            columnNumber: 25
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardContent"], {
-                                                            className: "space-y-4",
-                                                            children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "relative",
-                                                                    children: [
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$message$2d$square$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MessageSquare$3e$__["MessageSquare"], {
-                                                                            className: "absolute -top-2 -left-2 h-8 w-8 text-purple-400/20"
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/components/feedback-section.tsx",
-                                                                            lineNumber: 159,
-                                                                            columnNumber: 29
-                                                                        }, this),
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                            className: "text-gray-700 dark:text-gray-300 font-serif leading-relaxed text-base pl-6",
-                                                                            children: [
-                                                                                '"',
-                                                                                feedback.message,
-                                                                                '"'
-                                                                            ]
-                                                                        }, void 0, true, {
-                                                                            fileName: "[project]/components/feedback-section.tsx",
-                                                                            lineNumber: 160,
-                                                                            columnNumber: 29
-                                                                        }, this)
-                                                                    ]
-                                                                }, void 0, true, {
-                                                                    fileName: "[project]/components/feedback-section.tsx",
-                                                                    lineNumber: 158,
-                                                                    columnNumber: 27
-                                                                }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "flex items-center justify-between pt-4 border-t border-purple-500/10",
-                                                                    children: [
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                            className: "text-xs text-gray-500 dark:text-gray-500 font-serif",
-                                                                            children: new Date(feedback.created_at).toLocaleDateString("en-US", {
-                                                                                month: "long",
-                                                                                day: "numeric",
-                                                                                year: "numeric"
-                                                                            })
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/components/feedback-section.tsx",
-                                                                            lineNumber: 165,
-                                                                            columnNumber: 29
-                                                                        }, this),
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                            className: "flex items-center gap-1 text-xs text-purple-600 dark:text-purple-400",
-                                                                            children: [
-                                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$star$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Star$3e$__["Star"], {
-                                                                                    className: "h-3 w-3 fill-current"
-                                                                                }, void 0, false, {
-                                                                                    fileName: "[project]/components/feedback-section.tsx",
-                                                                                    lineNumber: 173,
-                                                                                    columnNumber: 31
-                                                                                }, this),
-                                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                                    className: "font-semibold",
-                                                                                    children: [
-                                                                                        feedback.rating,
-                                                                                        "/5"
-                                                                                    ]
-                                                                                }, void 0, true, {
-                                                                                    fileName: "[project]/components/feedback-section.tsx",
-                                                                                    lineNumber: 174,
-                                                                                    columnNumber: 31
-                                                                                }, this)
-                                                                            ]
-                                                                        }, void 0, true, {
-                                                                            fileName: "[project]/components/feedback-section.tsx",
-                                                                            lineNumber: 172,
-                                                                            columnNumber: 29
-                                                                        }, this)
-                                                                    ]
-                                                                }, void 0, true, {
-                                                                    fileName: "[project]/components/feedback-section.tsx",
-                                                                    lineNumber: 164,
-                                                                    columnNumber: 27
-                                                                }, this)
-                                                            ]
-                                                        }, void 0, true, {
-                                                            fileName: "[project]/components/feedback-section.tsx",
-                                                            lineNumber: 157,
+                                                            lineNumber: 146,
                                                             columnNumber: 25
                                                         }, this)
-                                                    ]
-                                                }, void 0, true, {
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/feedback-section.tsx",
+                                                        lineNumber: 145,
+                                                        columnNumber: 23
+                                                    }, this)
+                                                }, feedback.id, false, {
                                                     fileName: "[project]/components/feedback-section.tsx",
-                                                    lineNumber: 123,
-                                                    columnNumber: 23
-                                                }, this)
-                                            }, feedback.id, false, {
-                                                fileName: "[project]/components/feedback-section.tsx",
-                                                lineNumber: 122,
-                                                columnNumber: 21
-                                            }, this))
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/feedback-section.tsx",
-                                        lineNumber: 120,
-                                        columnNumber: 17
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$carousel$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CarouselPrevious"], {
-                                        className: "-left-12 bg-purple-100 dark:bg-purple-900/50 border-purple-300 dark:border-purple-500/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-800/50"
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/feedback-section.tsx",
-                                        lineNumber: 182,
-                                        columnNumber: 17
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$carousel$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CarouselNext"], {
-                                        className: "-right-12 bg-purple-100 dark:bg-purple-900/50 border-purple-300 dark:border-purple-500/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-800/50"
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/feedback-section.tsx",
-                                        lineNumber: 183,
-                                        columnNumber: 17
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/feedback-section.tsx",
-                                lineNumber: 119,
-                                columnNumber: 15
-                            }, this)
-                        }, void 0, false, {
-                            fileName: "[project]/components/feedback-section.tsx",
-                            lineNumber: 118,
-                            columnNumber: 13
-                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "text-center py-16 max-w-md mx-auto",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "relative inline-block mb-6",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$message$2d$square$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MessageSquare$3e$__["MessageSquare"], {
-                                            className: "h-20 w-20 text-purple-400/30 mx-auto"
+                                                    lineNumber: 144,
+                                                    columnNumber: 21
+                                                }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/components/feedback-section.tsx",
-                                            lineNumber: 189,
+                                            lineNumber: 142,
                                             columnNumber: 17
                                         }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "absolute inset-0 bg-purple-400/10 blur-2xl rounded-full"
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$carousel$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CarouselPrevious"], {
+                                            className: "-left-10 bg-white/80 dark:bg-white/10 border border-gray-200/60 dark:border-white/10 text-gray-700 dark:text-gray-200 hover:bg-white dark:hover:bg-white/15"
                                         }, void 0, false, {
                                             fileName: "[project]/components/feedback-section.tsx",
-                                            lineNumber: 190,
+                                            lineNumber: 199,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$carousel$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CarouselNext"], {
+                                            className: "-right-10 bg-white/80 dark:bg-white/10 border border-gray-200/60 dark:border-white/10 text-gray-700 dark:text-gray-200 hover:bg-white dark:hover:bg-white/15"
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/feedback-section.tsx",
+                                            lineNumber: 200,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/feedback-section.tsx",
-                                    lineNumber: 188,
+                                    lineNumber: 141,
+                                    columnNumber: 15
+                                }, this),
+                                count > 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "mt-4 flex items-center justify-center gap-2",
+                                    children: Array.from({
+                                        length: count
+                                    }).map((_, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                            "aria-label": `Go to slide ${i + 1}`,
+                                            onClick: ()=>carouselApi?.scrollTo(i),
+                                            className: `h-2.5 w-2.5 rounded-full transition-colors ${i === current ? "bg-purple-500" : "bg-gray-300 dark:bg-white/20"}`
+                                        }, i, false, {
+                                            fileName: "[project]/components/feedback-section.tsx",
+                                            lineNumber: 205,
+                                            columnNumber: 21
+                                        }, this))
+                                }, void 0, false, {
+                                    fileName: "[project]/components/feedback-section.tsx",
+                                    lineNumber: 203,
+                                    columnNumber: 17
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/components/feedback-section.tsx",
+                            lineNumber: 140,
+                            columnNumber: 13
+                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "text-center py-16 max-w-md mx-auto",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "relative inline-grid place-items-center mb-6 h-16 w-16 rounded-full border border-gray-200/60 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-sm",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$message$2d$square$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MessageSquare$3e$__["MessageSquare"], {
+                                        className: "h-7 w-7 text-gray-500 dark:text-gray-400"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/feedback-section.tsx",
+                                        lineNumber: 220,
+                                        columnNumber: 17
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/components/feedback-section.tsx",
+                                    lineNumber: 219,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-gray-600 dark:text-gray-400 font-serif text-lg mb-2",
+                                    className: "text-gray-700 dark:text-gray-300 text-lg mb-2",
                                     children: translations.feedback.noTestimonials
                                 }, void 0, false, {
                                     fileName: "[project]/components/feedback-section.tsx",
-                                    lineNumber: 192,
+                                    lineNumber: 222,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-sm text-gray-500 dark:text-gray-500 font-serif",
+                                    className: "text-sm text-gray-500 dark:text-gray-400",
                                     children: "Be the first to share your experience!"
                                 }, void 0, false, {
                                     fileName: "[project]/components/feedback-section.tsx",
-                                    lineNumber: 195,
+                                    lineNumber: 225,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/feedback-section.tsx",
-                            lineNumber: 187,
+                            lineNumber: 218,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/feedback-section.tsx",
-                    lineNumber: 113,
+                    lineNumber: 135,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5090,7 +5076,7 @@ function FeedbackSection({ translations }) {
                             children: translations.feedback.submitFeedback
                         }, void 0, false, {
                             fileName: "[project]/components/feedback-section.tsx",
-                            lineNumber: 204,
+                            lineNumber: 234,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
@@ -5105,19 +5091,19 @@ function FeedbackSection({ translations }) {
                                                 className: "h-5 w-5 text-purple-400"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                lineNumber: 210,
+                                                lineNumber: 240,
                                                 columnNumber: 17
                                             }, this),
                                             translations.feedback.shareExperience
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/feedback-section.tsx",
-                                        lineNumber: 209,
+                                        lineNumber: 239,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/feedback-section.tsx",
-                                    lineNumber: 208,
+                                    lineNumber: 238,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -5140,7 +5126,7 @@ function FeedbackSection({ translations }) {
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                                lineNumber: 218,
+                                                                lineNumber: 248,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -5154,13 +5140,13 @@ function FeedbackSection({ translations }) {
                                                                 placeholder: "Your full name"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                                lineNumber: 221,
+                                                                lineNumber: 251,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/feedback-section.tsx",
-                                                        lineNumber: 217,
+                                                        lineNumber: 247,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5175,7 +5161,7 @@ function FeedbackSection({ translations }) {
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                                lineNumber: 230,
+                                                                lineNumber: 260,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -5190,19 +5176,19 @@ function FeedbackSection({ translations }) {
                                                                 placeholder: "your.email@example.com"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                                lineNumber: 233,
+                                                                lineNumber: 263,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/feedback-section.tsx",
-                                                        lineNumber: 229,
+                                                        lineNumber: 259,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                lineNumber: 216,
+                                                lineNumber: 246,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5217,7 +5203,7 @@ function FeedbackSection({ translations }) {
                                                                 children: translations.feedback.company
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                                lineNumber: 246,
+                                                                lineNumber: 276,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -5230,13 +5216,13 @@ function FeedbackSection({ translations }) {
                                                                 placeholder: "Your company"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                                lineNumber: 249,
+                                                                lineNumber: 279,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/feedback-section.tsx",
-                                                        lineNumber: 245,
+                                                        lineNumber: 275,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5248,7 +5234,7 @@ function FeedbackSection({ translations }) {
                                                                 children: translations.feedback.role
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                                lineNumber: 257,
+                                                                lineNumber: 287,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -5261,19 +5247,19 @@ function FeedbackSection({ translations }) {
                                                                 placeholder: "Your job title"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                                lineNumber: 260,
+                                                                lineNumber: 290,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/feedback-section.tsx",
-                                                        lineNumber: 256,
+                                                        lineNumber: 286,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                lineNumber: 244,
+                                                lineNumber: 274,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5287,7 +5273,7 @@ function FeedbackSection({ translations }) {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/feedback-section.tsx",
-                                                        lineNumber: 270,
+                                                        lineNumber: 300,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5305,23 +5291,23 @@ function FeedbackSection({ translations }) {
                                                                     className: `h-6 w-6 ${i < newFeedback.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/feedback-section.tsx",
-                                                                    lineNumber: 279,
+                                                                    lineNumber: 309,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             }, i, false, {
                                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                                lineNumber: 273,
+                                                                lineNumber: 303,
                                                                 columnNumber: 23
                                                             }, this))
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/feedback-section.tsx",
-                                                        lineNumber: 271,
+                                                        lineNumber: 301,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                lineNumber: 269,
+                                                lineNumber: 299,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5336,7 +5322,7 @@ function FeedbackSection({ translations }) {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/feedback-section.tsx",
-                                                        lineNumber: 290,
+                                                        lineNumber: 320,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$textarea$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Textarea"], {
@@ -5351,13 +5337,13 @@ function FeedbackSection({ translations }) {
                                                         rows: 5
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/feedback-section.tsx",
-                                                        lineNumber: 293,
+                                                        lineNumber: 323,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                lineNumber: 289,
+                                                lineNumber: 319,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -5368,48 +5354,48 @@ function FeedbackSection({ translations }) {
                                                         className: "h-4 w-4 mr-2"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/feedback-section.tsx",
-                                                        lineNumber: 304,
+                                                        lineNumber: 334,
                                                         columnNumber: 19
                                                     }, this),
                                                     translations.feedback.submitButton
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                lineNumber: 303,
+                                                lineNumber: 333,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/feedback-section.tsx",
-                                        lineNumber: 215,
+                                        lineNumber: 245,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/feedback-section.tsx",
-                                    lineNumber: 214,
+                                    lineNumber: 244,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/feedback-section.tsx",
-                            lineNumber: 207,
+                            lineNumber: 237,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/feedback-section.tsx",
-                    lineNumber: 203,
+                    lineNumber: 233,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/components/feedback-section.tsx",
-            lineNumber: 105,
+            lineNumber: 127,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/components/feedback-section.tsx",
-        lineNumber: 104,
+        lineNumber: 126,
         columnNumber: 5
     }, this);
 }

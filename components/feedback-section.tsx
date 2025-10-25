@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Star, MessageSquare, Send } from "lucide-react"
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel"
 import { useState, useEffect } from "react"
 import { useToast } from "@/components/ui/use-toast"
 import { dataService } from "@/lib/data-service"
@@ -24,8 +24,11 @@ interface Feedback {
   message: string
   rating: number
   approved: boolean
-  created_at: string
-  updated_at: string
+  // Support both API shapes (Prisma camelCase vs legacy snake_case)
+  createdAt?: string
+  created_at?: string
+  updatedAt?: string
+  updated_at?: string
 }
 
 interface FeedbackSectionProps {
@@ -35,6 +38,9 @@ interface FeedbackSectionProps {
 export function FeedbackSection({ translations }: FeedbackSectionProps) {
   const [approvedFeedbacks, setApprovedFeedbacks] = useState<Feedback[]>([])
   const [loading, setLoading] = useState(true)
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null)
+  const [current, setCurrent] = useState(0)
+  const [count, setCount] = useState(0)
 
   const [newFeedback, setNewFeedback] = useState({
     name: "",
@@ -61,6 +67,22 @@ export function FeedbackSection({ translations }: FeedbackSectionProps) {
 
     loadFeedbacks()
   }, [])
+
+  // Carousel dots: track selected slide
+  useEffect(() => {
+    if (!carouselApi) return
+    const update = () => {
+      setCurrent(carouselApi.selectedScrollSnap())
+      setCount(carouselApi.scrollSnapList().length)
+    }
+    update()
+    carouselApi.on("select", update)
+    carouselApi.on("reInit", update)
+    return () => {
+      carouselApi.off("select", update)
+      carouselApi.off("reInit", update)
+    }
+  }, [carouselApi])
 
   const handleFeedbackSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -115,17 +137,19 @@ export function FeedbackSection({ translations }: FeedbackSectionProps) {
             {translations.feedback.testimonials}
           </h3>
           {approvedFeedbacks.length > 0 ? (
-            <div className="relative max-w-4xl mx-auto">
-              <Carousel className="w-full">
+            <div className="relative max-w-2xl mx-auto">
+              <Carousel className="w-full" setApi={setCarouselApi}>
                 <CarouselContent>
                   {approvedFeedbacks.map((feedback) => (
                     <CarouselItem key={feedback.id}>
-                      <Card className="border-purple-500/20 bg-white/5 dark:bg-white/5 backdrop-blur-sm hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300">
-                        <CardHeader className="space-y-4">
-                          <div className="flex items-start justify-between gap-4">
-                            <div className="flex items-center gap-4">
-                              <Avatar className="h-14 w-14 border-2 border-purple-400/30">
-                                <AvatarFallback className="bg-gradient-to-br from-purple-600 to-blue-600 text-white font-bold text-lg">
+                      <div className="px-2">
+                        <div className="p-[1px] rounded-3xl bg-gradient-to-br from-purple-500/25 via-transparent to-blue-500/25">
+                        <Card className="relative rounded-3xl border border-gray-200/60 dark:border-white/10 bg-white/80 dark:bg-white/5 backdrop-blur-sm shadow-lg">
+                          <CardHeader className="pt-6 pb-0 text-center space-y-2">
+                            {/* Centered avatar with initials (fully inside card, no overlap) */}
+                            <div className="mx-auto mb-2">
+                              <Avatar className="h-14 w-14 ring-2 ring-white/70 dark:ring-white/10 shadow">
+                                <AvatarFallback className="bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-200 font-semibold">
                                   {feedback.name
                                     .split(" ")
                                     .map((n) => n[0])
@@ -133,66 +157,72 @@ export function FeedbackSection({ translations }: FeedbackSectionProps) {
                                     .toUpperCase()}
                                 </AvatarFallback>
                               </Avatar>
-                              <div>
-                                <h4 className="font-bold text-lg text-gray-900 dark:text-white font-sans">{feedback.name}</h4>
-                                {feedback.position && (
-                                  <p className="text-sm text-gray-600 dark:text-gray-400 font-serif">
-                                    {feedback.position}
-                                    {feedback.company && (
-                                      <>
-                                        {" "}
-                                        <span className="text-purple-400">at</span>{" "}
-                                        <span className="text-purple-600 dark:text-purple-400 font-semibold">
-                                          {feedback.company}
-                                        </span>
-                                      </>
-                                    )}
-                                  </p>
-                                )}
-                              </div>
                             </div>
-                            <div className="flex items-center gap-1 flex-shrink-0">{renderStars(feedback.rating)}</div>
-                          </div>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                          <div className="relative">
-                            <MessageSquare className="absolute -top-2 -left-2 h-8 w-8 text-purple-400/20" />
-                            <p className="text-gray-700 dark:text-gray-300 font-serif leading-relaxed text-base pl-6">
-                              "{feedback.message}"
-                            </p>
-                          </div>
-                          <div className="flex items-center justify-between pt-4 border-t border-purple-500/10">
-                            <p className="text-xs text-gray-500 dark:text-gray-500 font-serif">
-                              {new Date(feedback.created_at).toLocaleDateString("en-US", {
-                                month: "long",
-                                day: "numeric",
-                                year: "numeric",
-                              })}
-                            </p>
-                            <div className="flex items-center gap-1 text-xs text-purple-600 dark:text-purple-400">
-                              <Star className="h-3 w-3 fill-current" />
-                              <span className="font-semibold">{feedback.rating}/5</span>
+                            <h4 className="font-semibold text-gray-900 dark:text-white">{feedback.name}</h4>
+                            {(feedback.position || feedback.company) && (
+                              <p className="text-sm text-gray-600 dark:text-gray-400">
+                                {[feedback.position, feedback.company].filter(Boolean).join(" · ")}
+                              </p>
+                            )}
+                            <div className="mx-auto flex items-center justify-center gap-1 text-yellow-500" aria-label={`Rating ${feedback.rating} out of 5`}>
+                              {renderStars(feedback.rating)}
                             </div>
-                          </div>
-                        </CardContent>
-                      </Card>
+                          </CardHeader>
+                          <CardContent className="pt-4">
+                            {/* Quote-style message, no chatbox icon */}
+                            <blockquote className="text-gray-800 dark:text-gray-200 leading-relaxed text-lg italic text-center">
+                              “{feedback.message}”
+                            </blockquote>
+                            {(() => {
+                              const dateValue = feedback.createdAt ?? feedback.created_at ?? feedback.updatedAt ?? feedback.updated_at
+                              let formatted = ""
+                              if (dateValue) {
+                                const d = new Date(dateValue)
+                                if (!Number.isNaN(d.getTime())) {
+                                  formatted = d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+                                }
+                              }
+                              return (
+                                <div className="mt-6 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                                  <span>{formatted}</span>
+                                  <span className="font-medium text-gray-600 dark:text-gray-300">{feedback.rating}/5</span>
+                                </div>
+                              )
+                            })()}
+                          </CardContent>
+                        </Card>
+                        </div>
+                      </div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselPrevious className="-left-12 bg-purple-100 dark:bg-purple-900/50 border-purple-300 dark:border-purple-500/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-800/50" />
-                <CarouselNext className="-right-12 bg-purple-100 dark:bg-purple-900/50 border-purple-300 dark:border-purple-500/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-800/50" />
+                <CarouselPrevious className="-left-10 bg-white/80 dark:bg-white/10 border border-gray-200/60 dark:border-white/10 text-gray-700 dark:text-gray-200 hover:bg-white dark:hover:bg-white/15" />
+                <CarouselNext className="-right-10 bg-white/80 dark:bg-white/10 border border-gray-200/60 dark:border-white/10 text-gray-700 dark:text-gray-200 hover:bg-white dark:hover:bg-white/15" />
               </Carousel>
+              {count > 1 && (
+                <div className="mt-4 flex items-center justify-center gap-2">
+                  {Array.from({ length: count }).map((_, i) => (
+                    <button
+                      key={i}
+                      aria-label={`Go to slide ${i + 1}`}
+                      onClick={() => carouselApi?.scrollTo(i)}
+                      className={`h-2.5 w-2.5 rounded-full transition-colors ${
+                        i === current ? "bg-purple-500" : "bg-gray-300 dark:bg-white/20"
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           ) : (
             <div className="text-center py-16 max-w-md mx-auto">
-              <div className="relative inline-block mb-6">
-                <MessageSquare className="h-20 w-20 text-purple-400/30 mx-auto" />
-                <div className="absolute inset-0 bg-purple-400/10 blur-2xl rounded-full"></div>
+              <div className="relative inline-grid place-items-center mb-6 h-16 w-16 rounded-full border border-gray-200/60 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-sm">
+                <MessageSquare className="h-7 w-7 text-gray-500 dark:text-gray-400" />
               </div>
-              <p className="text-gray-600 dark:text-gray-400 font-serif text-lg mb-2">
+              <p className="text-gray-700 dark:text-gray-300 text-lg mb-2">
                 {translations.feedback.noTestimonials}
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-500 font-serif">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 Be the first to share your experience!
               </p>
             </div>
