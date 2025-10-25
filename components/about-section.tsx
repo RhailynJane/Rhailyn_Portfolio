@@ -166,47 +166,7 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
           </div>
         </div>
 
-          {/* Technologies I Use */}
-          <div className="space-y-6">
-            <h3 className="text-3xl font-bold text-white font-sans flex items-center gap-2">
-              <Globe className="h-6 w-6 text-purple-400" />
-              Technologies I Use
-            </h3>
-            <Card className="hover:shadow-lg transition-shadow duration-300 bg-white/5 backdrop-blur-sm border-purple-500/20">
-              <CardContent className="pt-6">
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    "JavaScript",
-                    "TypeScript",
-                    "React",
-                    "Next.js",
-                    "React Native",
-                    "Node.js",
-                    "Python",
-                    "C#",
-                    "MySQL",
-                    "PostgreSQL",
-                    "Tailwind CSS",
-                    "Jenkins",
-                    "Cypress",
-                    "TestRail",
-                    "Jira",
-                    "Confluence",
-                  ].map((tech) => (
-                    <Badge
-                      key={tech}
-                      variant="secondary"
-                      className="text-xs bg-purple-500/20 text-purple-300 border-purple-500/30"
-                    >
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Education */}
+        {/* Education */}
         <div className="space-y-6">
           <h3 className="text-3xl font-bold text-white font-sans flex items-center gap-2">
             <GraduationCap className="h-6 w-6 text-purple-400" />

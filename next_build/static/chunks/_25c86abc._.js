@@ -1963,31 +1963,29 @@ const mockExperience = [
         id: 1,
         title: "Software QA Engineer",
         company: "Convoso Inc.",
-        start_date: "2017-01-01",
+        start_date: "2023-03-01",
         end_date: null,
         is_current: true,
         location: "Remote",
-        description: "Collaborated with developers to understand requirements and design specifications, improving communication and project outcomes.",
-        responsibilities: [
-            "Executed testing methodologies including regression, smoke testing, sanity, and performance testing",
-            "Created test plans and cases that enhance testing process consistency",
-            "Worked closely with Product Team to review user stories and acceptance criteria"
-        ],
+        description: "Lead quality assurance initiatives by executing comprehensive testing methodologies including regression, smoke, sanity, and performance testing to identify critical defects and ensure high-quality software delivery. Collaborate closely with developers to understand requirements and design specifications while creating detailed test plans and cases that enhance testing process consistency. Work with the Product Team to review user stories and acceptance criteria, ensuring product alignment with business requirements and improving overall communication and project outcomes.",
         skills: [
             "Manual Testing",
             "Regression Testing",
             "Smoke Testing",
+            "Sanity Testing",
             "Performance Testing",
             "Test Planning",
-            "Jenkins",
+            "Selenium",
             "Cypress",
             "TestRail",
             "Jira",
-            "Confluence"
-        ],
-        achievements: [
-            "Improved software quality through comprehensive testing strategies",
-            "Enhanced team communication and project outcomes"
+            "Confluence",
+            "Jenkins",
+            "Postman",
+            "API Testing",
+            "Cross-browser Testing",
+            "JavaScript",
+            "HTML/CSS"
         ]
     },
     {
@@ -1998,46 +1996,87 @@ const mockExperience = [
         end_date: "2023-03-01",
         is_current: false,
         location: "Remote",
-        description: "Resolved customer technical support cases escalated by Technical Support Analysts, leading to increased customer satisfaction.",
-        responsibilities: [
-            "Resolved customer technical support cases via phone and email",
-            "Created articles on product usage and troubleshooting",
-            "Provided real-time technical guidance to Technical Support Analysts"
-        ],
+        description: "Resolved complex customer technical support cases escalated by Technical Support Analysts via phone and email, leading to increased customer satisfaction and reduced resolution time. Contributed to the creation of comprehensive articles on product usage and troubleshooting to build a robust knowledge base, resulting in decreased support requests. Provided real-time technical guidance to Technical Support Analysts, fostering team development and enhancing overall support efficiency while analyzing recurring issues to drive product improvements.",
         skills: [
-            "Customer Support",
+            "Technical Support",
+            "Customer Service",
             "Technical Documentation",
             "Team Leadership",
-            "Knowledge Management"
-        ],
-        achievements: [
-            "Increased customer satisfaction through effective case resolution",
-            "Reduced support requests through comprehensive documentation"
+            "Knowledge Management",
+            "Troubleshooting",
+            "Zendesk",
+            "Jira",
+            "Product Knowledge",
+            "Communication"
         ]
     },
     {
         id: 3,
+        title: "Technical Support Analyst",
+        company: "Convoso Inc.",
+        start_date: "2021-07-01",
+        end_date: "2022-05-01",
+        is_current: false,
+        location: "Remote",
+        description: "Responded to customer inquiries via phone, chat, and email, ensuring quick and effective first-level technical support to address technical issues and concerns. Documented all customer interactions and solutions in the ticketing system, enabling seamless escalations and follow-ups while maintaining high customer satisfaction scores. Identified recurring issues and escalated them to higher-level support teams to drive product improvement and reduce repetitive tickets.",
+        skills: [
+            "Technical Support",
+            "Customer Service",
+            "Troubleshooting",
+            "Ticketing Systems",
+            "Zendesk",
+            "Communication",
+            "Problem Solving",
+            "Documentation",
+            "Time Management"
+        ]
+    },
+    {
+        id: 4,
+        title: "Level 2 Technical Support Engineer",
+        company: "Ascent Solutions Pte Ltd",
+        start_date: "2020-09-01",
+        end_date: "2021-07-01",
+        is_current: false,
+        location: "Remote",
+        description: "Provided second-level technical support for GPS tracking solutions (Wialon, Flespi), addressing queries via phone and email, which improved customer resolution times and satisfaction. Documented issue details and troubleshooting steps in Zoho Desk to maintain accurate support records, resulting in better tracking and faster issue resolution. Conducted root cause analysis for recurring issues, providing recommendations to enhance system stability and reduce support tickets. Assisted in deploying new software updates, ensuring seamless integration and minimal disruption for end-users, while troubleshooting IP Phone/Softphone configurations and PBX systems.",
+        skills: [
+            "GPS Tracking Solutions",
+            "Wialon",
+            "Flespi",
+            "Zoho Desk",
+            "Root Cause Analysis",
+            "IP Phone Configuration",
+            "PBX Troubleshooting",
+            "Software Deployment",
+            "Technical Documentation",
+            "System Integration",
+            "Networking",
+            "Wireshark"
+        ]
+    },
+    {
+        id: 5,
         title: "Technical Support Engineer 2",
         company: "Emerson Electric Asia, LTD ROHQ",
         start_date: "2017-11-01",
         end_date: "2020-02-01",
         is_current: false,
-        location: "Philippines",
-        description: "Provided comprehensive technical support and training for hardware and software systems.",
-        responsibilities: [
-            "Provided second-level technical support via phone and email",
-            "Conducted training sessions for new hires",
-            "Collaborated with cross-functional teams on compatibility issues"
-        ],
+        location: "Manila, Philippines",
+        description: "Provided second-level technical support for GPS tracking and telecommunications systems via phone and email, resulting in improved customer resolution times and satisfaction. Documented comprehensive issue details and troubleshooting procedures in Zoho Desk to maintain accurate support records, leading to better tracking and faster issue resolution. Conducted training sessions for new hires, equipping them with the skills and knowledge needed for effective technical support. Collaborated with cross-functional teams to identify and resolve hardware and software compatibility issues, improving overall system performance, while performing network diagnostics using tools like Wireshark and Putty for advanced troubleshooting.",
         skills: [
+            "GPS Tracking Systems",
+            "Telecommunications",
+            "Hardware Support",
             "Technical Training",
-            "System Integration",
+            "Zoho Desk",
             "Cross-functional Collaboration",
-            "Hardware Support"
-        ],
-        achievements: [
-            "Successfully trained multiple cohorts of new technical support staff",
-            "Improved overall system performance through cross-team collaboration"
+            "System Integration",
+            "Network Diagnostics",
+            "Wireshark",
+            "Putty",
+            "PBX Systems",
+            "VoIP Configuration"
         ]
     }
 ];
@@ -2605,91 +2644,18 @@ function AboutSection(param) {
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                             className: "text-3xl font-bold text-white font-sans flex items-center gap-2",
                             children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$globe$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Globe$3e$__["Globe"], {
-                                    className: "h-6 w-6 text-purple-400"
-                                }, void 0, false, {
-                                    fileName: "[project]/components/about-section.tsx",
-                                    lineNumber: 172,
-                                    columnNumber: 15
-                                }, this),
-                                "Technologies I Use"
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/components/about-section.tsx",
-                            lineNumber: 171,
-                            columnNumber: 13
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
-                            className: "hover:shadow-lg transition-shadow duration-300 bg-white/5 backdrop-blur-sm border-purple-500/20",
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
-                                className: "pt-6",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex flex-wrap gap-2",
-                                    children: [
-                                        "JavaScript",
-                                        "TypeScript",
-                                        "React",
-                                        "Next.js",
-                                        "React Native",
-                                        "Node.js",
-                                        "Python",
-                                        "C#",
-                                        "MySQL",
-                                        "PostgreSQL",
-                                        "Tailwind CSS",
-                                        "Jenkins",
-                                        "Cypress",
-                                        "TestRail",
-                                        "Jira",
-                                        "Confluence"
-                                    ].map((tech)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Badge"], {
-                                            variant: "secondary",
-                                            className: "text-xs bg-purple-500/20 text-purple-300 border-purple-500/30",
-                                            children: tech
-                                        }, tech, false, {
-                                            fileName: "[project]/components/about-section.tsx",
-                                            lineNumber: 196,
-                                            columnNumber: 21
-                                        }, this))
-                                }, void 0, false, {
-                                    fileName: "[project]/components/about-section.tsx",
-                                    lineNumber: 177,
-                                    columnNumber: 17
-                                }, this)
-                            }, void 0, false, {
-                                fileName: "[project]/components/about-section.tsx",
-                                lineNumber: 176,
-                                columnNumber: 15
-                            }, this)
-                        }, void 0, false, {
-                            fileName: "[project]/components/about-section.tsx",
-                            lineNumber: 175,
-                            columnNumber: 13
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/components/about-section.tsx",
-                    lineNumber: 170,
-                    columnNumber: 11
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "space-y-6",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                            className: "text-3xl font-bold text-white font-sans flex items-center gap-2",
-                            children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$graduation$2d$cap$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__GraduationCap$3e$__["GraduationCap"], {
                                     className: "h-6 w-6 text-purple-400"
                                 }, void 0, false, {
                                     fileName: "[project]/components/about-section.tsx",
-                                    lineNumber: 212,
+                                    lineNumber: 172,
                                     columnNumber: 13
                                 }, this),
                                 translations.about.education
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/about-section.tsx",
-                            lineNumber: 211,
+                            lineNumber: 171,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2707,7 +2673,7 @@ function AboutSection(param) {
                                                             children: edu.degree
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/about-section.tsx",
-                                                            lineNumber: 223,
+                                                            lineNumber: 183,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Badge"], {
@@ -2716,13 +2682,13 @@ function AboutSection(param) {
                                                             children: formatPeriod(edu.start_date, edu.end_date, edu.is_current)
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/about-section.tsx",
-                                                            lineNumber: 224,
+                                                            lineNumber: 184,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/about-section.tsx",
-                                                    lineNumber: 222,
+                                                    lineNumber: 182,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2730,7 +2696,7 @@ function AboutSection(param) {
                                                     children: edu.school
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/about-section.tsx",
-                                                    lineNumber: 228,
+                                                    lineNumber: 188,
                                                     columnNumber: 19
                                                 }, this),
                                                 edu.location && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2738,7 +2704,7 @@ function AboutSection(param) {
                                                     children: edu.location
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/about-section.tsx",
-                                                    lineNumber: 229,
+                                                    lineNumber: 189,
                                                     columnNumber: 36
                                                 }, this),
                                                 edu.field_of_study && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2749,13 +2715,13 @@ function AboutSection(param) {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/about-section.tsx",
-                                                    lineNumber: 230,
+                                                    lineNumber: 190,
                                                     columnNumber: 42
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/about-section.tsx",
-                                            lineNumber: 221,
+                                            lineNumber: 181,
                                             columnNumber: 17
                                         }, this),
                                         (edu.achievements || edu.description) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -2766,7 +2732,7 @@ function AboutSection(param) {
                                                     children: edu.description
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/about-section.tsx",
-                                                    lineNumber: 234,
+                                                    lineNumber: 194,
                                                     columnNumber: 41
                                                 }, this),
                                                 edu.achievements && edu.achievements.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2777,35 +2743,35 @@ function AboutSection(param) {
                                                             children: achievement
                                                         }, achievement, false, {
                                                             fileName: "[project]/components/about-section.tsx",
-                                                            lineNumber: 238,
+                                                            lineNumber: 198,
                                                             columnNumber: 27
                                                         }, this))
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/about-section.tsx",
-                                                    lineNumber: 236,
+                                                    lineNumber: 196,
                                                     columnNumber: 23
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/about-section.tsx",
-                                            lineNumber: 233,
+                                            lineNumber: 193,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, index, true, {
                                     fileName: "[project]/components/about-section.tsx",
-                                    lineNumber: 217,
+                                    lineNumber: 177,
                                     columnNumber: 15
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/components/about-section.tsx",
-                            lineNumber: 215,
+                            lineNumber: 175,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/about-section.tsx",
-                    lineNumber: 210,
+                    lineNumber: 170,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2818,14 +2784,14 @@ function AboutSection(param) {
                                     className: "h-6 w-6 text-purple-400"
                                 }, void 0, false, {
                                     fileName: "[project]/components/about-section.tsx",
-                                    lineNumber: 258,
+                                    lineNumber: 218,
                                     columnNumber: 13
                                 }, this),
                                 translations.about.certifications
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/about-section.tsx",
-                            lineNumber: 257,
+                            lineNumber: 217,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -2843,7 +2809,7 @@ function AboutSection(param) {
                                                         className: "h-4 w-4 text-purple-400 flex-shrink-0 mt-1"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/about-section.tsx",
-                                                        lineNumber: 267,
+                                                        lineNumber: 227,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2854,7 +2820,7 @@ function AboutSection(param) {
                                                                 children: cert.name
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/about-section.tsx",
-                                                                lineNumber: 269,
+                                                                lineNumber: 229,
                                                                 columnNumber: 25
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2862,7 +2828,7 @@ function AboutSection(param) {
                                                                 children: cert.issuing_organization
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/about-section.tsx",
-                                                                lineNumber: 270,
+                                                                lineNumber: 230,
                                                                 columnNumber: 25
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2873,7 +2839,7 @@ function AboutSection(param) {
                                                                 })
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/about-section.tsx",
-                                                                lineNumber: 271,
+                                                                lineNumber: 231,
                                                                 columnNumber: 25
                                                             }, this),
                                                             cert.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2881,45 +2847,45 @@ function AboutSection(param) {
                                                                 children: cert.description
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/about-section.tsx",
-                                                                lineNumber: 274,
+                                                                lineNumber: 234,
                                                                 columnNumber: 46
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/about-section.tsx",
-                                                        lineNumber: 268,
+                                                        lineNumber: 228,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/about-section.tsx",
-                                                lineNumber: 266,
+                                                lineNumber: 226,
                                                 columnNumber: 21
                                             }, this)
                                         }, index, false, {
                                             fileName: "[project]/components/about-section.tsx",
-                                            lineNumber: 265,
+                                            lineNumber: 225,
                                             columnNumber: 19
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/components/about-section.tsx",
-                                    lineNumber: 263,
+                                    lineNumber: 223,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/about-section.tsx",
-                                lineNumber: 262,
+                                lineNumber: 222,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/about-section.tsx",
-                            lineNumber: 261,
+                            lineNumber: 221,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/about-section.tsx",
-                    lineNumber: 256,
+                    lineNumber: 216,
                     columnNumber: 9
                 }, this)
             ]
