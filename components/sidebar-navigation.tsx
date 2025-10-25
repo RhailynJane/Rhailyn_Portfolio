@@ -50,8 +50,8 @@ export function SidebarNavigation({
 
       {/* Header */}
       <div className="p-6 border-b border-purple-500/20">
-        <h2 className="text-xl font-bold text-white font-sans">Rhailyn Jane Cona</h2>
-        <p className="text-sm text-gray-300 font-serif">Software Developer</p>
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white font-sans">Rhailyn Jane Cona</h2>
+        <p className="text-sm text-gray-700 dark:text-gray-300 font-serif">Software Developer</p>
       </div>
 
       {/* Navigation Items */}
@@ -65,7 +65,7 @@ export function SidebarNavigation({
               className={`w-full justify-start gap-3 transition-all duration-200 ${
                 activeSection === item.id
                   ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white"
-                  : "text-gray-300 hover:bg-white/10 hover:text-white"
+                  : "text-gray-700 dark:text-gray-300 hover:bg-gray-200/50 dark:hover:bg-white/10 hover:text-gray-900 dark:hover:text-white"
               }`}
               onClick={() => {
                 onSectionChange(item.id)
@@ -88,7 +88,7 @@ export function SidebarNavigation({
           variant="ghost"
           size="sm"
           onClick={toggleTheme}
-          className="w-full justify-start gap-3 text-gray-300 hover:bg-white/10 hover:text-white"
+          className="w-full justify-start gap-3 text-gray-700 dark:text-gray-300 hover:bg-gray-200/50 dark:hover:bg-white/10 hover:text-gray-900 dark:hover:text-white"
         >
           {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           <span className="font-serif">
@@ -102,7 +102,7 @@ export function SidebarNavigation({
             <Button
               variant="ghost"
               size="sm"
-              className="w-full justify-start gap-3 text-gray-300 hover:bg-white/10 hover:text-white"
+              className="w-full justify-start gap-3 text-gray-700 dark:text-gray-300 hover:bg-gray-200/50 dark:hover:bg-white/10 hover:text-gray-900 dark:hover:text-white"
             >
               <Languages className="h-4 w-4" />
               <span className="font-serif">
@@ -110,12 +110,12 @@ export function SidebarNavigation({
               </span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-48 bg-gray-900 border-purple-500/20">
+          <DropdownMenuContent align="end" className="w-48 bg-gray-100 dark:bg-gray-900 border-purple-500/20">
             {languages.map((language) => (
               <DropdownMenuItem
                 key={language.code}
                 onClick={() => onLanguageChange(language.code)}
-                className="gap-2 text-gray-300 hover:bg-white/10 hover:text-white"
+                className="gap-2 text-gray-700 dark:text-gray-300 hover:bg-gray-200/50 dark:hover:bg-white/10 hover:text-gray-900 dark:hover:text-white"
               >
                 <span>{language.flag}</span>
                 <span>{language.name}</span>
@@ -135,7 +135,7 @@ export function SidebarNavigation({
           <Button
             variant="ghost"
             size="sm"
-            className="fixed top-4 left-4 z-40 bg-black/50 backdrop-blur-sm text-white hover:bg-black/70 border border-purple-500/30"
+            className="fixed top-4 left-4 z-40 bg-gray-200/80 dark:bg-black/50 backdrop-blur-sm text-gray-900 dark:text-white hover:bg-gray-300/80 dark:hover:bg-black/70 border border-purple-500/30"
           >
             <Menu className="h-5 w-5" />
           </Button>
