@@ -22,8 +22,6 @@ interface Project {
   videoUrl: string
   figmaUrl: string
   features: string[]
-  challenges: string
-  outcome: string
   duration: string
   timeline?: string
   team: string
@@ -46,7 +44,7 @@ export default function ProjectDetailPage() {
         const projectData = await dataService.getProjectById(params.id as string)
         if (projectData) {
           // Transform the data to match the expected interface
-          const transformedProject: Project = {
+            const transformedProject: Project = {
             id: projectData.id,
             title: projectData.title,
             description: projectData.description,
@@ -59,8 +57,6 @@ export default function ProjectDetailPage() {
             videoUrl: projectData.video_url || "",
             figmaUrl: projectData.figma_url || "",
             features: projectData.features || [],
-            challenges: projectData.challenges || "Various technical challenges were overcome during development.",
-            outcome: projectData.outcome || "Successfully completed project meeting all requirements.",
             duration: projectData.duration || "Not specified",
             timeline: projectData.timeline || "",
             team: projectData.team || "Solo Project",
@@ -113,7 +109,7 @@ export default function ProjectDetailPage() {
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <Button variant="outline" onClick={() => router.back()} className="mb-6">
+          <Button variant="outline" onClick={() => router.push("/#projects")} className="mb-6">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Projects
           </Button>
@@ -181,15 +177,7 @@ export default function ProjectDetailPage() {
                   </div>
                 )}
 
-                <div>
-                  <h4 className="font-semibold mb-2">Challenges & Solutions:</h4>
-                  <p className="text-muted-foreground font-serif">{project.challenges}</p>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold mb-2">Outcome:</h4>
-                  <p className="text-muted-foreground font-serif">{project.outcome}</p>
-                </div>
+                {/* Removed Challenges & Solutions and Outcome sections as requested */}
               </CardContent>
             </Card>
 

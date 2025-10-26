@@ -1,5 +1,15 @@
 {
+  "/api/education/route": "app/api/education/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/certifications/route": "app/api/certifications/route.js",
   "/api/projects/route": "app/api/projects/route.js",
+  "/api/feedback/route": "app/api/feedback/route.js",
+  "/api/feedback/moderation/route": "app/api/feedback/moderation/route.js",
+  "/api/skills/route": "app/api/skills/route.js",
+  "/api/tools/route": "app/api/tools/route.js",
+  "/api/experience/route": "app/api/experience/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/admin/page": "app/admin/page.js",
   "/page": "app/page.js",
   "/projects/[id]/page": "app/projects/[id]/page.js"
 }

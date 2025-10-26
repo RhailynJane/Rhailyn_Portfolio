@@ -11,7 +11,6 @@ export type Project = {
   image_url?: string | null
   figma_url?: string | null
   featured: boolean
-  status: string
   created_at: string
   updated_at: string
   // Extended fields for detailed project pages
@@ -20,8 +19,6 @@ export type Project = {
   duration?: string
   timeline?: string
   features?: string[]
-  challenges?: string
-  outcome?: string
 }
 
 const mockProjects: Project[] = [
@@ -41,7 +38,6 @@ const mockProjects: Project[] = [
     figma_url:
       "https://www.figma.com/design/4fuzNHukJNygOXylaNqjct/Mobile?node-id=0-1&t=GuSJCPJG8kJr0xwn-1",
     featured: true,
-    status: "completed",
     created_at: "2025-05-01T00:00:00Z",
     updated_at: "2025-12-01T00:00:00Z",
     role: "Project Manager, Lead Mobile Developer, Frontend Developer, Backend Developer, UI/UX Designer, QA",
@@ -61,67 +57,87 @@ const mockProjects: Project[] = [
       "Push Notifications - Multi-type notifications for appointments, messages, and system updates",
       "Security & Privacy - Row-level security, data encryption, and audit logging"
     ],
-    challenges:
-      "Building a HIPAA-compliant mental health platform required implementing robust security measures including end-to-end encryption, secure video consultations, and comprehensive audit logging. Integrating clinical assessment tools (PHQ-9, GAD-7) with crisis detection algorithms demanded careful validation. Creating an accessible, stigma-free user experience while maintaining professional therapeutic standards was a key design challenge. Real-time features (messaging, video calls) required optimizing WebSocket and WebRTC implementations for reliability.",
-    outcome:
-      "Successfully delivered a comprehensive mental health platform serving the Clarity Collective community. The app features 12 core modules including mood tracking, journaling, video consultations, and crisis support. Implemented secure authentication with JWT, real-time communication with WebSocket, and HIPAA-compliant video calls. Built a scalable PostgreSQL database architecture with proper security policies. Created an intuitive React Native interface with TypeScript, providing users with accessible mental health support and professional care coordination."
   },
   {
     id: "2",
     title: "SafeSpace Web Platform",
-    description: "Web version of the SafeSpace community safety platform",
+    description: "Web version for staff, team leaders, support workers, and admins with user/referral/appointments management",
     long_description:
-      "Web version of the SafeSpace community safety platform with cross-browser compatibility and accessible design.",
-    technologies: ["JavaScript", "Web Development", "Responsive Design"],
+      "SafeSpace Web is a staff-facing platform featuring user management, referral management, appointments, and administrative tools. Designed for team leaders, support workers, and admins with accessibility and robust management workflows.",
+    technologies: ["JavaScript", "React", "Web Development", "Responsive Design"],
     category: "Web Application",
-    github_url: null,
+    github_url: "https://github.com/komalpreetkaur05/SafeSpaceApp",
     demo_url: null,
     video_url: null,
     image_url: "/safespace-web.png",
     figma_url:
       "https://www.figma.com/design/1uxJlnu19gOZCK47oarQXh/SafeSpace-Figma-Template?node-id=0-1&t=kNckyJSiOUD5zrDv-1",
     featured: true,
-    status: "completed",
     created_at: "2024-01-15T00:00:00Z",
     updated_at: "2024-01-15T00:00:00Z",
+    team: "Clarity Collective Team",
+    role: "Frontend, Backend",
+    features: [
+      "User Management for staff and administrators",
+      "Referral Management workflows",
+      "Appointments scheduling and management",
+      "Role-based access for team leader/support worker/admin"
+    ],
   },
   {
     id: "3",
     title: "Rural Alberta Health Connect Website",
-    description: "Healthcare platform connecting rural Alberta communities with medical services",
+    description: "AI-Enhanced Telemedicine Platform for Rural Communities (web version of the mobile app)",
     long_description:
-      "Healthcare platform designed to connect rural Alberta communities with medical services, featuring healthcare service integration and community connectivity.",
-    technologies: ["Web Development", "JavaScript"],
+      "Rural Alberta Health Connect is an innovative AI-powered healthcare platform designed specifically to address the unique challenges faced by rural communities in Alberta. The platform bridges the healthcare gap with cutting-edge technology that works even in areas with limited internet connectivity, including multi-modal AI symptom analysis, offline-first design, and location-aware emergency triage.",
+    technologies: ["React", "Next.js", "Tailwind CSS", "Node.js", "Computer Vision (YOLO)", "NLP"],
     category: "Web Application",
-    github_url: null,
+    github_url: "https://github.com/RhailynJane/rahc_website",
     demo_url: null,
     video_url: null,
     image_url: "/rural-health-web.png",
     figma_url:
       "https://www.figma.com/design/2CyCUUXxpupNyevQsLoByj/AlbertaHealthConnect?node-id=0-1&t=DmOYSaEEOWPvALYu-1",
     featured: true,
-    status: "completed",
     created_at: "2024-02-01T00:00:00Z",
     updated_at: "2024-02-01T00:00:00Z",
+    team: "Rhailyn Jane Cona, Yue Zhou",
+    role: "Project Manager, Frontend Developer",
+    features: [
+      "Multi-Modal AI Symptom Analysis (text + image via YOLO)",
+      "24/7 AI-Powered Assessment with offline capability",
+      "GPS-based emergency triage and facility finder",
+      "Weather-aware routing and rural-optimized experience",
+      "Privacy-compliant data handling (HIA/PIPEDA-aligned)",
+      "Low-bandwidth optimization and PWA offline-first design"
+    ],
   },
   {
     id: "4",
     title: "Rural Alberta Health Connect Mobile",
-    description: "Mobile application for healthcare access in rural Alberta",
+    description: "Improving Healthcare Access in Rural Alberta",
     long_description:
-      "Mobile application designed for healthcare access in rural Alberta with healthcare service integration and mobile optimization.",
-    technologies: ["React Native", "Mobile Development"],
+      "Alberta Health Connect is a mobile application designed to improve access to healthcare information and guidance for residents of rural Alberta. It provides an AI-powered triage system, considers rural challenges, protects privacy with local data storage, and works offline. Future plans include YOLOv8-based image recognition for symptom analysis.",
+    technologies: ["React Native", "Expo", "Convex", "AI/ML (YOLOv8)"],
     category: "Mobile Application",
-    github_url: null,
+    github_url: "https://github.com/RhailynJane/rural_alberta_health_connect_mobile",
     demo_url: null,
     video_url: null,
     image_url: "/rural-health-mobile.png",
     figma_url:
       "https://www.figma.com/design/2CyCUUXxpupNyevQsLoByj/AlbertaHealthConnect?node-id=0-1&t=DmOYSaEEOWPvALYu-1",
     featured: true,
-    status: "completed",
     created_at: "2024-02-15T00:00:00Z",
     updated_at: "2024-02-15T00:00:00Z",
+    team: "Rhailyn Cona, Yue Zhou",
+    role: "UI/UX Designer, Frontend, Backend, Project Manager",
+    features: [
+      "AI-Powered Triage with conversational interface",
+      "Rural-focused design (limited facilities, transport, weather)",
+      "Secure & Private (encrypted, local device storage)",
+      "Offline Access to core triage and disclaimers",
+      "Future: YOLOv8 image recognition for symptom analysis"
+    ],
   },
   {
     id: "5",
@@ -137,7 +153,6 @@ const mockProjects: Project[] = [
     image_url: "/portfolio.png",
     figma_url: null,
     featured: true,
-    status: "completed",
     created_at: "2024-03-01T00:00:00Z",
     updated_at: "2024-03-01T00:00:00Z",
   },
@@ -146,35 +161,50 @@ const mockProjects: Project[] = [
     title: "FitmindAI App",
     description: "AI-powered fitness and mental wellness application",
     long_description:
-      "AI-powered fitness and mental wellness application with AI recommendations and wellness tracking features.",
-    technologies: ["AI Integration", "Mobile/Web Development"],
+      "FitMindAI is a comprehensive fitness application built with Expo and React Native. It features workout tracking, challenges (including AI-generated personalized challenges), user profiles, an exercise library, progress visualization, and AI coach insights.",
+    technologies: ["React Native", "Expo", "Expo Router", "OpenAI API", "Firebase Firestore"],
     category: "Mobile Application",
-    github_url: null,
+    github_url: "https://github.com/RhailynJane/FitMindAI_App",
     demo_url: null,
     video_url: null,
     image_url: "/fitmindai.png",
     figma_url:
       "https://www.figma.com/design/PBGbOCOsVMEX1ul9a2Y2Ax/FitMindAI?node-id=0-1&t=UYXIqGsbavai9er8-1",
     featured: true,
-    status: "completed",
     created_at: "2024-04-01T00:00:00Z",
     updated_at: "2024-04-01T00:00:00Z",
+    features: [
+      "Workout Tracking and custom plans",
+      "Challenges System with progress tracking and XP",
+      "AI-Powered personalized challenges and AI coach insights",
+      "Exercise Library with body part filtering",
+      "Progress Visualization with charts and stats"
+    ],
   },
   {
     id: "7",
-    title: "Cinetracker Project",
-    description: "Movie and media tracking application",
-    technologies: ["Web Development", "JavaScript"],
+    title: "CineTracker",
+    description: "The Movie Discovery Platform (CineTracker): comprehensive entertainment tracking with TMDB and Firebase",
+    long_description:
+      "CineTracker is a Next.js-based platform integrated with TMDB API and Firebase, offering real-time content discovery, authentication, list management (watchlist, favorites, watched history), responsive UI, theme support, and performance optimizations. Advanced features include multi-criteria search, user profiles with stats, and SEO-friendly SSR.",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Firebase Auth", "Firestore", "TMDB API"],
     category: "Web Application",
-    github_url: null,
+    github_url: "https://github.com/RhailynJane/CineTracker",
     demo_url: null,
     video_url: null,
     image_url: "/cinetracker.png",
     figma_url: null,
     featured: true,
-    status: "completed",
     created_at: "2024-05-01T00:00:00Z",
     updated_at: "2024-05-01T00:00:00Z",
+    role: "Solo Project",
+    features: [
+      "TMDB-powered content discovery and details",
+      "Firebase Auth with Google OAuth",
+      "Watchlist, favorites, watched history with real-time sync",
+      "Advanced search with filters and pagination",
+      "Responsive, accessible UI with dark/light mode"
+    ],
   },
   {
     id: "8",
@@ -188,7 +218,6 @@ const mockProjects: Project[] = [
     image_url: "/library-management-system.png",
     figma_url: null,
     featured: true,
-    status: "completed",
     created_at: "2024-08-01T00:00:00Z",
     updated_at: "2024-08-01T00:00:00Z",
   },
@@ -204,7 +233,6 @@ const mockProjects: Project[] = [
     image_url: "/dog-care-website.png",
     figma_url: null,
     featured: true,
-    status: "completed",
     created_at: "2024-08-01T00:00:00Z",
     updated_at: "2024-08-01T00:00:00Z",
   },
@@ -220,25 +248,34 @@ const mockProjects: Project[] = [
     image_url: "/travel-management-app.png",
     figma_url: null,
     featured: true,
-    status: "completed",
     created_at: "2024-10-01T00:00:00Z",
     updated_at: "2024-10-01T00:00:00Z",
   },
   {
     id: "11",
     title: "House Utility Management System",
-    description: "Real-time utility tracking web application",
-    technologies: ["HTML", "CSS", "C#", ".NET MAUI", "SQL Server"],
-    category: "Web Application",
+    description: "A .NET MAUI app to manage home utilities with tracking, cost management, and reporting",
+    long_description:
+      "The House Utility Management System is a .NET MAUI application that assists users in managing their home utilities. With features like utility tracking, cost management, and detailed reporting, it simplifies the process of monitoring and optimizing utility usage. Users can add, edit, and delete utilities and review monthly summaries.",
+    technologies: [".NET MAUI", "C#", "SQLite/SQL Server"],
+    category: "Mobile Application",
     github_url: "https://github.com/RhailynJane/HouseUtilityManagementSystem.git",
     demo_url: null,
     video_url: null,
     image_url: "/placeholder-2b24u.png",
     figma_url: null,
     featured: true,
-    status: "completed",
     created_at: "2024-11-01T00:00:00Z",
     updated_at: "2024-11-01T00:00:00Z",
+    team: "Rhailyn Jane Cona, Komalpreet Kaur, Harjot Kaur, Joshua Thomson",
+    role: "Frontend, Backend",
+    features: [
+      "Homepage with navigation and overview of recorded utilities",
+      "Utilities management: add, edit, delete electricity/water/gas",
+      "Detailed utility attributes: name, type, usage, cost, date recorded",
+      "Monthly reports: total usage and cost summaries",
+      "Usage history and cost breakdowns over time"
+    ],
   },
   {
     id: "12",
@@ -252,7 +289,6 @@ const mockProjects: Project[] = [
     image_url: "/rental-management-interface.png",
     figma_url: null,
     featured: true,
-    status: "completed",
     created_at: "2024-11-01T00:00:00Z",
     updated_at: "2024-11-01T00:00:00Z",
   },

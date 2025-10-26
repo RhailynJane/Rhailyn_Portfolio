@@ -37,9 +37,7 @@ export async function GET(request: Request) {
         team: project.team || undefined,
         duration: project.duration || undefined,
         timeline: project.timeline || undefined,
-        features: project.features || undefined,
-        challenges: project.challenges || undefined,
-        outcome: project.outcome || undefined,
+  features: project.features || undefined,
       })
     }
 
@@ -79,9 +77,7 @@ export async function GET(request: Request) {
       team: p.team || undefined,
       duration: p.duration || undefined,
       timeline: p.timeline || undefined,
-      features: p.features || undefined,
-      challenges: p.challenges || undefined,
-      outcome: p.outcome || undefined,
+  features: p.features || undefined,
     }))
 
     return NextResponse.json(formattedProjects)

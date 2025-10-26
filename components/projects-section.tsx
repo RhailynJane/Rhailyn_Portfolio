@@ -22,7 +22,6 @@ interface Project {
   image_url?: string | null
   figma_url?: string | null
   featured: boolean
-  status: string
   created_at: string
   updated_at: string
 }
