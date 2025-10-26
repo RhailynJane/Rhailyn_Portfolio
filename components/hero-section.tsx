@@ -94,10 +94,6 @@ export function HeroSection({ onScrollToAbout, translations }: HeroSectionProps)
             <Mail className="h-4 w-4 text-purple-400" />
             <span>crhailynjane@gmail.com</span>
           </div>
-          <div className="flex items-center gap-2 bg-gray-200/50 dark:bg-white/5 px-3 py-2 rounded-full backdrop-blur-sm">
-            <Mail className="h-4 w-4 text-purple-400" />
-            <span>+(1403)-540-9188</span>
-          </div>
         </div>
 
         <div className="space-y-4">
