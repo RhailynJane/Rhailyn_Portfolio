@@ -106,8 +106,8 @@ async function main() {
       // UI/UX Design
       { categoryId: categories[4].id, name: 'Figma', level: 88, displayOrder: 1 },
       { categoryId: categories[4].id, name: 'Prototyping', level: 85, displayOrder: 2 },
-      { categoryId: categories[4].id, name: 'Wireframing', level: 83, displayOrder: 3 },
-      { categoryId: categories[4].id, name: 'User Research', level: 80, displayOrder: 4 },
+      { categoryId: categories[4].id, name: 'Wireframing', level: 90, displayOrder: 3 },
+      { categoryId: categories[4].id, name: 'User Research', level: 88, displayOrder: 4 },
       
       // DevOps & Tools
       { categoryId: categories[5].id, name: 'Git & GitHub', level: 92, displayOrder: 1 },

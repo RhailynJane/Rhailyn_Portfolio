@@ -94,7 +94,9 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
     "MySQL": "Designed schemas for multi-project databases.",
     "PostgreSQL": "Used Prisma with Supabase for Portfolio and SafeSpace data.",
     "Firebase": "Integrated Auth and Firestore in CineTracker and FitMindAI.",
-    "Prisma": "ORM for type-safe DB queries in Portfolio and SafeSpace.",
+    "Prisma": "ORM for type-safe DB queries in Portfolio, SafeSpace, and SAIT capstone project.",
+    "Prisma ORM": "ORM for type-safe DB queries in Portfolio, SafeSpace, and SAIT capstone project.",
+    "RESTful APIs": "Built Express APIs for SafeSpace and SAIT capstone project backend services.",
     // Testing/QA
     "Cypress": "Used at Convoso for automated UI/E2E testing as Software QA Engineer.",
     "Selenium": "Ran morning regression tests at Convoso as Technical Support Analyst.",
@@ -255,7 +257,7 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
                 <CardContent className="space-y-4">
                   {category.skills.map((skill) => {
                     const prof = levelToProficiency(skill.level)
-                    const desc = skillDescriptions[skill.name] || `Hands-on experience with ${skill.name}.`
+                    const desc = skillDescriptions[skill.name] || `Proficient in ${skill.name} across various projects and applications.`
                     return (
                       <div key={skill.id} className="flex items-center justify-between gap-3">
                         <span className="font-serif text-sm font-medium truncate">{skill.name}</span>
