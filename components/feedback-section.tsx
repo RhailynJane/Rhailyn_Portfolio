@@ -253,7 +253,7 @@ export function FeedbackSection({ translations }: FeedbackSectionProps) {
                       value={newFeedback.name}
                       onChange={(e) => setNewFeedback((prev) => ({ ...prev, name: e.target.value }))}
                       required
-                      placeholder="Your full name"
+                      placeholder={translations.feedback.namePlaceholder}
                     />
                   </div>
                   <div className="space-y-2">
@@ -266,7 +266,7 @@ export function FeedbackSection({ translations }: FeedbackSectionProps) {
                       value={newFeedback.email}
                       onChange={(e) => setNewFeedback((prev) => ({ ...prev, email: e.target.value }))}
                       required
-                      placeholder="your.email@example.com"
+                      placeholder={translations.feedback.emailPlaceholder}
                     />
                   </div>
                 </div>
@@ -280,7 +280,7 @@ export function FeedbackSection({ translations }: FeedbackSectionProps) {
                       id="feedback-company"
                       value={newFeedback.company}
                       onChange={(e) => setNewFeedback((prev) => ({ ...prev, company: e.target.value }))}
-                      placeholder="Your company"
+                      placeholder={translations.feedback.companyPlaceholder}
                     />
                   </div>
                   <div className="space-y-2">
@@ -291,7 +291,7 @@ export function FeedbackSection({ translations }: FeedbackSectionProps) {
                       id="feedback-role"
                       value={newFeedback.position}
                       onChange={(e) => setNewFeedback((prev) => ({ ...prev, position: e.target.value }))}
-                      placeholder="Your job title"
+                      placeholder={translations.feedback.rolePlaceholder}
                     />
                   </div>
                 </div>
@@ -325,7 +325,7 @@ export function FeedbackSection({ translations }: FeedbackSectionProps) {
                     value={newFeedback.message}
                     onChange={(e) => setNewFeedback((prev) => ({ ...prev, message: e.target.value }))}
                     required
-                    placeholder="Share your experience working with me..."
+                    placeholder={translations.feedback.messagePlaceholder}
                     rows={5}
                   />
                 </div>

@@ -5343,7 +5343,7 @@ function FeedbackSection(param) {
                                                                             name: e.target.value
                                                                         })),
                                                                 required: true,
-                                                                placeholder: "Your full name"
+                                                                placeholder: translations.feedback.namePlaceholder
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/feedback-section.tsx",
                                                                 lineNumber: 251,
@@ -5379,7 +5379,7 @@ function FeedbackSection(param) {
                                                                             email: e.target.value
                                                                         })),
                                                                 required: true,
-                                                                placeholder: "your.email@example.com"
+                                                                placeholder: translations.feedback.emailPlaceholder
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/feedback-section.tsx",
                                                                 lineNumber: 263,
@@ -5419,7 +5419,7 @@ function FeedbackSection(param) {
                                                                             ...prev,
                                                                             company: e.target.value
                                                                         })),
-                                                                placeholder: "Your company"
+                                                                placeholder: translations.feedback.companyPlaceholder
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/feedback-section.tsx",
                                                                 lineNumber: 279,
@@ -5450,7 +5450,7 @@ function FeedbackSection(param) {
                                                                             ...prev,
                                                                             position: e.target.value
                                                                         })),
-                                                                placeholder: "Your job title"
+                                                                placeholder: translations.feedback.rolePlaceholder
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/feedback-section.tsx",
                                                                 lineNumber: 290,
@@ -5539,7 +5539,7 @@ function FeedbackSection(param) {
                                                                     message: e.target.value
                                                                 })),
                                                         required: true,
-                                                        placeholder: "Share your experience working with me...",
+                                                        placeholder: translations.feedback.messagePlaceholder,
                                                         rows: 5
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/feedback-section.tsx",
@@ -5748,7 +5748,12 @@ const translations = {
             feedbackApproved: "Feedback Approved",
             feedbackRejected: "Feedback Rejected",
             feedbackApprovedDescription: "The feedback has been approved and published.",
-            feedbackRejectedDescription: "The feedback has been rejected."
+            feedbackRejectedDescription: "The feedback has been rejected.",
+            namePlaceholder: "Your full name",
+            emailPlaceholder: "your.email@example.com",
+            companyPlaceholder: "Your company",
+            rolePlaceholder: "Your job title",
+            messagePlaceholder: "Share your experience working with me..."
         },
         common: {
             loading: "Loading...",
@@ -5882,7 +5887,12 @@ const translations = {
             feedbackApproved: "Na-approve ang Puna",
             feedbackRejected: "Tinanggihan ang Puna",
             feedbackApprovedDescription: "Na-approve at na-publish na ang puna.",
-            feedbackRejectedDescription: "Tinanggihan ang puna."
+            feedbackRejectedDescription: "Tinanggihan ang puna.",
+            namePlaceholder: "Inyong buong pangalan",
+            emailPlaceholder: "inyong.email@halimbawa.com",
+            companyPlaceholder: "Inyong kumpanya",
+            rolePlaceholder: "Inyong tungkulin sa trabaho",
+            messagePlaceholder: "Ibahagi ang inyong karanasan sa pakikipagtrabaho sa akin..."
         },
         common: {
             loading: "Naglo-load...",
@@ -6016,7 +6026,12 @@ const translations = {
             feedbackApproved: "Commentaire Approuvé",
             feedbackRejected: "Commentaire Rejeté",
             feedbackApprovedDescription: "Le commentaire a été approuvé et publié.",
-            feedbackRejectedDescription: "Le commentaire a été rejeté."
+            feedbackRejectedDescription: "Le commentaire a été rejeté.",
+            namePlaceholder: "Votre nom complet",
+            emailPlaceholder: "votre.email@exemple.com",
+            companyPlaceholder: "Votre entreprise",
+            rolePlaceholder: "Votre titre de poste",
+            messagePlaceholder: "Partagez votre expérience de travail avec moi..."
         },
         common: {
             loading: "Chargement...",
