@@ -12,6 +12,16 @@ export function useTranslation(initialLanguage = "en") {
   useEffect(() => {
     setMounted(true)
     if (typeof window !== "undefined") {
+      // Version check: reset preferences if version mismatch (force new defaults)
+      const version = "1.0.0"
+      const savedVersion = localStorage.getItem("appVersion")
+      if (savedVersion !== version) {
+        localStorage.setItem("appVersion", version)
+        localStorage.setItem("preferredLanguage", initialLanguage)
+        localStorage.setItem("theme", "dark")
+        return
+      }
+
       const savedLanguage = localStorage.getItem("preferredLanguage")
       if (savedLanguage && savedLanguage !== currentLanguage) {
         setCurrentLanguage(savedLanguage)
