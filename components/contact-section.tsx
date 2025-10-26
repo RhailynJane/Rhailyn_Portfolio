@@ -139,7 +139,7 @@ export function ContactSection({ translations }: ContactSectionProps) {
                 <CardTitle className="font-sans">{translations.contact.connectWithMe}</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-4">
                   {socialLinks.map((social, index) => {
                     const Icon = social.icon
                     return (
@@ -154,7 +154,7 @@ export function ContactSection({ translations }: ContactSectionProps) {
                           href={social.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2"
+                          className="flex items-center justify-center gap-2"
                         >
                           <Icon className={`h-5 w-5 ${social.color}`} />
                           <span className="font-serif">{social.label}</span>

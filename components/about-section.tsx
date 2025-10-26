@@ -198,7 +198,7 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
                           <Badge
                             key={achievement}
                             variant="secondary"
-                            className="text-xs bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-500/30"
+                            className="text-xs bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-500/30 max-w-full wrap-break-word"
                           >
                             {achievement}
                           </Badge>

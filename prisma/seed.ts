@@ -465,7 +465,7 @@ async function main() {
         endDate: new Date('2017-05-01'),
         isCurrent: false,
         description: 'Comprehensive engineering degree program specializing in electronics systems design, circuit analysis, microcontroller programming, and telecommunications. Developed strong analytical and problem-solving skills through rigorous coursework in mathematics, physics, and engineering principles. Recognized for academic excellence as a consistent Dean Lister and recipient of prestigious scholarship programs. Served as Business Manager for the College of Engineering and Industrial Technology, demonstrating leadership and organizational capabilities.',
-        achievements: ['Dean Lister (2014-2016)', 'Emerson Scholarship Program', 'Bobby Eusebio Scholarship Program', 'College of Engineering and Industrial Technology Business Manager', 'Broadkast ng Talino 2017 (Top 20 Finalist)'],
+        achievements: ['Dean Lister (2014-2016)', 'Emerson Scholarship Program', 'Bobby Eusebio Scholarship Program', 'College Business Manager', 'Broadkast ng Talino 2017 (Top 20 Finalist)'],
         displayOrder: 2,
       },
     ],
