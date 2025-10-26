@@ -99,7 +99,7 @@ export function ContactSection({ translations }: ContactSectionProps) {
                   const Icon = info.icon
                   return (
                     <div key={index} className="flex items-center gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <div className="shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
                         <Icon className="h-5 w-5 text-primary" />
                       </div>
                       <div className="flex-1 min-w-0">

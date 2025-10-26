@@ -213,16 +213,16 @@ export default function FeedbackManager({ items }: Props) {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[40px]">
+                <TableHead className="w-10">
                   <Checkbox checked={selectedIds.length>0 && selectedIds.length===filteredSorted.length} onCheckedChange={(v: any) => toggleAll(Boolean(v))} aria-label="Select all" />
                 </TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead>Email</TableHead>
-                <TableHead className="min-w-[240px]">Message</TableHead>
+                <TableHead className="min-w-60">Message</TableHead>
                 <TableHead>Rating</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Date</TableHead>
-                <TableHead className="w-[160px]">Actions</TableHead>
+                <TableHead className="w-40">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

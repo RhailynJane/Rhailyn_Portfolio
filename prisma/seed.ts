@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
@@ -287,7 +288,7 @@ async function main() {
         longDescription: 'Personal portfolio website showcasing projects and skills with responsive design and project showcase features.',
         technologies: ['JavaScript', 'Web Development'],
         category: 'Web Application',
-        githubUrl: 'https://github.com/RhailynJane/Portfolio',
+  githubUrl: 'https://github.com/RhailynJane/rhailyn_portfolio.git',
         imageUrl: '/portfolio.png',
         featured: true,
       },

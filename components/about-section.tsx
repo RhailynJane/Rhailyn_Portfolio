@@ -60,7 +60,7 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
 
   if (loading) {
     return (
-      <section className="py-20 px-4 min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 dark:from-gray-900 dark:via-black dark:to-gray-800">
+  <section className="py-20 px-4 min-h-screen bg-linear-to-br from-gray-100 via-gray-50 to-gray-100 dark:from-gray-900 dark:via-black dark:to-gray-800">
         <div className="max-w-6xl mx-auto flex items-center justify-center">
           <div className="text-gray-900 dark:text-white text-xl">Loading...</div>
         </div>
@@ -69,7 +69,7 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
   }
 
   return (
-    <section className="py-20 px-4 min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 dark:from-gray-900 dark:via-black dark:to-gray-800">
+  <section className="py-20 px-4 min-h-screen bg-linear-to-br from-gray-100 via-gray-50 to-gray-100 dark:from-gray-900 dark:via-black dark:to-gray-800">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
@@ -142,7 +142,7 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
                       {formatPeriod(exp.start_date, exp.end_date, exp.is_current)}
                     </Badge>
                   </div>
-                  <p className="text-gray-700 dark:text-gray-300 font-serif font-semibold">{exp.company}</p>
+                  <p className="text-gray-700 dark:text-gray-300 font-serif font-semibold">{exp.title}</p>
                   {exp.location && <p className="text-sm text-gray-600 dark:text-gray-400">{exp.location}</p>}
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -224,7 +224,7 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
                 {certifications.map((cert: any, index) => (
                   <div key={index} className="flex flex-col gap-2 p-4 rounded-lg bg-white/5 backdrop-blur-sm">
                     <div className="flex items-start gap-2">
-                      <Award className="h-4 w-4 text-purple-400 flex-shrink-0 mt-1" />
+                      <Award className="h-4 w-4 text-purple-400 shrink-0 mt-1" />
                       <div className="flex-1">
                         <h4 className="text-sm font-semibold text-purple-700 dark:text-purple-300">{cert.name}</h4>
                         <p className="text-xs text-gray-600 dark:text-gray-400">{cert.issuing_organization}</p>
