@@ -1,0 +1,7 @@
+app.js
+.git
+node_modules
+.next
+next_build
+*.log
+.env.local

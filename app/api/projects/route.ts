@@ -63,7 +63,7 @@ export async function GET(request: Request) {
       })
     }
 
-    const formattedProjects = projects.map((p) => ({
+    const formattedProjects = projects.map((p: any) => ({
       id: p.id,
       title: p.title,
       description: p.description,

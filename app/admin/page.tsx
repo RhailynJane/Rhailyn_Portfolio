@@ -4,6 +4,24 @@ import { Button } from "@/components/ui/button"
 import { revalidatePath } from "next/cache"
 import FeedbackManager from "@/components/admin/FeedbackManager"
 
+// Force dynamic rendering - don't try to pre-render at build time
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
+type FeedbackWithDeleted = {
+  id: string
+  name: string
+  email: string
+  message: string
+  rating: number
+  approved: boolean
+  deleted?: boolean
+  createdAt: Date
+  updatedAt: Date
+  company: string | null
+  position: string | null
+}
+
 async function approve(formData: FormData) {
   "use server"
   const id = formData.get("id") as string
@@ -22,13 +40,13 @@ async function remove(formData: FormData) {
 
 export default async function AdminPage() {
   // This page is protected by middleware (HTTP Basic Auth)
-  const feedbacks = await prisma.feedback.findMany({ orderBy: { createdAt: "desc" } })
+  const feedbacks = await prisma.feedback.findMany({ orderBy: { createdAt: "desc" } }) as FeedbackWithDeleted[]
 
-  const active = feedbacks.filter((f) => !(f as any).deleted)
+  const active = feedbacks.filter((f: FeedbackWithDeleted) => !f.deleted)
   const total = active.length
-  const approved = active.filter((f) => f.approved).length
+  const approved = active.filter((f: FeedbackWithDeleted) => f.approved).length
   const pending = total - approved
-  const avgRating = total ? (active.reduce((s, f) => s + (f.rating || 0), 0) / total).toFixed(2) : "0.00"
+  const avgRating = total ? (active.reduce((s: number, f: FeedbackWithDeleted) => s + (f.rating || 0), 0) / total).toFixed(2) : "0.00"
 
   return (
     <section className="py-20 px-4">
@@ -55,14 +73,14 @@ export default async function AdminPage() {
 
         {/* Manager */}
         <FeedbackManager
-          items={feedbacks.map((f) => ({
+          items={feedbacks.map((f: FeedbackWithDeleted) => ({
             id: f.id,
             name: f.name,
             email: f.email,
             message: f.message,
             rating: f.rating,
             approved: f.approved,
-            deleted: (f as any).deleted ?? false,
+            deleted: f.deleted ?? false,
             createdAt: f.createdAt.toISOString(),
           }))}
         />

@@ -7,7 +7,7 @@ export async function GET() {
       orderBy: { displayOrder: "asc" },
     })
 
-    const formattedEducation = education.map((edu) => ({
+    const formattedEducation = education.map((edu: any) => ({
       id: edu.id,
       degree: edu.degree,
       field_of_study: edu.fieldOfStudy,

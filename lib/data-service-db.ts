@@ -27,7 +27,7 @@ export const dataService = {
     const projects = await prisma.project.findMany({
       orderBy: { createdAt: "desc" },
     })
-    return projects.map((p) => ({
+    return projects.map((p: any) => ({
       id: p.id,
       title: p.title,
       description: p.description,
@@ -51,7 +51,7 @@ export const dataService = {
       where: { featured: true },
       orderBy: { createdAt: "desc" },
     })
-    return projects.map((p) => ({
+    return projects.map((p: any) => ({
       id: p.id,
       title: p.title,
       description: p.description,
@@ -99,7 +99,7 @@ export const dataService = {
       where: { category },
       orderBy: { createdAt: "desc" },
     })
-    return projects.map((p) => ({
+    return projects.map((p: any) => ({
       id: p.id,
       title: p.title,
       description: p.description,
@@ -177,13 +177,13 @@ export const dataService = {
       orderBy: { displayOrder: "asc" },
     })
     
-    return categories.map((category) => ({
+    return categories.map((category: any) => ({
       id: category.id,
       title: category.title,
       icon: category.icon,
       color: category.color,
       display_order: category.displayOrder,
-      skills: category.skills.map((skill) => ({
+      skills: category.skills.map((skill: any) => ({
         id: skill.id,
         category_id: skill.categoryId,
         name: skill.name,
@@ -197,7 +197,7 @@ export const dataService = {
     const tools = await prisma.tool.findMany({
       orderBy: { order: "asc" },
     })
-    return tools.map((t) => t.name)
+    return tools.map((t: any) => t.name)
   },
 
   // Experience
@@ -205,7 +205,7 @@ export const dataService = {
     const experiences = await prisma.experience.findMany({
       orderBy: { displayOrder: "asc" },
     })
-    return experiences.map((exp) => ({
+    return experiences.map((exp: any) => ({
       id: exp.id,
       title: exp.title,
       company: exp.company,
@@ -223,7 +223,7 @@ export const dataService = {
       where: { isCurrent: true },
       orderBy: { displayOrder: "asc" },
     })
-    return experiences.map((exp) => ({
+    return experiences.map((exp: any) => ({
       id: exp.id,
       title: exp.title,
       company: exp.company,
@@ -241,7 +241,7 @@ export const dataService = {
     const education = await prisma.education.findMany({
       orderBy: { displayOrder: "asc" },
     })
-    return education.map((edu) => ({
+    return education.map((edu: any) => ({
       id: edu.id,
       degree: edu.degree,
       field_of_study: edu.fieldOfStudy,
@@ -260,7 +260,7 @@ export const dataService = {
     const certifications = await prisma.certification.findMany({
       orderBy: { displayOrder: "asc" },
     })
-    return certifications.map((cert) => ({
+    return certifications.map((cert: any) => ({
       id: cert.id,
       name: cert.name,
       issuing_organization: cert.issuingOrganization,
@@ -279,7 +279,7 @@ export const dataService = {
       },
       orderBy: { displayOrder: "asc" },
     })
-    return certifications.map((cert) => ({
+    return certifications.map((cert: any) => ({
       id: cert.id,
       name: cert.name,
       issuing_organization: cert.issuingOrganization,

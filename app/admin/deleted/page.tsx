@@ -3,17 +3,35 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import FeedbackManager from "@/components/admin/FeedbackManager"
 
+// Force dynamic rendering - don't try to pre-render at build time
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
+type FeedbackWithDeleted = {
+  id: string
+  name: string
+  email: string
+  message: string
+  rating: number
+  approved: boolean
+  deleted?: boolean
+  createdAt: Date
+  updatedAt: Date
+  company: string | null
+  position: string | null
+}
+
 export default async function DeletedFeedbackPage() {
   // This page is protected by middleware (HTTP Basic Auth)
   const allFeedbacks = await prisma.feedback.findMany({ 
     orderBy: { createdAt: "desc" } 
-  })
+  }) as FeedbackWithDeleted[]
   
   // Debug: log all feedback to see structure
-  console.log("All feedbacks:", allFeedbacks.map((f: any) => ({ id: f.id, name: f.name, deleted: f.deleted })))
+  console.log("All feedbacks:", allFeedbacks.map((f: FeedbackWithDeleted) => ({ id: f.id, name: f.name, deleted: f.deleted })))
   
   // Filter deleted on server side
-  const feedbacks = allFeedbacks.filter((f: any) => f.deleted === true)
+  const feedbacks = allFeedbacks.filter((f: FeedbackWithDeleted) => f.deleted === true)
   const total = feedbacks.length
   
   console.log("Filtered deleted:", feedbacks.length)
@@ -40,7 +58,7 @@ export default async function DeletedFeedbackPage() {
 
         {/* Manager - only show deleted items */}
         <FeedbackManager
-          items={feedbacks.map((f: any) => ({
+          items={feedbacks.map((f: FeedbackWithDeleted) => ({
             id: f.id,
             name: f.name,
             email: f.email,

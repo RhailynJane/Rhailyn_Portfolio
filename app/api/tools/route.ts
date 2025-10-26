@@ -7,7 +7,7 @@ export async function GET() {
       orderBy: { order: "asc" },
     })
 
-    const toolNames = tools.map((t) => t.name)
+    const toolNames = tools.map((t: any) => t.name)
 
     return NextResponse.json(toolNames)
   } catch (error) {

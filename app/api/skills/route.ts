@@ -12,13 +12,13 @@ export async function GET() {
       orderBy: { displayOrder: "asc" },
     })
 
-    const formattedCategories = categories.map((category) => ({
+    const formattedCategories = categories.map((category: any) => ({
       id: category.id,
       title: category.title,
       icon: category.icon,
       color: category.color,
       display_order: category.displayOrder,
-      skills: category.skills.map((skill) => ({
+      skills: category.skills.map((skill: any) => ({
         id: skill.id,
         category_id: skill.categoryId,
         name: skill.name,

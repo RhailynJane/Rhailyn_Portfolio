@@ -21,7 +21,7 @@ export async function GET(request: Request) {
       })
     }
 
-    const formattedCertifications = certifications.map((cert) => ({
+    const formattedCertifications = certifications.map((cert: any) => ({
       id: cert.id,
       name: cert.name,
       issuing_organization: cert.issuingOrganization,

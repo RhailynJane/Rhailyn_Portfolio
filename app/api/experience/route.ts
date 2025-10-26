@@ -19,7 +19,7 @@ export async function GET(request: Request) {
       })
     }
 
-    const formattedExperiences = experiences.map((exp) => ({
+    const formattedExperiences = experiences.map((exp: any) => ({
       id: exp.id,
       title: exp.title,
       company: exp.company,
