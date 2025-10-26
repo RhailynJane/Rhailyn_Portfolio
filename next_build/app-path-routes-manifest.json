@@ -1,20 +1,20 @@
 {
   "/_not-found/page": "/_not-found",
+  "/api/certifications/route": "/api/certifications",
+  "/api/education/route": "/api/education",
   "/api/admin/login/route": "/api/admin/login",
   "/api/experience/route": "/api/experience",
-  "/api/education/route": "/api/education",
   "/api/feedback/moderation/restore/route": "/api/feedback/moderation/restore",
-  "/api/feedback/moderation/route": "/api/feedback/moderation",
   "/api/feedback/route": "/api/feedback",
-  "/api/projects/route": "/api/projects",
-  "/api/logout/route": "/api/logout",
+  "/api/feedback/moderation/route": "/api/feedback/moderation",
   "/api/skills/route": "/api/skills",
-  "/api/certifications/route": "/api/certifications",
+  "/api/logout/route": "/api/logout",
   "/api/tools/route": "/api/tools",
+  "/api/projects/route": "/api/projects",
   "/favicon.ico/route": "/favicon.ico",
-  "/admin/deleted/page": "/admin/deleted",
   "/admin/page": "/admin",
+  "/admin/deleted/page": "/admin/deleted",
   "/admin/signin/page": "/admin/signin",
-  "/page": "/",
-  "/projects/[id]/page": "/projects/[id]"
+  "/projects/[id]/page": "/projects/[id]",
+  "/page": "/"
 }

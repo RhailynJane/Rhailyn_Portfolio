@@ -1,6 +1,3 @@
-import type { NextConfig } from "next";
-
-// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Change the build output directory to 'next_build'
