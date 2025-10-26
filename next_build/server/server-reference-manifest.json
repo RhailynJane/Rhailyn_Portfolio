@@ -1,1 +1,28 @@
-{"node":{"4046128e37e3caaed235e2554f20f5c30cd4686a98":{"workers":{"app/admin/page":{"moduleId":"12309","async":false}},"layer":{"app/admin/page":"rsc"}},"40dd4f48375ddfe6306786a98f11141132c4ceb23f":{"workers":{"app/admin/page":{"moduleId":"12309","async":false}},"layer":{"app/admin/page":"rsc"}}},"edge":{},"encryptionKey":"kbqdWTVhfjk0aDp771WE/AV401SC7GXWkqV1Nc1BIHg="}
+{
+  "node": {
+    "4069dca316e451f2d0960e2f8d9bf58be8f052ddcc": {
+      "workers": {
+        "app/admin/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/admin/page.tsx [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/admin/page": "rsc"
+      }
+    },
+    "40f293ff9b6e0232f5e6fa9852f2dd2db4d05a8b1c": {
+      "workers": {
+        "app/admin/page": {
+          "moduleId": "[project]/.next-internal/server/app/admin/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/admin/page.tsx [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/admin/page": "rsc"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "kbqdWTVhfjk0aDp771WE/AV401SC7GXWkqV1Nc1BIHg="
+}
