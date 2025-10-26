@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${geist.variable} ${manrope.variable} antialiased`} suppressHydrationWarning={true}>
+    <html lang="en" className={`dark ${geist.variable} ${manrope.variable} antialiased`} suppressHydrationWarning={true}>
       <body>
         <ThemeContextProvider>
           {children}

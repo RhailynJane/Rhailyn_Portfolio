@@ -19,7 +19,7 @@ const ThemeContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$projec
 function ThemeContextProvider(param) {
     let { children } = param;
     _s();
-    const [theme, setThemeState] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("light");
+    const [theme, setThemeState] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("dark");
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "ThemeContextProvider.useEffect": ()=>{
             const stored = ("TURBOPACK compile-time truthy", 1) ? localStorage.getItem("theme") : "TURBOPACK unreachable";
@@ -58,7 +58,7 @@ function ThemeContextProvider(param) {
         columnNumber: 10
     }, this);
 }
-_s(ThemeContextProvider, "3LkmwVfsHMtp3dWoV1p10hV0dRw=");
+_s(ThemeContextProvider, "vxSuMSfTKE1dBpHHq+egWJL5ZG0=");
 _c = ThemeContextProvider;
 function useThemeContext() {
     _s1();

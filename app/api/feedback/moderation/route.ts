@@ -1,43 +1,45 @@
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { isUUID } from "@/lib/validation"
+import { isAdminRequestAuthorized } from "@/lib/admin-auth"
 
-function isAuthorized(req: Request) {
-  const header = req.headers.get("authorization") || ""
-  if (!header.startsWith("Basic ")) return false
-  const creds = Buffer.from(header.replace("Basic ", ""), "base64").toString()
-  const [user, pass] = creds.split(":")
-  return user === process.env.ADMIN_USER && pass === process.env.ADMIN_PASSWORD
-}
+// Auth is enforced by middleware; we also validate cookie here for defense-in-depth
 
-export async function GET(req: Request) {
-  if (!isAuthorized(req)) return new NextResponse("Unauthorized", { status: 401 })
+export async function GET() {
+  if (!(await isAdminRequestAuthorized())) return new NextResponse("Unauthorized", { status: 401 })
   try {
     const feedback = await prisma.feedback.findMany({ orderBy: { createdAt: "desc" } })
     return NextResponse.json(feedback)
-  } catch {
-    return NextResponse.json({ error: "Failed" }, { status: 500 })
+  } catch (e) {
+    console.error("Database error in moderation GET:", e)
+    return NextResponse.json([])
   }
 }
 
 export async function PATCH(req: Request) {
-  if (!isAuthorized(req)) return new NextResponse("Unauthorized", { status: 401 })
+  if (!(await isAdminRequestAuthorized())) return new NextResponse("Unauthorized", { status: 401 })
   try {
     const body = await req.json()
-    await prisma.feedback.update({ where: { id: body.id }, data: { approved: true } })
+    const id = body?.id
+    if (!isUUID(id)) return NextResponse.json({ success: false, error: "Invalid id" }, { status: 400 })
+    await prisma.feedback.update({ where: { id }, data: { approved: true } })
     return NextResponse.json({ success: true })
-  } catch {
-    return NextResponse.json({ error: "Failed" }, { status: 500 })
+  } catch (e) {
+    console.error("Database error in moderation PATCH:", e)
+    return NextResponse.json({ success: false, error: "Database unavailable" }, { status: 500 })
   }
 }
 
 export async function DELETE(req: Request) {
-  if (!isAuthorized(req)) return new NextResponse("Unauthorized", { status: 401 })
+  if (!(await isAdminRequestAuthorized())) return new NextResponse("Unauthorized", { status: 401 })
   try {
     const { searchParams } = new URL(req.url)
     const id = searchParams.get("id") as string
-    await prisma.feedback.delete({ where: { id } })
+    if (!isUUID(id)) return NextResponse.json({ success: false, error: "Invalid id" }, { status: 400 })
+    await (prisma as any).feedback.update({ where: { id }, data: { deleted: true, approved: false } })
     return NextResponse.json({ success: true })
-  } catch {
-    return NextResponse.json({ error: "Failed" }, { status: 500 })
+  } catch (e) {
+    console.error("Database error in moderation DELETE:", e)
+    return NextResponse.json({ success: false, error: "Database unavailable" }, { status: 500 })
   }
 }

@@ -40,7 +40,7 @@ export function HeroSection({ onScrollToAbout, translations }: HeroSectionProps)
   ]
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-800">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 dark:from-gray-900 dark:via-black dark:to-gray-800">
       <div className="absolute inset-0 overflow-hidden">
         {/* Large orbital rings */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -76,37 +76,33 @@ export function HeroSection({ onScrollToAbout, translations }: HeroSectionProps)
 
         <div className="space-y-4">
           <h1 className="text-5xl lg:text-7xl font-bold leading-tight font-sans">
-            <span className="text-white">{translations.hero.title.split(" ").slice(0, 2).join(" ")}</span>
+            <span className="text-gray-900 dark:text-white">{translations.hero.title.split(" ").slice(0, 2).join(" ")}</span>
             <span className="block bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
               {translations.hero.title.split(" ").slice(2).join(" ")}
             </span>
           </h1>
-          <p className="text-xl lg:text-2xl text-gray-300 font-serif max-w-3xl mx-auto">{translations.hero.subtitle}</p>
-          <p className="text-lg text-gray-400 font-serif max-w-2xl mx-auto">{translations.hero.description}</p>
+          <p className="text-xl lg:text-2xl text-gray-700 dark:text-gray-300 font-serif max-w-3xl mx-auto">{translations.hero.subtitle}</p>
+          <p className="text-lg text-gray-600 dark:text-gray-400 font-serif max-w-2xl mx-auto">{translations.hero.description}</p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-300">
-          <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-full backdrop-blur-sm">
+        <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-700 dark:text-gray-300">
+          <div className="flex items-center gap-2 bg-gray-200/50 dark:bg-white/5 px-3 py-2 rounded-full backdrop-blur-sm">
             <MapPin className="h-4 w-4 text-purple-400" />
             <span>Calgary, AB</span>
           </div>
-          <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-full backdrop-blur-sm">
+          <div className="flex items-center gap-2 bg-gray-200/50 dark:bg-white/5 px-3 py-2 rounded-full backdrop-blur-sm">
             <Mail className="h-4 w-4 text-purple-400" />
             <span>crhailynjane@gmail.com</span>
-          </div>
-          <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-full backdrop-blur-sm">
-            <Mail className="h-4 w-4 text-purple-400" />
-            <span>contact@rhailyncona.dev</span>
           </div>
         </div>
 
         <div className="space-y-4">
-          <p className="text-sm text-gray-400 font-serif">{translations.hero.techStack}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 font-serif">{translations.hero.techStack}</p>
           <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
             {techStack.map((tech, index) => (
               <Badge
                 key={tech}
-                className={`bg-white/10 text-white border-purple-400/30 hover:bg-purple-500/20 hover:border-purple-400/50 transition-all duration-300 hover:scale-105 animate-fade-in backdrop-blur-sm`}
+                className={`bg-purple-100 dark:bg-white/10 text-purple-700 dark:text-white border-purple-300 dark:border-purple-400/30 hover:bg-purple-200 dark:hover:bg-purple-500/20 hover:border-purple-400 dark:hover:border-purple-400/50 transition-all duration-300 hover:scale-105 animate-fade-in backdrop-blur-sm`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {tech}
@@ -128,7 +124,7 @@ export function HeroSection({ onScrollToAbout, translations }: HeroSectionProps)
             <Button
               variant="outline"
               size="icon"
-              className="border-purple-400/30 text-purple-400 hover:bg-purple-500/20 hover:border-purple-400/50 hover:scale-110 transition-all duration-300 bg-white/5 backdrop-blur-sm"
+              className="border-purple-400/30 text-purple-400 hover:bg-purple-500/20 hover:border-purple-400/50 hover:scale-110 transition-all duration-300 bg-gray-200/50 dark:bg-white/5 backdrop-blur-sm"
               onClick={() => window.open('https://github.com/RhailynJane', '_blank')}
             >
               <Github className="h-4 w-4" />
@@ -136,7 +132,7 @@ export function HeroSection({ onScrollToAbout, translations }: HeroSectionProps)
             <Button
               variant="outline"
               size="icon"
-              className="border-purple-400/30 text-purple-400 hover:bg-purple-500/20 hover:border-purple-400/50 hover:scale-110 transition-all duration-300 bg-white/5 backdrop-blur-sm"
+              className="border-purple-400/30 text-purple-400 hover:bg-purple-500/20 hover:border-purple-400/50 hover:scale-110 transition-all duration-300 bg-gray-200/50 dark:bg-white/5 backdrop-blur-sm"
               onClick={() => window.open('https://linkedin.com/in/rhailyn-cona/', '_blank')}
             >
               <Linkedin className="h-4 w-4" />
@@ -144,7 +140,7 @@ export function HeroSection({ onScrollToAbout, translations }: HeroSectionProps)
             <Button
               variant="outline"
               size="icon"
-              className="border-purple-400/30 text-purple-400 hover:bg-purple-500/20 hover:border-purple-400/50 hover:scale-110 transition-all duration-300 bg-white/5 backdrop-blur-sm"
+              className="border-purple-400/30 text-purple-400 hover:bg-purple-500/20 hover:border-purple-400/50 hover:scale-110 transition-all duration-300 bg-gray-200/50 dark:bg-white/5 backdrop-blur-sm"
               onClick={() => window.location.href = 'mailto:contact@rhailyncona.dev'}
             >
               <Mail className="h-4 w-4" />

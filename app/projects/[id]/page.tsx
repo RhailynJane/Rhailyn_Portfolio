@@ -3,11 +3,12 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Github, ExternalLink, Play, Calendar, Users, Code } from "lucide-react"
+import { ArrowLeft, Github, ExternalLink, Calendar, Users, Code } from "lucide-react"
 import { useRouter, useParams } from "next/navigation"
 import { useTranslation } from "@/hooks/use-translation"
 import { dataService } from "@/lib/data-service"
 import { useEffect, useState } from "react"
+import { SidebarNavigation } from "@/components/sidebar-navigation"
 
 interface Project {
   id: string
@@ -20,21 +21,30 @@ interface Project {
   github: string
   demo: string
   videoUrl: string
+  figmaUrl: string
   features: string[]
-  challenges: string
-  outcome: string
   duration: string
+  timeline?: string
   team: string
+  role?: string
   date: string
 }
 
 export default function ProjectDetailPage() {
   const router = useRouter()
   const params = useParams()
-  const { t } = useTranslation()
+  const { t, currentLanguage, changeLanguage } = useTranslation()
 
   const [project, setProject] = useState<Project | null>(null)
   const [loading, setLoading] = useState(true)
+
+  const handleSectionChange = (section: string) => {
+    window.location.href = `/?section=${section}`
+  }
+
+  const handleLanguageChange = (language: string) => {
+    changeLanguage(language)
+  }
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -43,23 +53,23 @@ export default function ProjectDetailPage() {
         const projectData = await dataService.getProjectById(params.id as string)
         if (projectData) {
           // Transform the data to match the expected interface
-          const transformedProject: Project = {
+            const transformedProject: Project = {
             id: projectData.id,
             title: projectData.title,
             description: projectData.description,
             longDescription: projectData.long_description || projectData.description,
-            image: projectData.image_url || "/placeholder.svg",
+            image: projectData.image_url || "",
             technologies: projectData.technologies || [],
             category: projectData.category,
             github: projectData.github_url || "",
             demo: projectData.demo_url || "",
             videoUrl: projectData.video_url || "",
-            features: (projectData as any).features || [],
-            challenges:
-              (projectData as any).challenges || "Various technical challenges were overcome during development.",
-            outcome: (projectData as any).outcome || "Successfully completed project meeting all requirements.",
-            duration: (projectData as any).duration || "Not specified",
-            team: (projectData as any).team_size || "Solo Project",
+            figmaUrl: projectData.figma_url || "",
+            features: projectData.features || [],
+            duration: projectData.duration || "Not specified",
+            timeline: projectData.timeline || "",
+            team: projectData.team || "Solo Project",
+            role: projectData.role || "",
             date:
               new Date(projectData.created_at).toLocaleDateString("en-US", { month: "long", year: "numeric" }) ||
               "Not specified",
@@ -80,35 +90,68 @@ export default function ProjectDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading project details...</p>
+      <>
+        <SidebarNavigation
+          activeSection="projects"
+          onSectionChange={handleSectionChange}
+          currentLanguage={currentLanguage}
+          onLanguageChange={handleLanguageChange}
+          translations={t}
+        />
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">{t.common.loading}</p>
+          </div>
         </div>
-      </div>
+      </>
     )
   }
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Project Not Found</h1>
-          <Button onClick={() => router.back()}>
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Go Back
-          </Button>
+      <>
+        <SidebarNavigation
+          activeSection="projects"
+          onSectionChange={handleSectionChange}
+          currentLanguage={currentLanguage}
+          onLanguageChange={handleLanguageChange}
+          translations={t}
+        />
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold mb-4">Project Not Found</h1>
+            <Button onClick={() => router.back()}>
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Go Back
+            </Button>
+          </div>
         </div>
-      </div>
+      </>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <Button variant="outline" onClick={() => router.back()} className="mb-6">
+    <>
+      <SidebarNavigation
+        activeSection="projects"
+        onSectionChange={handleSectionChange}
+        currentLanguage={currentLanguage}
+        onLanguageChange={handleLanguageChange}
+        translations={t}
+      />
+      <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
+        <div className="max-w-6xl mx-auto px-4 py-8">
+          {/* Header */}
+          <div className="mb-8">
+          <Button 
+            variant="outline" 
+            onClick={() => {
+              // Navigate to home page with projects query parameter
+              window.location.href = "/?section=projects"
+            }} 
+            className="mb-6"
+          >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Projects
           </Button>
@@ -121,27 +164,6 @@ export default function ProjectDetailPage() {
             <p className="text-xl text-muted-foreground font-serif max-w-3xl">{project.description}</p>
           </div>
         </div>
-
-        {/* Project Image/Video */}
-        <Card className="mb-8 overflow-hidden">
-          <CardContent className="p-0">
-            <div className="relative aspect-video bg-muted">
-              <img
-                src={project.image || "/placeholder.svg"}
-                alt={project.title}
-                className="w-full h-full object-cover"
-              />
-              {project.videoUrl && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                  <Button size="lg" className="bg-primary/90 hover:bg-primary">
-                    <Play className="h-6 w-6 mr-2" />
-                    Watch Demo
-                  </Button>
-                </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Project Details Grid */}
         <div className="grid lg:grid-cols-3 gap-8 mb-8">
@@ -172,15 +194,7 @@ export default function ProjectDetailPage() {
                   </div>
                 )}
 
-                <div>
-                  <h4 className="font-semibold mb-2">Challenges & Solutions:</h4>
-                  <p className="text-muted-foreground font-serif">{project.challenges}</p>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold mb-2">Outcome:</h4>
-                  <p className="text-muted-foreground font-serif">{project.outcome}</p>
-                </div>
+                {/* Removed Challenges & Solutions and Outcome sections as requested */}
               </CardContent>
             </Card>
 
@@ -209,11 +223,12 @@ export default function ProjectDetailPage() {
                 <CardTitle>Project Info</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="flex items-center gap-2 text-sm">
-                  <Calendar className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-muted-foreground">Duration:</span>
-                  <span>{project.duration}</span>
-                </div>
+                {project.role && (
+                  <div className="space-y-1">
+                    <span className="text-sm font-semibold text-muted-foreground">Role:</span>
+                    <p className="text-sm leading-relaxed">{project.role}</p>
+                  </div>
+                )}
                 <div className="flex items-center gap-2 text-sm">
                   <Users className="h-4 w-4 text-muted-foreground" />
                   <span className="text-muted-foreground">Team:</span>
@@ -221,9 +236,15 @@ export default function ProjectDetailPage() {
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <Calendar className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-muted-foreground">Completed:</span>
-                  <span>{project.date}</span>
+                  <span className="text-muted-foreground">Duration:</span>
+                  <span>{project.duration}</span>
                 </div>
+                {project.timeline && (
+                  <div className="space-y-1 pt-2 border-t">
+                    <span className="text-sm font-semibold text-muted-foreground">Timeline:</span>
+                    <p className="text-sm leading-relaxed">{project.timeline}</p>
+                  </div>
+                )}
               </CardContent>
             </Card>
 
@@ -240,7 +261,6 @@ export default function ProjectDetailPage() {
                       View on GitHub
                     </a>
                   </Button>
-                  
                 )}
                 {project.demo && (
                   <Button asChild variant="outline" className="w-full bg-transparent">
@@ -250,11 +270,20 @@ export default function ProjectDetailPage() {
                     </a>
                   </Button>
                 )}
+                {project.figmaUrl && (
+                  <Button asChild variant="outline" className="w-full bg-transparent">
+                    <a href={project.figmaUrl} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      View in Figma
+                    </a>
+                  </Button>
+                )}
               </CardContent>
             </Card>
           </div>
         </div>
+        </div>
       </div>
-    </div>
-  )
-}
+      </>
+    )
+  }

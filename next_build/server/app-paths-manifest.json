@@ -1,3 +1,10 @@
 {
-  "/page": "app/page.js"
+  "/admin/page": "app/admin/page.js",
+  "/api/feedback/moderation/restore/route": "app/api/feedback/moderation/restore/route.js",
+  "/api/feedback/moderation/route": "app/api/feedback/moderation/route.js",
+  "/api/feedback/route": "app/api/feedback/route.js",
+  "/api/projects/route": "app/api/projects/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
+  "/projects/[id]/page": "app/projects/[id]/page.js"
 }

@@ -120,6 +120,12 @@ export interface Translation {
     feedbackRejected: string
     feedbackApprovedDescription: string
     feedbackRejectedDescription: string
+    // Placeholders
+    namePlaceholder: string
+    emailPlaceholder: string
+    companyPlaceholder: string
+    rolePlaceholder: string
+    messagePlaceholder: string
   }
   common: {
     loading: string
@@ -261,6 +267,11 @@ export const translations: Record<string, Translation> = {
       feedbackRejected: "Feedback Rejected",
       feedbackApprovedDescription: "The feedback has been approved and published.",
       feedbackRejectedDescription: "The feedback has been rejected.",
+      namePlaceholder: "Your full name",
+      emailPlaceholder: "your.email@example.com",
+      companyPlaceholder: "Your company",
+      rolePlaceholder: "Your job title",
+      messagePlaceholder: "Share your experience working with me...",
     },
     common: {
       loading: "Loading...",
@@ -401,6 +412,11 @@ export const translations: Record<string, Translation> = {
       feedbackRejected: "Tinanggihan ang Puna",
       feedbackApprovedDescription: "Na-approve at na-publish na ang puna.",
       feedbackRejectedDescription: "Tinanggihan ang puna.",
+      namePlaceholder: "Inyong buong pangalan",
+      emailPlaceholder: "inyong.email@halimbawa.com",
+      companyPlaceholder: "Inyong kumpanya",
+      rolePlaceholder: "Inyong tungkulin sa trabaho",
+      messagePlaceholder: "Ibahagi ang inyong karanasan sa pakikipagtrabaho sa akin...",
     },
     common: {
       loading: "Naglo-load...",
@@ -541,6 +557,11 @@ export const translations: Record<string, Translation> = {
       feedbackRejected: "Commentaire Rejeté",
       feedbackApprovedDescription: "Le commentaire a été approuvé et publié.",
       feedbackRejectedDescription: "Le commentaire a été rejeté.",
+      namePlaceholder: "Votre nom complet",
+      emailPlaceholder: "votre.email@exemple.com",
+      companyPlaceholder: "Votre entreprise",
+      rolePlaceholder: "Votre titre de poste",
+      messagePlaceholder: "Partagez votre expérience de travail avec moi...",
     },
     common: {
       loading: "Chargement...",

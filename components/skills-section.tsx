@@ -64,6 +64,7 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
       Database,
       Palette,
       Users,
+      Wrench,
     }
     return iconMap[iconName] || Code
   }
@@ -73,8 +74,8 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center space-y-4">
-            <h2 className="text-4xl lg:text-5xl font-bold text-white  font-sans">{translations.skills.title}</h2>
-            <p className="text-xl text-muted-white  font-serif max-w-3xl mx-auto">Loading skills...</p>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white font-sans">{translations.skills.title}</h2>
+            <p className="text-xl text-gray-700 dark:text-gray-300 font-serif max-w-3xl mx-auto">Loading skills...</p>
           </div>
         </div>
       </section>
@@ -86,8 +87,8 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center space-y-4">
-            <h2 className="text-4xl lg:text-5xl font-bold text-white  font-sans">{translations.skills.title}</h2>
-            <p className="text-xl text-muted-white  font-serif max-w-3xl mx-auto">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white font-sans">{translations.skills.title}</h2>
+            <p className="text-xl text-gray-700 dark:text-gray-300 font-serif max-w-3xl mx-auto">
               Skills data is currently unavailable. Please check back later.
             </p>
           </div>
@@ -101,18 +102,18 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-bold text-white font-sans">{translations.skills.title}</h2>
-          <p className="text-xl text-white font-serif max-w-3xl mx-auto">{translations.skills.subtitle}</p>
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white font-sans">{translations.skills.title}</h2>
+          <p className="text-xl text-gray-700 dark:text-gray-300 font-serif max-w-3xl mx-auto">{translations.skills.subtitle}</p>
         </div>
 
         {/* Skills Categories */}
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((category, index) => {
             const Icon = getIconComponent(category.icon)
             return (
-              <Card key={category.id} className="hover:shadow-lg transition-all duration-300 border-primary/20">
+              <Card key={category.id} className="hover:shadow-lg transition-all duration-300 border-primary/20 hover:border-primary/40">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 font-sans">
+                  <CardTitle className="flex items-center gap-3 font-sans text-lg">
                     <Icon className={`h-6 w-6 ${category.color}`} />
                     {category.title}
                   </CardTitle>
@@ -122,7 +123,7 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
                     <div key={skill.id} className="space-y-2">
                       <div className="flex justify-between items-center">
                         <span className="font-serif text-sm font-medium">{skill.name}</span>
-                        <span className="text-sm text-muted-white  font-mono">{skill.level}%</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400 font-mono">{skill.level}%</span>
                       </div>
                       <Progress
                         value={skill.level}
@@ -142,7 +143,7 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
         {/* Tools & Technologies */}
         <div className="space-y-6">
           <div className="text-center">
-            <h3 className="text-3xl font-bold text-white  font-sans flex items-center justify-center gap-2">
+            <h3 className="text-3xl font-bold text-gray-900 dark:text-white font-sans flex items-center justify-center gap-2">
               <Wrench className="h-6 w-6 text-primary" />
               {translations.skills.toolsTechnologies}
             </h3>

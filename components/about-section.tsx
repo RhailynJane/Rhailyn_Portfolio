@@ -60,21 +60,21 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
 
   if (loading) {
     return (
-      <section className="py-20 px-4 min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800">
+      <section className="py-20 px-4 min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 dark:from-gray-900 dark:via-black dark:to-gray-800">
         <div className="max-w-6xl mx-auto flex items-center justify-center">
-          <div className="text-white text-xl">Loading...</div>
+          <div className="text-gray-900 dark:text-white text-xl">Loading...</div>
         </div>
       </section>
     )
   }
 
   return (
-    <section className="py-20 px-4 min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800">
+    <section className="py-20 px-4 min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 dark:from-gray-900 dark:via-black dark:to-gray-800">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-bold text-white font-sans">{translations.about.title}</h2>
-          <p className="text-xl text-gray-300 font-serif max-w-3xl mx-auto">{translations.about.subtitle}</p>
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white font-sans">{translations.about.title}</h2>
+          <p className="text-xl text-gray-700 dark:text-gray-300 font-serif max-w-3xl mx-auto">{translations.about.subtitle}</p>
         </div>
 
         {/* Profile Image and Enhanced Profile Summary Layout */}
@@ -104,18 +104,18 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-gray-300 font-serif leading-relaxed">{translations.about.profileDescription}</p>
+              <p className="text-gray-700 dark:text-gray-300 font-serif leading-relaxed">{translations.about.profileDescription}</p>
               <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary" className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                <Badge variant="secondary" className="bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-500/30">
                   {translations.about.bilingual}
                 </Badge>
-                <Badge variant="secondary" className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                <Badge variant="secondary" className="bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-500/30">
                   {translations.about.qualityAssurance}
                 </Badge>
-                <Badge variant="secondary" className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                <Badge variant="secondary" className="bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-500/30">
                   {translations.about.technicalSupport}
                 </Badge>
-                <Badge variant="secondary" className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                <Badge variant="secondary" className="bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-500/30">
                   {translations.about.softwareTesting}
                 </Badge>
               </div>
@@ -125,7 +125,7 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
 
         {/* Experience */}
         <div className="space-y-6">
-          <h3 className="text-3xl font-bold text-white font-sans flex items-center gap-2">
+          <h3 className="text-3xl font-bold text-gray-900 dark:text-white font-sans flex items-center gap-2">
             <Briefcase className="h-6 w-6 text-purple-400" />
             {translations.about.experience}
           </h3>
@@ -137,16 +137,16 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
               >
                 <CardHeader>
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                    <CardTitle className="text-purple-400 font-sans">{exp.title}</CardTitle>
-                    <Badge variant="outline" className="border-purple-500/30 text-purple-300">
+                    <CardTitle className="text-purple-400 font-sans">{exp.company}</CardTitle>
+                    <Badge variant="outline" className="border-purple-300 dark:border-purple-500/30 text-purple-700 dark:text-purple-300">
                       {formatPeriod(exp.start_date, exp.end_date, exp.is_current)}
                     </Badge>
                   </div>
-                  <p className="text-gray-300 font-serif font-semibold">{exp.company}</p>
-                  {exp.location && <p className="text-sm text-gray-400">{exp.location}</p>}
+                  <p className="text-gray-700 dark:text-gray-300 font-serif font-semibold">{exp.company}</p>
+                  {exp.location && <p className="text-sm text-gray-600 dark:text-gray-400">{exp.location}</p>}
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <p className="text-gray-400 font-serif">{exp.description}</p>
+                  <p className="text-gray-600 dark:text-gray-400 font-serif">{exp.description}</p>
                   {/* Removed Key Responsibilities as requested */}
                   <div className="flex flex-wrap gap-2">
                     {exp.skills &&
@@ -154,7 +154,7 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
                         <Badge
                           key={skill}
                           variant="secondary"
-                          className="text-xs bg-purple-500/20 text-purple-300 border-purple-500/30"
+                          className="text-xs bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-500/30"
                         >
                           {skill}
                         </Badge>
@@ -166,49 +166,9 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
           </div>
         </div>
 
-          {/* Technologies I Use */}
-          <div className="space-y-6">
-            <h3 className="text-3xl font-bold text-white font-sans flex items-center gap-2">
-              <Globe className="h-6 w-6 text-purple-400" />
-              Technologies I Use
-            </h3>
-            <Card className="hover:shadow-lg transition-shadow duration-300 bg-white/5 backdrop-blur-sm border-purple-500/20">
-              <CardContent className="pt-6">
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    "JavaScript",
-                    "TypeScript",
-                    "React",
-                    "Next.js",
-                    "React Native",
-                    "Node.js",
-                    "Python",
-                    "C#",
-                    "MySQL",
-                    "PostgreSQL",
-                    "Tailwind CSS",
-                    "Jenkins",
-                    "Cypress",
-                    "TestRail",
-                    "Jira",
-                    "Confluence",
-                  ].map((tech) => (
-                    <Badge
-                      key={tech}
-                      variant="secondary"
-                      className="text-xs bg-purple-500/20 text-purple-300 border-purple-500/30"
-                    >
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Education */}
+        {/* Education */}
         <div className="space-y-6">
-          <h3 className="text-3xl font-bold text-white font-sans flex items-center gap-2">
+          <h3 className="text-3xl font-bold text-gray-900 dark:text-white font-sans flex items-center gap-2">
             <GraduationCap className="h-6 w-6 text-purple-400" />
             {translations.about.education}
           </h3>
@@ -221,24 +181,24 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
                 <CardHeader>
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                     <CardTitle className="text-purple-400 font-sans">{edu.degree}</CardTitle>
-                    <Badge variant="outline" className="border-purple-500/30 text-purple-300">
+                    <Badge variant="outline" className="border-purple-300 dark:border-purple-500/30 text-purple-700 dark:text-purple-300">
                       {formatPeriod(edu.start_date, edu.end_date, edu.is_current)}
                     </Badge>
                   </div>
-                  <p className="text-gray-300 font-serif font-semibold">{edu.school}</p>
-                  {edu.location && <p className="text-sm text-gray-400">{edu.location}</p>}
-                  {edu.field_of_study && <p className="text-sm text-gray-400">Field of Study: {edu.field_of_study}</p>}
+                  <p className="text-gray-700 dark:text-gray-300 font-serif font-semibold">{edu.school}</p>
+                  {edu.location && <p className="text-sm text-gray-600 dark:text-gray-400">{edu.location}</p>}
+                  {edu.field_of_study && <p className="text-sm text-gray-600 dark:text-gray-400">Field of Study: {edu.field_of_study}</p>}
                 </CardHeader>
                 {(edu.achievements || edu.description) && (
                   <CardContent className="space-y-3">
-                    {edu.description && <p className="text-gray-400 font-serif">{edu.description}</p>}
+                    {edu.description && <p className="text-gray-600 dark:text-gray-400 font-serif">{edu.description}</p>}
                     {edu.achievements && edu.achievements.length > 0 && (
                       <div className="flex flex-wrap gap-2">
                         {edu.achievements.map((achievement: string) => (
                           <Badge
                             key={achievement}
                             variant="secondary"
-                            className="text-xs bg-purple-500/20 text-purple-300 border-purple-500/30"
+                            className="text-xs bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-500/30"
                           >
                             {achievement}
                           </Badge>
@@ -254,7 +214,7 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
 
         {/* Certifications */}
         <div className="space-y-6">
-          <h3 className="text-3xl font-bold text-white font-sans flex items-center gap-2">
+          <h3 className="text-3xl font-bold text-gray-900 dark:text-white font-sans flex items-center gap-2">
             <Award className="h-6 w-6 text-purple-400" />
             {translations.about.certifications}
           </h3>
@@ -266,12 +226,12 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
                     <div className="flex items-start gap-2">
                       <Award className="h-4 w-4 text-purple-400 flex-shrink-0 mt-1" />
                       <div className="flex-1">
-                        <h4 className="text-sm font-semibold text-purple-300">{cert.name}</h4>
-                        <p className="text-xs text-gray-400">{cert.issuing_organization}</p>
-                        <p className="text-xs text-gray-500">
+                        <h4 className="text-sm font-semibold text-purple-700 dark:text-purple-300">{cert.name}</h4>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">{cert.issuing_organization}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-500">
                           {new Date(cert.issue_date).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
                         </p>
-                        {cert.description && <p className="text-xs text-gray-400 mt-1">{cert.description}</p>}
+                        {cert.description && <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{cert.description}</p>}
                       </div>
                     </div>
                   </div>
