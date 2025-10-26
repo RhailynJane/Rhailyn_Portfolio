@@ -6071,12 +6071,30 @@ function useTranslation() {
     _s();
     const [currentLanguage, setCurrentLanguage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initialLanguage);
     const [t, setT] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$translations$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getTranslation"])(initialLanguage));
+    const [mounted, setMounted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    // Load language from localStorage after mount to avoid hydration mismatch
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "useTranslation.useEffect": ()=>{
+            setMounted(true);
+            if ("TURBOPACK compile-time truthy", 1) {
+                const savedLanguage = localStorage.getItem("preferredLanguage");
+                if (savedLanguage && savedLanguage !== currentLanguage) {
+                    setCurrentLanguage(savedLanguage);
+                }
+            }
+        }
+    }["useTranslation.useEffect"], []);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "useTranslation.useEffect": ()=>{
             setT((0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$translations$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getTranslation"])(currentLanguage));
+            // Save to localStorage whenever language changes (only after mount)
+            if (mounted && "object" !== "undefined") {
+                localStorage.setItem("preferredLanguage", currentLanguage);
+            }
         }
     }["useTranslation.useEffect"], [
-        currentLanguage
+        currentLanguage,
+        mounted
     ]);
     const changeLanguage = (language)=>{
         setCurrentLanguage(language);
@@ -6087,7 +6105,7 @@ function useTranslation() {
         changeLanguage
     };
 }
-_s(useTranslation, "QeSuSNUFPBft7NRlYDjDTw2MkjY=");
+_s(useTranslation, "RdLm5xNESiuONZBUoIEO4A90tzA=");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
 }

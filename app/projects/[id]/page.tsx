@@ -8,6 +8,7 @@ import { useRouter, useParams } from "next/navigation"
 import { useTranslation } from "@/hooks/use-translation"
 import { dataService } from "@/lib/data-service"
 import { useEffect, useState } from "react"
+import { SidebarNavigation } from "@/components/sidebar-navigation"
 
 interface Project {
   id: string
@@ -32,10 +33,18 @@ interface Project {
 export default function ProjectDetailPage() {
   const router = useRouter()
   const params = useParams()
-  const { t } = useTranslation()
+  const { t, currentLanguage, changeLanguage } = useTranslation()
 
   const [project, setProject] = useState<Project | null>(null)
   const [loading, setLoading] = useState(true)
+
+  const handleSectionChange = (section: string) => {
+    window.location.href = `/?section=${section}`
+  }
+
+  const handleLanguageChange = (language: string) => {
+    changeLanguage(language)
+  }
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -81,34 +90,60 @@ export default function ProjectDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading project details...</p>
+      <>
+        <SidebarNavigation
+          activeSection="projects"
+          onSectionChange={handleSectionChange}
+          currentLanguage={currentLanguage}
+          onLanguageChange={handleLanguageChange}
+          translations={t}
+        />
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">{t.common.loading}</p>
+          </div>
         </div>
-      </div>
+      </>
     )
   }
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Project Not Found</h1>
-          <Button onClick={() => router.back()}>
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Go Back
-          </Button>
+      <>
+        <SidebarNavigation
+          activeSection="projects"
+          onSectionChange={handleSectionChange}
+          currentLanguage={currentLanguage}
+          onLanguageChange={handleLanguageChange}
+          translations={t}
+        />
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold mb-4">Project Not Found</h1>
+            <Button onClick={() => router.back()}>
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Go Back
+            </Button>
+          </div>
         </div>
-      </div>
+      </>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="mb-8">
+    <>
+      <SidebarNavigation
+        activeSection="projects"
+        onSectionChange={handleSectionChange}
+        currentLanguage={currentLanguage}
+        onLanguageChange={handleLanguageChange}
+        translations={t}
+      />
+      <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
+        <div className="max-w-6xl mx-auto px-4 py-8">
+          {/* Header */}
+          <div className="mb-8">
           <Button 
             variant="outline" 
             onClick={() => {
@@ -247,7 +282,8 @@ export default function ProjectDetailPage() {
             </Card>
           </div>
         </div>
+        </div>
       </div>
-    </div>
-  )
-}
+      </>
+    )
+  }
