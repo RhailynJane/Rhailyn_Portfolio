@@ -18,9 +18,9 @@ A modern, responsive portfolio website built with Next.js, featuring dynamic con
 
 - **Frontend**: Next.js 15, React 19, TypeScript
 - **Styling**: Tailwind CSS, Radix UI Components
-- **Database**: PostgreSQL via Prisma ORM
+- **Database**: Supabase (PostgreSQL) via Prisma ORM
 - **Authentication**: HTTP Basic Auth for admin
-- **Deployment**: Vercel-ready
+- **Deployment**: Vercel
 - **Icons**: Lucide React
 - **Fonts**: Geist, Manrope
 
@@ -30,7 +30,7 @@ A modern, responsive portfolio website built with Next.js, featuring dynamic con
 
 - Node.js 18+ 
 - npm or yarn
-- PostgreSQL database
+- Supabase account (free tier available)
 
 ### Installation
 
@@ -45,22 +45,27 @@ A modern, responsive portfolio website built with Next.js, featuring dynamic con
    npm install
    ```
 
-3. **Set up environment variables**
-   Create a `.env.local` file in the root directory:
+3. **Set up Supabase**
+   - Create a free account at [supabase.com](https://supabase.com)
+   - Create a new project
+   - Get your database connection string from Settings → Database → Connection String (URI)
+
+4. **Set up environment variables**
+   Create a `.env` file in the root directory:
    ```env
-   DATABASE_URL="postgresql://user:password@host:port/database"
+   DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.xxxxx.supabase.co:5432/postgres"
    ADMIN_USER=admin
    ADMIN_PASSWORD=your_secure_password
    ```
+   Note: Special characters in password need URL encoding (e.g., `!` = `%21`, `@` = `%40`)
 
-4. **Set up database**
+5. **Set up database**
    ```bash
-   npm run db:generate
    npm run db:push
    npm run db:seed
    ```
 
-5. **Run the development server**
+6. **Run the development server**
    ```bash
    npm run dev
    ```
@@ -133,7 +138,7 @@ Content is managed through `lib/data-service.ts`. You can:
 For dynamic content via database, Prisma is used to manage data models (e.g., Feedback, Projects). See `prisma/schema.prisma` and `prisma/seed.ts`.
 
 ### Database Setup
-Ensure your PostgreSQL database has the Feedback table created via `npx prisma db push` before deployment.
+The database schema is automatically synced to Supabase using `npm run db:push`. Seed data is populated via `npm run db:seed`.
 
 ## 📱 Features Overview
 
@@ -160,4 +165,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Built with [Next.js](https://nextjs.org/)
 - UI components from [Radix UI](https://radix-ui.com/) and [shadcn/ui](https://ui.shadcn.com/)
 - Styled with [Tailwind CSS](https://tailwindcss.com/)
-- Database powered by [Prisma](https://prisma.io/) + PostgreSQL
+- Database powered by [Supabase](https://supabase.com/) + [Prisma](https://prisma.io/)
