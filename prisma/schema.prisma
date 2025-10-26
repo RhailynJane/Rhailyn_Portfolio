@@ -75,6 +75,14 @@ model Project {
   figmaUrl        String?  @map("figma_url")
   featured        Boolean  @default(false)
   status          String   @default("completed") // completed, in-progress, planned
+  // Extended fields for detailed project pages
+  role            String?  @db.Text
+  team            String?
+  duration        String?
+  timeline        String?  @db.Text
+  features        String[] // Array of feature descriptions
+  challenges      String?  @db.Text
+  outcome         String?  @db.Text
   createdAt       DateTime @default(now()) @map("created_at")
   updatedAt       DateTime @updatedAt @map("updated_at")
 

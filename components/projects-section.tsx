@@ -3,10 +3,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Github, Calendar, ExternalLink } from "lucide-react"
+import { Github, ExternalLink, Eye } from "lucide-react"
 import { useState, useEffect } from "react"
 import { dataService } from "@/lib/data-service"
 import type { Translation } from "@/lib/translations"
+import Link from "next/link"
 
 interface Project {
   id: string
@@ -83,10 +84,6 @@ export function ProjectsSection({ translations }: ProjectsSectionProps) {
                     {project.category}
                   </Badge>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Calendar className="h-4 w-4" />
-                  {new Date(project.created_at).toLocaleDateString()}
-                </div>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm text-muted-foreground font-serif line-clamp-3">{project.description}</p>
@@ -105,20 +102,17 @@ export function ProjectsSection({ translations }: ProjectsSectionProps) {
                 </div>
 
                 <div className="flex gap-2 pt-2">
-                  {project.demo_url && project.demo_url !== "#" && (
-                    <Button variant="default" size="sm" className="flex-1" asChild>
-                      <a href={project.demo_url} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        View Demo
-                      </a>
-                    </Button>
-                  )}
+                  <Button variant="default" size="sm" className="flex-1" asChild>
+                    <Link href={`/projects/${project.id}`}>
+                      <Eye className="h-4 w-4 mr-2" />
+                      View Details
+                    </Link>
+                  </Button>
 
                   {project.github_url && project.github_url !== "#" && (
-                    <Button variant="outline" size="sm" asChild className={project.demo_url && project.demo_url !== "#" ? "" : "flex-1"}>
+                    <Button variant="outline" size="sm" asChild>
                       <a href={project.github_url} target="_blank" rel="noopener noreferrer">
-                        <Github className="h-4 w-4 mr-2" />
-                        GitHub
+                        <Github className="h-4 w-4" />
                       </a>
                     </Button>
                   )}
@@ -126,8 +120,7 @@ export function ProjectsSection({ translations }: ProjectsSectionProps) {
                   {project.figma_url && (
                     <Button variant="outline" size="sm" asChild>
                       <a href={project.figma_url} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        Figma
+                        <ExternalLink className="h-4 w-4" />
                       </a>
                     </Button>
                   )}

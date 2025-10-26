@@ -33,6 +33,13 @@ export async function GET(request: Request) {
         status: project.status,
         created_at: project.createdAt.toISOString(),
         updated_at: project.updatedAt.toISOString(),
+        role: project.role || undefined,
+        team: project.team || undefined,
+        duration: project.duration || undefined,
+        timeline: project.timeline || undefined,
+        features: project.features || undefined,
+        challenges: project.challenges || undefined,
+        outcome: project.outcome || undefined,
       })
     }
 
@@ -68,6 +75,13 @@ export async function GET(request: Request) {
       status: p.status,
       created_at: p.createdAt.toISOString(),
       updated_at: p.updatedAt.toISOString(),
+      role: p.role || undefined,
+      team: p.team || undefined,
+      duration: p.duration || undefined,
+      timeline: p.timeline || undefined,
+      features: p.features || undefined,
+      challenges: p.challenges || undefined,
+      outcome: p.outcome || undefined,
     }))
 
     return NextResponse.json(formattedProjects)

@@ -131,7 +131,14 @@ async function GET(request) {
                 featured: project.featured,
                 status: project.status,
                 created_at: project.createdAt.toISOString(),
-                updated_at: project.updatedAt.toISOString()
+                updated_at: project.updatedAt.toISOString(),
+                role: project.role || undefined,
+                team: project.team || undefined,
+                duration: project.duration || undefined,
+                timeline: project.timeline || undefined,
+                features: project.features || undefined,
+                challenges: project.challenges || undefined,
+                outcome: project.outcome || undefined
             });
         }
         if (category) {
@@ -174,7 +181,14 @@ async function GET(request) {
                 featured: p.featured,
                 status: p.status,
                 created_at: p.createdAt.toISOString(),
-                updated_at: p.updatedAt.toISOString()
+                updated_at: p.updatedAt.toISOString(),
+                role: p.role || undefined,
+                team: p.team || undefined,
+                duration: p.duration || undefined,
+                timeline: p.timeline || undefined,
+                features: p.features || undefined,
+                challenges: p.challenges || undefined,
+                outcome: p.outcome || undefined
             }));
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(formattedProjects);
     } catch (error) {

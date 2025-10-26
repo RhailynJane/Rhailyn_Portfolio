@@ -14,27 +14,57 @@ export type Project = {
   status: string
   created_at: string
   updated_at: string
+  // Extended fields for detailed project pages
+  role?: string
+  team?: string
+  duration?: string
+  timeline?: string
+  features?: string[]
+  challenges?: string
+  outcome?: string
 }
 
 const mockProjects: Project[] = [
   {
     id: "1",
-    title: "SafeSpace Mobile App",
-    description: "Mobile application prototype for safe space community platform",
+    title: "SafeSpace Mental Health App",
+    description: "Comprehensive mental health and wellness application with mood tracking, AI journaling, and professional consultations",
     long_description:
-      "Mobile application prototype designed for safe space community platform with community safety features and user-friendly interface.",
-    technologies: ["React Native", "JavaScript", "Mobile Development"],
+      "SafeSpace is a comprehensive mental health and wellness application designed to provide users with tools for mental health management, professional support, and community connection. The app combines evidence-based therapeutic techniques with modern technology to create a supportive ecosystem for mental wellbeing. Core mission: To make mental health support accessible, personalized, and stigma-free through technology-enabled care solutions.",
+    technologies: ["React Native", "TypeScript", "Expo Router", "PostgreSQL", "Node.js", "Express", "WebRTC", "WebSocket", "JWT", "AWS S3"],
     category: "Mobile Application",
-    github_url: null,
+    github_url: "https://github.com/annieala/SafeSpace-prototype",
     demo_url: null,
-    video_url: null,
-    image_url: "/safespace-mobile.png",
+  video_url: null,
+  // No image for this project (hide media section on details page)
+  image_url: null,
     figma_url:
       "https://www.figma.com/design/4fuzNHukJNygOXylaNqjct/Mobile?node-id=0-1&t=GuSJCPJG8kJr0xwn-1",
     featured: true,
     status: "completed",
-    created_at: "2024-01-01T00:00:00Z",
-    updated_at: "2024-01-01T00:00:00Z",
+    created_at: "2025-05-01T00:00:00Z",
+    updated_at: "2025-12-01T00:00:00Z",
+    role: "Project Manager, Lead Mobile Developer, Frontend Developer, Backend Developer, UI/UX Designer, QA",
+    team: "Clarity Collective Team",
+    duration: "May 2025 - December 2025",
+    timeline: "May-September: Research and Design | September-December: Development, Testing, Deployment",
+    features: [
+      "Mood Tracking & Analytics - Daily mood monitoring with insights and pattern recognition",
+      "AI-Powered Journaling - Intelligent reflection with emotion tagging and search capabilities",
+      "Professional Consultations - Secure HIPAA-compliant video therapy sessions with WebRTC",
+      "Community Support - Safe moderated forum for shared experiences and discussions",
+      "Crisis Resources - Immediate support with emergency contacts and grounding exercises",
+      "Personalized Resources - Curated mental health content library with recommendations",
+      "Self-Assessment Tools - Clinical screening instruments (PHQ-9, GAD-7) with progress tracking",
+      "Real-time Messaging - Secure chat with file sharing and group conversations",
+      "Appointment Management - Support worker directory with availability scheduling",
+      "Push Notifications - Multi-type notifications for appointments, messages, and system updates",
+      "Security & Privacy - Row-level security, data encryption, and audit logging"
+    ],
+    challenges:
+      "Building a HIPAA-compliant mental health platform required implementing robust security measures including end-to-end encryption, secure video consultations, and comprehensive audit logging. Integrating clinical assessment tools (PHQ-9, GAD-7) with crisis detection algorithms demanded careful validation. Creating an accessible, stigma-free user experience while maintaining professional therapeutic standards was a key design challenge. Real-time features (messaging, video calls) required optimizing WebSocket and WebRTC implementations for reliability.",
+    outcome:
+      "Successfully delivered a comprehensive mental health platform serving the Clarity Collective community. The app features 12 core modules including mood tracking, journaling, video consultations, and crisis support. Implemented secure authentication with JWT, real-time communication with WebSocket, and HIPAA-compliant video calls. Built a scalable PostgreSQL database architecture with proper security policies. Created an intuitive React Native interface with TypeScript, providing users with accessible mental health support and professional care coordination."
   },
   {
     id: "2",
