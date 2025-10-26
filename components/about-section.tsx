@@ -178,27 +178,27 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
                 key={index}
                 className="hover:shadow-lg transition-shadow duration-300 bg-white/5 backdrop-blur-sm border-purple-500/20"
               >
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                    <CardTitle className="text-purple-400 font-sans">{edu.degree}</CardTitle>
-                    <Badge variant="outline" className="border-purple-300 dark:border-purple-500/30 text-purple-700 dark:text-purple-300">
+                <CardHeader className="space-y-3">
+                  <div className="flex flex-col gap-2">
+                    <CardTitle className="text-lg sm:text-xl text-purple-400 font-sans wrap-break-word">{edu.degree}</CardTitle>
+                    <Badge variant="outline" className="border-purple-300 dark:border-purple-500/30 text-purple-700 dark:text-purple-300 w-fit text-xs">
                       {formatPeriod(edu.start_date, edu.end_date, edu.is_current)}
                     </Badge>
                   </div>
-                  <p className="text-gray-700 dark:text-gray-300 font-serif font-semibold">{edu.school}</p>
-                  {edu.location && <p className="text-sm text-gray-600 dark:text-gray-400">{edu.location}</p>}
-                  {edu.field_of_study && <p className="text-sm text-gray-600 dark:text-gray-400">Field of Study: {edu.field_of_study}</p>}
+                  <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 font-serif font-semibold wrap-break-word">{edu.school}</p>
+                  {edu.location && <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{edu.location}</p>}
+                  {edu.field_of_study && <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Field of Study: {edu.field_of_study}</p>}
                 </CardHeader>
                 {(edu.achievements || edu.description) && (
                   <CardContent className="space-y-3">
-                    {edu.description && <p className="text-gray-600 dark:text-gray-400 font-serif">{edu.description}</p>}
+                    {edu.description && <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-serif">{edu.description}</p>}
                     {edu.achievements && edu.achievements.length > 0 && (
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
                         {edu.achievements.map((achievement: string) => (
                           <Badge
                             key={achievement}
                             variant="secondary"
-                            className="text-xs bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-500/30 max-w-full wrap-break-word"
+                            className="text-[10px] sm:text-xs bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-500/30 inline-block whitespace-normal leading-relaxed py-1"
                           >
                             {achievement}
                           </Badge>
@@ -220,18 +220,18 @@ const formatPeriod = (startDate: string, endDate: string | null, isCurrent: bool
           </h3>
           <Card className="hover:shadow-lg transition-shadow duration-300 bg-white/5 backdrop-blur-sm border-purple-500/20">
             <CardContent className="pt-6">
-              <div className="grid sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {certifications.map((cert: any, index) => (
-                  <div key={index} className="flex flex-col gap-2 p-4 rounded-lg bg-white/5 backdrop-blur-sm">
+                  <div key={index} className="flex flex-col gap-2 p-3 sm:p-4 rounded-lg bg-white/5 backdrop-blur-sm">
                     <div className="flex items-start gap-2">
                       <Award className="h-4 w-4 text-purple-400 shrink-0 mt-1" />
-                      <div className="flex-1">
-                        <h4 className="text-sm font-semibold text-purple-700 dark:text-purple-300">{cert.name}</h4>
-                        <p className="text-xs text-gray-600 dark:text-gray-400">{cert.issuing_organization}</p>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-sm sm:text-base font-semibold text-purple-700 dark:text-purple-300 wrap-break-word">{cert.name}</h4>
+                        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{cert.issuing_organization}</p>
                         <p className="text-xs text-gray-500 dark:text-gray-500">
                           {new Date(cert.issue_date).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
                         </p>
-                        {cert.description && <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{cert.description}</p>}
+                        {cert.description && <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1.5">{cert.description}</p>}
                       </div>
                     </div>
                   </div>
