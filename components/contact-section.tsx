@@ -25,12 +25,6 @@ export function ContactSection({ translations }: ContactSectionProps) {
       href: "mailto:crhailynjane@gmail.com",
     },
     {
-      icon: Mail,
-      label: "Professional Email",
-      value: "contact@rhailyncona.dev",
-      href: "mailto:contact@rhailyncona.dev",
-    },
-    {
       icon: MapPin,
       label: "Location",
       value: "Calgary, AB, Canada",
@@ -54,7 +48,7 @@ export function ContactSection({ translations }: ContactSectionProps) {
     {
       icon: Mail,
       label: "Email",
-      href: "mailto:contact@rhailyncona.dev",
+      href: "mailto:crhailynjane@gmail.com",
       color: "text-red-600",
     },
   ]

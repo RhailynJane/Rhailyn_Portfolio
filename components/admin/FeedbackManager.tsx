@@ -102,8 +102,8 @@ export default function FeedbackManager({ items }: Props) {
     await fetch(`/api/feedback/moderation?id=${encodeURIComponent(id)}` , {
       method: "DELETE",
     })
-    // Trigger full page refresh to get updated data from server
-    window.location.reload()
+    // Redirect to deleted page after deletion
+    window.location.href = "/admin/deleted"
   }
 
   const restoreOne = async (id: string) => {
@@ -135,7 +135,8 @@ export default function FeedbackManager({ items }: Props) {
         fetch(`/api/feedback/moderation?id=${encodeURIComponent(id)}`, { method: "DELETE" })
       )
     )
-    window.location.reload()
+    // Redirect to deleted page after bulk deletion
+    window.location.href = "/admin/deleted"
   }
 
   const bulkRestore = async () => {

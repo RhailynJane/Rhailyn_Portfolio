@@ -141,7 +141,7 @@ export function HeroSection({ onScrollToAbout, translations }: HeroSectionProps)
               variant="outline"
               size="icon"
               className="border-purple-400/30 text-purple-400 hover:bg-purple-500/20 hover:border-purple-400/50 hover:scale-110 transition-all duration-300 bg-gray-200/50 dark:bg-white/5 backdrop-blur-sm"
-              onClick={() => window.location.href = 'mailto:contact@rhailyncona.dev'}
+              onClick={() => window.location.href = 'mailto:crhailynjane@gmail.com'}
             >
               <Mail className="h-4 w-4" />
             </Button>
