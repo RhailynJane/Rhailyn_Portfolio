@@ -102,10 +102,13 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
     "Postman": "Validated APIs and created test suites at Convoso and for personal projects.",
     "Manual Testing": "Executed comprehensive test plans as QA Engineer at Convoso.",
     "Automated Testing": "Transitioned to automation team, contributed Cypress scripts at Convoso.",
-    "Regression Testing": "Conducted daily regression with Selenium at Convoso (Technical Support).",
+    "Regression Testing": "Performed release regression testing as QA Engineer at Convoso.",
     "Smoke Testing": "Verified builds and critical paths at Convoso.",
     "Sanity Testing": "Quick validation of fixes and features at Convoso.",
     "Performance Testing": "Load tested critical user flows at Convoso.",
+    "Wireframing": "Designed user flows and interface mockups for SafeSpace, FitMindAI, and Health Connect.",
+    "User Research": "Conducted user testing and gathered feedback to inform design decisions across projects.",
+    "Cross-Platform Development": "Built apps for web and mobile using React, React Native, and .NET MAUI across multiple projects.",
     // Tools/DevOps
     "Jenkins": "Set up CI pipelines for automated test runs at Convoso.",
     "Jira": "Tracked bugs, stories, and releases across Convoso and personal projects.",
@@ -121,6 +124,71 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
     "Knowledge Management": "Built knowledge base articles at Convoso.",
     "Technical Documentation": "Wrote system integration docs and user guides at Convoso and Emerson.",
     "Technical Training": "Conducted training sessions for new hires at Emerson.",
+  }
+
+  const toolDescriptions: Record<string, string> = {
+    // Development Tools
+    "VS Code": "Primary code editor used across all web and mobile projects.",
+    "Git & GitHub": "Version control and collaboration for SafeSpace, Portfolio, and open-source contributions.",
+    "NPM & Yarn": "Package management for Node.js projects and dependency handling.",
+    "Vite": "Build tool for fast development in modern web projects.",
+    "Webpack": "Module bundler configuration for complex build workflows.",
+    
+    // Frontend
+    "React.js": "Component library for CineTracker and Portfolio web applications.",
+    "Next.js": "Framework for SSR/SSG in Portfolio and CineTracker projects.",
+    "Tailwind CSS": "Utility-first styling across Portfolio, CineTracker, and Health Connect.",
+    "shadcn/ui": "Component library integrated in Portfolio for consistent UI design.",
+    "Bootstrap": "Responsive layouts in earlier projects and prototypes.",
+    
+    // Backend & Database
+    "Node.js": "Runtime for SafeSpace backend API and Express servers.",
+    "Express.js": "RESTful API framework for SafeSpace and project backends.",
+    "Prisma": "Type-safe ORM for Portfolio and SafeSpace database operations.",
+    "PostgreSQL": "Primary database for Portfolio (Supabase) and SafeSpace data.",
+    "MySQL": "Database used in academic projects and multi-tier applications.",
+    "SQL Server": "Enterprise database experience from coursework.",
+    "Firebase": "Auth and Firestore backend for CineTracker and FitMindAI.",
+    "Supabase": "PostgreSQL hosting and real-time features for Portfolio.",
+    "WatermelonDB": "Offline-first database for SafeSpace mobile app.",
+    
+    // Mobile
+    "React Native": "Cross-platform framework for SafeSpace, FitMindAI, and Health Connect apps.",
+    "Expo": "Development platform for rapid mobile iteration and deployment.",
+    ".NET MAUI": "Cross-platform apps (Traveless, Utility Management).",
+    "Xamarin": "Earlier mobile development experience with .NET stack.",
+    
+    // Testing
+    "Cypress": "E2E testing automation at Convoso as QA Engineer.",
+    "Selenium": "Regression test automation at Convoso (Technical Support and QA).",
+    "Postman": "API testing at Convoso and across personal projects.",
+    "TestRail": "Test case management and execution tracking at Convoso.",
+    "Jest": "Unit testing for React components and Node.js functions.",
+    
+    // Design
+    "Figma": "UI/UX design and prototyping for SafeSpace, FitMindAI, and Health Connect.",
+    "Adobe XD": "Wireframing and design mockups for web interfaces.",
+    "Canva": "Graphics and presentation materials for projects.",
+    
+    // Project Management
+    "Jira": "Sprint planning and bug tracking at Convoso and across projects.",
+    "Confluence": "Documentation and knowledge base at Convoso.",
+    "Trello": "Task management for personal and team projects.",
+    "Slack": "Team communication and collaboration.",
+    "Microsoft Teams": "Cross-functional coordination at work and school.",
+    
+    // DevOps
+    "Jenkins": "CI/CD pipelines for automated testing at Convoso.",
+    "Docker": "Containerization for development environments.",
+    "Vercel": "Production deployment for Portfolio and Next.js apps.",
+    "Netlify": "Hosting for static sites and frontend projects.",
+    
+    // Other
+    "ESLint": "Code quality and linting across JavaScript/TypeScript projects.",
+    "Prettier": "Code formatting standards for consistent style.",
+    "Zendesk": "Customer support ticketing at Ascent Solutions and Emerson.",
+    "Zoho Desk": "Help desk management at Ascent Solutions.",
+    "Wireshark": "Network diagnostics and troubleshooting at Emerson.",
   }
 
   const getIconComponent = (iconName: string) => {
@@ -224,18 +292,29 @@ export function SkillsSection({ translations }: SkillsSectionProps) {
           </div>
           <Card className="hover:shadow-lg transition-shadow duration-300">
             <CardContent className="pt-6">
-              <div className="flex flex-wrap gap-3 justify-center">
-                {tools.map((tool, index) => (
-                  <Badge
-                    key={tool}
-                    variant="secondary"
-                    className="px-4 py-2 text-sm font-serif hover:scale-105 transition-transform duration-200 animate-fade-in"
-                    style={{ animationDelay: `${index * 50}ms` }}
-                  >
-                    {tool}
-                  </Badge>
-                ))}
-              </div>
+              <TooltipProvider>
+                <div className="flex flex-wrap gap-3 justify-center">
+                  {tools.map((tool, index) => {
+                    const toolDesc = toolDescriptions[tool] || `Used in various projects and workflows.`
+                    return (
+                      <Tooltip key={tool}>
+                        <TooltipTrigger asChild>
+                          <Badge
+                            variant="secondary"
+                            className="px-4 py-2 text-sm font-serif hover:scale-105 transition-transform duration-200 animate-fade-in cursor-help"
+                            style={{ animationDelay: `${index * 50}ms` }}
+                          >
+                            {tool}
+                          </Badge>
+                        </TooltipTrigger>
+                        <TooltipContent className="max-w-xs text-sm font-serif">
+                          <p><span className="font-semibold">{tool}</span> — {toolDesc}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    )
+                  })}
+                </div>
+              </TooltipProvider>
             </CardContent>
           </Card>
         </div>

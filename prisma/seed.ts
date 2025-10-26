@@ -452,8 +452,8 @@ async function main() {
         startDate: new Date('2024-01-01'),
         endDate: new Date('2025-12-01'),
         isCurrent: true,
-        description: 'Comprehensive diploma program focused on modern software development practices, covering full-stack web development, mobile application development, database management, and software engineering principles. Gained hands-on experience with industry-standard tools and technologies including React, React Native, .NET MAUI, Python, C#, MySQL, PostgreSQL, and modern development workflows using Git, Jira, and Agile methodologies.',
-        achievements: ['Expected Graduation: December 2025', 'Focus on Full-Stack Development', 'Hands-on Project Experience'],
+        description: 'Comprehensive diploma program focused on modern software development practices, covering full-stack web development, mobile application development, database management, and software engineering principles. Applied industry-standard tools and technologies including React, React Native, .NET MAUI, Python, C#, MySQL, PostgreSQL in projects like SafeSpace, CineTracker, FitMindAI, and Health Connect, using modern development workflows with Git, Jira, and Agile methodologies.',
+        achievements: ['Expected Graduation: December 2025', 'Focus on Full-Stack Development', 'Applied learning through SafeSpace, CineTracker, and mobile app projects'],
         displayOrder: 1,
       },
       {
