@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Github, ExternalLink, Play, Calendar, Users, Code } from "lucide-react"
+import { ArrowLeft, Github, ExternalLink, Calendar, Users, Code } from "lucide-react"
 import { useRouter, useParams } from "next/navigation"
 import { useTranslation } from "@/hooks/use-translation"
 import { dataService } from "@/lib/data-service"
@@ -109,7 +109,14 @@ export default function ProjectDetailPage() {
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <Button variant="outline" onClick={() => router.push("/#projects")} className="mb-6">
+          <Button 
+            variant="outline" 
+            onClick={() => {
+              // Navigate to home page with projects query parameter
+              window.location.href = "/?section=projects"
+            }} 
+            className="mb-6"
+          >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Projects
           </Button>
@@ -122,31 +129,6 @@ export default function ProjectDetailPage() {
             <p className="text-xl text-muted-foreground font-serif max-w-3xl">{project.description}</p>
           </div>
         </div>
-
-        {/* Project Image/Video */}
-        {(project.image || project.videoUrl) && (
-          <Card className="mb-8 overflow-hidden">
-            <CardContent className="p-0">
-              <div className="relative aspect-video bg-muted">
-                {project.image && (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
-                )}
-                {project.videoUrl && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                    <Button size="lg" className="bg-primary/90 hover:bg-primary">
-                      <Play className="h-6 w-6 mr-2" />
-                      Watch Demo
-                    </Button>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        )}
 
         {/* Project Details Grid */}
         <div className="grid lg:grid-cols-3 gap-8 mb-8">
@@ -228,11 +210,6 @@ export default function ProjectDetailPage() {
                     <p className="text-sm leading-relaxed">{project.timeline}</p>
                   </div>
                 )}
-                <div className="flex items-center gap-2 text-sm">
-                  <Calendar className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-muted-foreground">Completed:</span>
-                  <span>{project.date}</span>
-                </div>
               </CardContent>
             </Card>
 

@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import { SidebarNavigation } from "@/components/sidebar-navigation"
 import { HeroSection } from "@/components/hero-section"
 import { AboutSection } from "@/components/about-section"
@@ -11,8 +12,17 @@ import { FeedbackSection } from "@/components/feedback-section"
 import { useTranslation } from "@/hooks/use-translation"
 
 export default function Portfolio() {
+  const searchParams = useSearchParams()
   const [activeSection, setActiveSection] = useState("home")
   const { t, currentLanguage, changeLanguage } = useTranslation("en")
+
+  useEffect(() => {
+    // Check if there's a section query parameter
+    const section = searchParams.get("section")
+    if (section) {
+      setActiveSection(section)
+    }
+  }, [searchParams])
 
   const handleSectionChange = (section: string) => {
     setActiveSection(section)
