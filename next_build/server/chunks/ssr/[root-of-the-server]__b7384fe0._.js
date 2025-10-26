@@ -5195,10 +5195,22 @@ function FeedbackSection({ translations }) {
                                                                 })),
                                                         required: true,
                                                         placeholder: translations.feedback.messagePlaceholder,
-                                                        rows: 5
+                                                        rows: 5,
+                                                        maxLength: 5000
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/feedback-section.tsx",
                                                         lineNumber: 323,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                        className: "text-xs text-gray-500 dark:text-gray-400 text-right",
+                                                        children: [
+                                                            newFeedback.message.length,
+                                                            " / 5000"
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "[project]/components/feedback-section.tsx",
+                                                        lineNumber: 332,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
@@ -5215,14 +5227,14 @@ function FeedbackSection({ translations }) {
                                                         className: "h-4 w-4 mr-2"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/feedback-section.tsx",
-                                                        lineNumber: 334,
+                                                        lineNumber: 338,
                                                         columnNumber: 19
                                                     }, this),
                                                     translations.feedback.submitButton
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/feedback-section.tsx",
-                                                lineNumber: 333,
+                                                lineNumber: 337,
                                                 columnNumber: 17
                                             }, this)
                                         ]

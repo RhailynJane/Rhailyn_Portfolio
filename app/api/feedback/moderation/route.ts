@@ -37,7 +37,7 @@ export async function DELETE(req: Request) {
   try {
     const { searchParams } = new URL(req.url)
     const id = searchParams.get("id") as string
-    await prisma.feedback.delete({ where: { id } })
+    await (prisma as any).feedback.update({ where: { id }, data: { deleted: true, approved: false } })
     return NextResponse.json({ success: true })
   } catch (e) {
     console.error("Database error in moderation DELETE:", e)

@@ -5,12 +5,14 @@ A modern, responsive portfolio website built with Next.js, featuring dynamic con
 ## ✨ Features
 
 - **Responsive Design**: Optimized for all devices with mobile-first approach
-- **Dark Theme**: Elegant dark design with purple accents and smooth animations
-- **Multi-language Support**: Available in English, Filipino, and French
+- **Dark Theme (Default)**: Elegant dark design with purple accents and smooth animations; persists between visits
+- **Multi-language Support**: English (default), Filipino, and French with client-side persistence (hydration-safe)
 - **Dynamic Content**: Database-driven projects, blogs, skills, and experience
 - **Interactive Elements**: Animated hero section with orbital rings and particles
 - **Contact System**: Functional contact form and feedback submission
 - **SEO Optimized**: Built with Next.js best practices
+- **Deep-link Navigation**: Jump directly to sections via `/?section=about|projects|blog|skills|contact`
+- **Project Details Sidebar**: In-page sidebar with language switcher and theme toggle
 
 ## 🛠️ Tech Stack
 
@@ -53,8 +55,9 @@ A modern, responsive portfolio website built with Next.js, featuring dynamic con
 
 4. **Set up database**
    ```bash
-   npx prisma generate
-   npx prisma db push
+   npm run db:generate
+   npm run db:push
+   npm run db:seed
    ```
 
 5. **Run the development server**
@@ -62,7 +65,7 @@ A modern, responsive portfolio website built with Next.js, featuring dynamic con
    npm run dev
    ```
 
-   Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
+   The dev server starts on port 3000 (or the next available port, e.g., 3001). Open the printed URL to view the portfolio.
 
 ## 📁 Project Structure
 
@@ -102,7 +105,13 @@ The portfolio supports three languages:
 - **Filipino** 
 - **French**
 
-Language switching is available in the navigation menu. All content including UI text, project descriptions, and blog posts can be translated.
+Language switching is available in the navigation menu and on project detail pages (via the sidebar). The selected language is stored locally and restored on future visits. Server-side rendering always starts in English to avoid hydration mismatches, then applies your saved preference on the client.
+
+## 🧭 Routing and navigation
+
+- Section deep links: `/?section=about`, `/?section=projects`, `/?section=skills`, `/?section=contact`
+- The "Back to Projects" action on project detail pages returns to `/?section=projects`
+- Project detail pages include a sidebar with language and theme controls
 
 ## 🎨 Customization
 
@@ -121,7 +130,25 @@ Content is managed through `lib/data-service.ts`. You can:
 4. **Education**: Update your educational background
 5. **Certifications**: Add professional certifications
 
-For dynamic content via database, use Prisma to manage the Feedback model.
+For dynamic content via database, Prisma is used to manage data models (e.g., Feedback, Projects). See `prisma/schema.prisma` and `prisma/seed.ts`.
+
+## 🔐 Admin and API
+
+### Admin moderation
+
+- Path: `/admin` (protected by HTTP Basic Auth via `middleware.ts`)
+- Credentials are provided via environment variables: `ADMIN_USER` and `ADMIN_PASSWORD`
+
+### API endpoints
+
+- `GET /api/feedback` — returns approved feedback (public)
+- `POST /api/feedback` — submit feedback (public)
+   - Body: `{ name, email, company?, position?, message, rating }`
+- `GET /api/feedback/modERATION` — list all feedback (requires Basic Auth)
+- `PATCH /api/feedback/modERATION` — approve feedback by `{ id }` (requires Basic Auth)
+- `DELETE /api/feedback/modERATION?id=...` — delete feedback by id (requires Basic Auth)
+
+Note: Admin endpoints require the same credentials as `/admin` (send via the `Authorization: Basic ...` header).
 
 ## 🚀 Deployment
 
@@ -142,7 +169,7 @@ Ensure your PostgreSQL database has the Feedback table created via `npx prisma d
 - **Hero Section**: Animated introduction with contact information
 - **About**: Professional background, education, and certifications
 - **Skills**: Interactive skill categories with proficiency levels
-- **Projects**: Detailed project showcase with GitHub and Figma links
+- **Projects**: Detailed project showcase with GitHub and Figma links; project detail pages include a localized sidebar and a smart "Back to Projects" link
 - **Contact**: Contact information with social media links
 - **Feedback**: Testimonial system with admin moderation
 - **Admin Panel**: Secure moderation dashboard at `/admin` (HTTP Basic Auth)

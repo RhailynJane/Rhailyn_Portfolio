@@ -7,7 +7,9 @@ export async function GET() {
       where: { approved: true },
       orderBy: { createdAt: "desc" },
     })
-    return NextResponse.json(feedback)
+    // Exclude soft-deleted on the server side
+    const filtered = feedback.filter((f: any) => !f.deleted)
+    return NextResponse.json(filtered)
   } catch (e) {
     console.error("Database error:", e)
     // Return empty array when database is unavailable

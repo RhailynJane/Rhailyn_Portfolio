@@ -266,6 +266,7 @@
     --container-3xl: 48rem;
     --container-4xl: 56rem;
     --container-6xl: 72rem;
+    --container-7xl: 80rem;
     --text-xs: .75rem;
     --text-xs--line-height: calc(1 / .75);
     --text-sm: .875rem;
@@ -1764,8 +1765,16 @@
     width: calc(var(--spacing) * 96);
   }
 
+  .w-\[40px\] {
+    width: 40px;
+  }
+
   .w-\[100px\] {
     width: 100px;
+  }
+
+  .w-\[160px\] {
+    width: 160px;
   }
 
   .w-auto {
@@ -1807,6 +1816,14 @@
 
   .max-w-6xl {
     max-width: var(--container-6xl);
+  }
+
+  .max-w-7xl {
+    max-width: var(--container-7xl);
+  }
+
+  .max-w-\[420px\] {
+    max-width: 420px;
   }
 
   .max-w-\[calc\(100\%-2rem\)\] {
@@ -1851,6 +1868,10 @@
 
   .min-w-\[12rem\] {
     min-width: 12rem;
+  }
+
+  .min-w-\[240px\] {
+    min-width: 240px;
   }
 
   .min-w-\[var\(--radix-select-trigger-width\)\] {
@@ -2056,6 +2077,10 @@
 
   .auto-rows-min {
     grid-auto-rows: min-content;
+  }
+
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .grid-cols-\[0_1fr\] {
@@ -3012,6 +3037,16 @@
     background-color: var(--muted);
   }
 
+  .bg-muted\/30 {
+    background-color: var(--muted);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-muted\/30 {
+      background-color: color-mix(in oklab, var(--muted) 30%, transparent);
+    }
+  }
+
   .bg-muted\/50 {
     background-color: var(--muted);
   }
@@ -3563,6 +3598,10 @@
 
   .text-left {
     text-align: left;
+  }
+
+  .text-right {
+    text-align: right;
   }
 
   .align-middle {
@@ -6169,6 +6208,12 @@
   @media (min-width: 40rem) {
     .sm\:grid-cols-2 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 40rem) {
+    .sm\:grid-cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 

@@ -327,7 +327,11 @@ export function FeedbackSection({ translations }: FeedbackSectionProps) {
                     required
                     placeholder={translations.feedback.messagePlaceholder}
                     rows={5}
+                    maxLength={5000}
                   />
+                  <p className="text-xs text-gray-500 dark:text-gray-400 text-right">
+                    {newFeedback.message.length} / 5000
+                  </p>
                 </div>
 
                 <Button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-serif shadow-lg shadow-purple-500/25 transition-all hover:scale-[1.02]">

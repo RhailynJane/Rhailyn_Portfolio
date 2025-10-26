@@ -107,7 +107,9 @@ async function GET() {
                 createdAt: "desc"
             }
         });
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(feedback);
+        // Exclude soft-deleted on the server side
+        const filtered = feedback.filter((f)=>!f.deleted);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(filtered);
     } catch (e) {
         console.error("Database error:", e);
         // Return empty array when database is unavailable
