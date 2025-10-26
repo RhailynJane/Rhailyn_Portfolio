@@ -3,34 +3,35 @@
   "middleware": {
     "/": {
       "files": [
-        "server/edge-runtime-webpack.js",
-        "server/middleware.js"
+        "server/edge/chunks/_96dd3902._.js",
+        "server/edge/chunks/[root-of-the-server]__de110ef0._.js",
+        "server/edge/chunks/edge-wrapper_35eacba0.js"
       ],
       "name": "middleware",
       "page": "/",
       "matchers": [
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/admin(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\.json)?[\\/#\\?]?$",
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/admin(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
           "originalSource": "/admin/:path*"
         },
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/feedback\\/moderation(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\.json)?[\\/#\\?]?$",
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/api\\/feedback\\/moderation(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
           "originalSource": "/api/feedback/moderation/:path*"
         }
       ],
       "wasm": [],
       "assets": [],
       "env": {
-        "__NEXT_BUILD_ID": "ZFsHRtVhyQ0e-UJooFDrC",
+        "__NEXT_BUILD_ID": "development",
         "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "jdMtZgZr44OZcWyvcs1+D4uiwrJkocGzNko0xGWS7IM=",
-        "__NEXT_PREVIEW_MODE_ID": "aed48bf18d189322e0306247b18210ec",
-        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "35d016e7220cc47600c0fb115a2f8018502200624160c4835363f015a860d955",
-        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "2bb2a024bd61dec005c2bb9bcbb9f467197749249f704ed7e9e493a73dbfc42f"
+        "__NEXT_PREVIEW_MODE_ID": "400609697a3fe856a50c49d29139b1fb",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "e771851259b4a35f015115170162d85e34c01cd692d4438f9e0b2683384a6030",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "294e04784b4f5c3dd4b369e8e92ae439e3ce79ee900efb4b91a9ef4e4c2b1bc2"
       }
     }
   },
-  "functions": {},
   "sortedMiddleware": [
     "/"
-  ]
+  ],
+  "functions": {}
 }

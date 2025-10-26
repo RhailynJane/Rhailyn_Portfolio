@@ -36,8 +36,8 @@ A modern, responsive portfolio website built with Next.js, featuring dynamic con
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/portfolio.git
-   cd portfolio
+   git clone https://github.com/RhailynJane/rhailyn_portfolio.git
+   cd rhailyn_portfolio
    ```
 
 2. **Install dependencies**
