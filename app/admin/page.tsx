@@ -40,7 +40,13 @@ async function remove(formData: FormData) {
 
 export default async function AdminPage() {
   // This page is protected by middleware (HTTP Basic Auth)
-  const feedbacks = await prisma.feedback.findMany({ orderBy: { createdAt: "desc" } }) as FeedbackWithDeleted[]
+  let feedbacks: FeedbackWithDeleted[] = []
+  let loadError: string | null = null
+  try {
+    feedbacks = (await prisma.feedback.findMany({ orderBy: { createdAt: "desc" } })) as FeedbackWithDeleted[]
+  } catch (e) {
+    loadError = "Unable to load data from the database. Please verify DATABASE_URL in Vercel environment variables."
+  }
 
   const active = feedbacks.filter((f: FeedbackWithDeleted) => !f.deleted)
   const total = active.length
@@ -62,6 +68,15 @@ export default async function AdminPage() {
             </a>
           </div>
         </div>
+
+        {/* Error state */}
+        {loadError ? (
+          <Card>
+            <CardContent className="pt-4">
+              <p className="text-sm text-red-600">{loadError}</p>
+            </CardContent>
+          </Card>
+        ) : null}
 
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">

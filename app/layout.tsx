@@ -5,6 +5,7 @@ import { Manrope } from "next/font/google"
 import "./globals.css"
 import { ThemeContextProvider } from "@/components/theme-context"
 import { Toaster } from "@/components/toaster"
+import { Analytics } from "@vercel/analytics/next"
 
 const geist = Geist({
   subsets: ["latin"],
@@ -34,6 +35,8 @@ export default function RootLayout({
         <ThemeContextProvider>
           {children}
           <Toaster />
+          {/* Vercel Web Analytics */}
+          <Analytics />
         </ThemeContextProvider>
       </body>
     </html>
