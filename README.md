@@ -132,35 +132,6 @@ Content is managed through `lib/data-service.ts`. You can:
 
 For dynamic content via database, Prisma is used to manage data models (e.g., Feedback, Projects). See `prisma/schema.prisma` and `prisma/seed.ts`.
 
-## 🔐 Admin and API
-
-### Admin moderation
-
-- Path: `/admin` (protected by HTTP Basic Auth via `middleware.ts`)
-- Credentials are provided via environment variables: `ADMIN_USER` and `ADMIN_PASSWORD`
-
-### API endpoints
-
-- `GET /api/feedback` — returns approved feedback (public)
-- `POST /api/feedback` — submit feedback (public)
-   - Body: `{ name, email, company?, position?, message, rating }`
-- `GET /api/feedback/modERATION` — list all feedback (requires Basic Auth)
-- `PATCH /api/feedback/modERATION` — approve feedback by `{ id }` (requires Basic Auth)
-- `DELETE /api/feedback/modERATION?id=...` — delete feedback by id (requires Basic Auth)
-
-Note: Admin endpoints require the same credentials as `/admin` (send via the `Authorization: Basic ...` header).
-
-## 🚀 Deployment
-
-### Deploy to Vercel
-
-1. **Connect your repository** to Vercel
-2. **Add environment variables** in Vercel dashboard:
-   - `DATABASE_URL` (PostgreSQL connection string)
-   - `ADMIN_USER` (for moderation panel)
-   - `ADMIN_PASSWORD` (for moderation panel)
-3. **Deploy** - Vercel will automatically build and deploy your portfolio
-
 ### Database Setup
 Ensure your PostgreSQL database has the Feedback table created via `npx prisma db push` before deployment.
 
@@ -172,15 +143,6 @@ Ensure your PostgreSQL database has the Feedback table created via `npx prisma d
 - **Projects**: Detailed project showcase with GitHub and Figma links; project detail pages include a localized sidebar and a smart "Back to Projects" link
 - **Contact**: Contact information with social media links
 - **Feedback**: Testimonial system with admin moderation
-- **Admin Panel**: Secure moderation dashboard at `/admin` (HTTP Basic Auth)
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ## 📄 License
 
@@ -199,4 +161,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - UI components from [Radix UI](https://radix-ui.com/) and [shadcn/ui](https://ui.shadcn.com/)
 - Styled with [Tailwind CSS](https://tailwindcss.com/)
 - Database powered by [Prisma](https://prisma.io/) + PostgreSQL
-- Deployed on [Vercel](https://vercel.com/)

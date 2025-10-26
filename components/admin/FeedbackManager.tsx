@@ -117,15 +117,38 @@ export default function FeedbackManager({ items }: Props) {
   }
 
   const bulkApprove = async () => {
-    for (const id of selectedIds) await approveOne(id)
+    await Promise.all(
+      selectedIds.map((id) =>
+        fetch("/api/feedback/moderation", {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id }),
+        })
+      )
+    )
+    window.location.reload()
   }
 
   const bulkDelete = async () => {
-    for (const id of selectedIds) await deleteOne(id)
+    await Promise.all(
+      selectedIds.map((id) =>
+        fetch(`/api/feedback/moderation?id=${encodeURIComponent(id)}`, { method: "DELETE" })
+      )
+    )
+    window.location.reload()
   }
 
   const bulkRestore = async () => {
-    for (const id of selectedIds) await restoreOne(id)
+    await Promise.all(
+      selectedIds.map((id) =>
+        fetch("/api/feedback/moderation/restore", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id }),
+        })
+      )
+    )
+    window.location.reload()
   }
 
   const exportCSV = () => {

@@ -1,17 +1,10 @@
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { isUUID } from "@/lib/validation"
-
-function isAuthorized(req: Request) {
-  const header = req.headers.get("authorization") || ""
-  if (!header.startsWith("Basic ")) return false
-  const creds = Buffer.from(header.replace("Basic ", ""), "base64").toString()
-  const [user, pass] = creds.split(":")
-  return user === (process.env.ADMIN_USER || "") && pass === (process.env.ADMIN_PASSWORD || "")
-}
+import { isAdminRequestAuthorized } from "@/lib/admin-auth"
 
 export async function POST(req: Request) {
-  if (!isAuthorized(req)) return new NextResponse("Unauthorized", { status: 401 })
+  if (!(await isAdminRequestAuthorized())) return new NextResponse("Unauthorized", { status: 401 })
   try {
     const { id } = await req.json()
     if (!isUUID(id)) return NextResponse.json({ success: false, error: "Invalid id" }, { status: 400 })

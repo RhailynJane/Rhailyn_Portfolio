@@ -1,17 +1,12 @@
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { isUUID } from "@/lib/validation"
+import { isAdminRequestAuthorized } from "@/lib/admin-auth"
 
-function isAuthorized(req: Request) {
-  const header = req.headers.get("authorization") || ""
-  if (!header.startsWith("Basic ")) return false
-  const creds = Buffer.from(header.replace("Basic ", ""), "base64").toString()
-  const [user, pass] = creds.split(":")
-  return user === process.env.ADMIN_USER && pass === process.env.ADMIN_PASSWORD
-}
+// Auth is enforced by middleware; we also validate cookie here for defense-in-depth
 
-export async function GET(req: Request) {
-  if (!isAuthorized(req)) return new NextResponse("Unauthorized", { status: 401 })
+export async function GET() {
+  if (!(await isAdminRequestAuthorized())) return new NextResponse("Unauthorized", { status: 401 })
   try {
     const feedback = await prisma.feedback.findMany({ orderBy: { createdAt: "desc" } })
     return NextResponse.json(feedback)
@@ -22,7 +17,7 @@ export async function GET(req: Request) {
 }
 
 export async function PATCH(req: Request) {
-  if (!isAuthorized(req)) return new NextResponse("Unauthorized", { status: 401 })
+  if (!(await isAdminRequestAuthorized())) return new NextResponse("Unauthorized", { status: 401 })
   try {
     const body = await req.json()
     const id = body?.id
@@ -36,7 +31,7 @@ export async function PATCH(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  if (!isAuthorized(req)) return new NextResponse("Unauthorized", { status: 401 })
+  if (!(await isAdminRequestAuthorized())) return new NextResponse("Unauthorized", { status: 401 })
   try {
     const { searchParams } = new URL(req.url)
     const id = searchParams.get("id") as string
