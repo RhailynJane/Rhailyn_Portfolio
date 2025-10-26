@@ -1,16 +1,20 @@
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { isUUID, isSafeCategory } from "@/lib/validation"
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
-    const id = searchParams.get("id")
-    const category = searchParams.get("category")
+  const id = searchParams.get("id")
+  const category = searchParams.get("category")
     const featured = searchParams.get("featured")
 
     let projects
 
     if (id) {
+      if (!isUUID(id)) {
+        return NextResponse.json({ error: "Invalid id" }, { status: 400 })
+      }
       const project = await prisma.project.findUnique({
         where: { id },
       })
@@ -30,7 +34,6 @@ export async function GET(request: Request) {
         image_url: project.imageUrl,
         figma_url: project.figmaUrl,
         featured: project.featured,
-        status: project.status,
         created_at: project.createdAt.toISOString(),
         updated_at: project.updatedAt.toISOString(),
         role: project.role || undefined,
@@ -42,6 +45,9 @@ export async function GET(request: Request) {
     }
 
     if (category) {
+      if (!isSafeCategory(category)) {
+        return NextResponse.json({ error: "Invalid category" }, { status: 400 })
+      }
       projects = await prisma.project.findMany({
         where: { category },
         orderBy: { createdAt: "desc" },
@@ -70,7 +76,6 @@ export async function GET(request: Request) {
       image_url: p.imageUrl,
       figma_url: p.figmaUrl,
       featured: p.featured,
-      status: p.status,
       created_at: p.createdAt.toISOString(),
       updated_at: p.updatedAt.toISOString(),
       role: p.role || undefined,

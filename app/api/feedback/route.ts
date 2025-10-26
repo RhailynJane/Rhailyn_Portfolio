@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { sanitizeString, isEmail, clampNumber } from "@/lib/validation"
 
 export async function GET() {
   try {
@@ -20,16 +21,23 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = await req.json()
+
+    const name = sanitizeString(body?.name, 100)
+    const email = sanitizeString(body?.email, 254)
+    const company = sanitizeString(body?.company, 120) || null
+    const position = sanitizeString(body?.position, 120) || null
+    const message = sanitizeString(body?.message, 5000)
+    const rating = clampNumber(body?.rating, 1, 5, 5)
+
+    if (!name || !message) {
+      return NextResponse.json({ error: "Name and message are required" }, { status: 400 })
+    }
+    if (email && !isEmail(email)) {
+      return NextResponse.json({ error: "Invalid email" }, { status: 400 })
+    }
+
     const created = await prisma.feedback.create({
-      data: {
-        name: body.name,
-        email: body.email,
-        company: body.company || null,
-        position: body.position || null,
-        message: body.message,
-        rating: Number(body.rating) || 5,
-        approved: false,
-      },
+      data: { name, email, company, position, message, rating, approved: false },
     })
     return NextResponse.json({ id: created.id })
   } catch (e) {

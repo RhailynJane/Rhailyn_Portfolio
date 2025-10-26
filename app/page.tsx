@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { SidebarNavigation } from "@/components/sidebar-navigation"
 import { HeroSection } from "@/components/hero-section"
@@ -11,18 +11,26 @@ import { ContactSection } from "@/components/contact-section"
 import { FeedbackSection } from "@/components/feedback-section"
 import { useTranslation } from "@/hooks/use-translation"
 
-export default function Portfolio() {
+function SectionFromQuery({ onInit }: { onInit: (section: string) => void }) {
   const searchParams = useSearchParams()
+  useEffect(() => {
+    const section = searchParams.get("section")
+    if (section) onInit(section)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams])
+  return null
+}
+
+export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("home")
   const { t, currentLanguage, changeLanguage } = useTranslation("en")
 
-  useEffect(() => {
-    // Check if there's a section query parameter
-    const section = searchParams.get("section")
-    if (section) {
-      setActiveSection(section)
-    }
-  }, [searchParams])
+  // Initialize from URL query in a Suspense-safe child
+  const InitFromQuery = (
+    <Suspense fallback={null}>
+      <SectionFromQuery onInit={setActiveSection} />
+    </Suspense>
+  )
 
   const handleSectionChange = (section: string) => {
     setActiveSection(section)
@@ -38,6 +46,7 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 dark:from-gray-900 dark:via-black dark:to-gray-800">
+      {InitFromQuery}
       <SidebarNavigation
         activeSection={activeSection}
         onSectionChange={handleSectionChange}

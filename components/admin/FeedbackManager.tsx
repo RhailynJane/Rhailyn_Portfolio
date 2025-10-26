@@ -1,12 +1,14 @@
 "use client"
 
-import { useMemo, useState, useTransition } from "react"
+import { useEffect, useMemo, useState, useTransition } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Eye } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export type FeedbackItem = {
@@ -26,12 +28,21 @@ type Props = {
 
 export default function FeedbackManager({ items }: Props) {
   const [query, setQuery] = useState("")
-  const [filter, setFilter] = useState<"all" | "pending" | "approved" | "deleted">("all")
+  // Default to "deleted" when every incoming item is deleted (e.g., /admin/deleted page)
+  const [filter, setFilter] = useState<"all" | "pending" | "approved" | "deleted">(
+    () => (items.every((i) => i.deleted) ? "deleted" : "all")
+  )
   const [sort, setSort] = useState<"newest" | "oldest" | "rating-desc" | "rating-asc">("newest")
   const [selected, setSelected] = useState<Record<string, boolean>>({})
   const [page, setPage] = useState(1)
   const pageSize = 10
   const [isPending, startTransition] = useTransition()
+
+  // If the source items change and now all are deleted (or not), sync the filter for clarity
+  useEffect(() => {
+    const allDeleted = items.length > 0 && items.every((i) => i.deleted)
+    if (allDeleted && filter !== "deleted") setFilter("deleted")
+  }, [items])
 
   const toggleAll = (checked: boolean) => {
     const map: Record<string, boolean> = {}
@@ -83,29 +94,16 @@ export default function FeedbackManager({ items }: Props) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id }),
     })
-    // Optimistically update
-    setSelected((prev) => ({ ...prev, [id]: false }))
-    // Soft update list
-    const idx = items.findIndex((i) => i.id === id)
-    if (idx >= 0) items[idx].approved = true
-    // Force re-render
-    startTransition(() => setPage((p) => p))
+    // Trigger full page refresh to get updated data from server
+    window.location.reload()
   }
 
   const deleteOne = async (id: string) => {
     await fetch(`/api/feedback/moderation?id=${encodeURIComponent(id)}` , {
       method: "DELETE",
     })
-    // Remove from selection
-    setSelected((prev) => {
-      const copy = { ...prev }
-      delete copy[id]
-      return copy
-    })
-    // Remove from list (local)
-    const idx = items.findIndex((i) => i.id === id)
-    if (idx >= 0) items[idx].deleted = true
-    startTransition(() => setPage((p) => Math.min(p, Math.max(1, Math.ceil(items.length / pageSize)))))
+    // Trigger full page refresh to get updated data from server
+    window.location.reload()
   }
 
   const restoreOne = async (id: string) => {
@@ -114,12 +112,8 @@ export default function FeedbackManager({ items }: Props) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id }),
     })
-    const idx = items.findIndex((i) => i.id === id)
-    if (idx >= 0) {
-      items[idx].deleted = false
-      items[idx].approved = false
-    }
-    startTransition(() => setPage((p) => p))
+    // Trigger full page refresh to get updated data from server
+    window.location.reload()
   }
 
   const bulkApprove = async () => {
@@ -165,18 +159,21 @@ export default function FeedbackManager({ items }: Props) {
               </SelectContent>
             </Select>
             <Input placeholder="Search name, email, message" value={query} onChange={(e) => { setPage(1); setQuery(e.target.value) }} className="w-72" />
-            <Select value={filter} onValueChange={(v: any) => { setPage(1); setFilter(v) }}>
-              <SelectTrigger className="w-36"><SelectValue placeholder="Filter" /></SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All</SelectItem>
-                <SelectItem value="pending">Pending</SelectItem>
-                <SelectItem value="approved">Approved</SelectItem>
-                <SelectItem value="deleted">Deleted</SelectItem>
-              </SelectContent>
-            </Select>
+            {/* Only show filter if not all items are deleted */}
+            {!items.every(i => i.deleted) && (
+              <Select value={filter} onValueChange={(v: any) => { setPage(1); setFilter(v) }}>
+                <SelectTrigger className="w-36"><SelectValue placeholder="Filter" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All</SelectItem>
+                  <SelectItem value="pending">Pending</SelectItem>
+                  <SelectItem value="approved">Approved</SelectItem>
+                  <SelectItem value="deleted">Deleted</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
           </div>
           <div className="flex gap-2 flex-wrap">
-            {filter === "deleted" ? (
+            {filter === "deleted" || items.every(i => i.deleted) ? (
               <Button className="shrink-0" variant="secondary" disabled={selectedIds.length === 0 || isPending} onClick={() => startTransition(bulkRestore)}>Restore Selected</Button>
             ) : (
               <>
@@ -223,6 +220,48 @@ export default function FeedbackManager({ items }: Props) {
                   <TableCell className="text-sm">{new Date(f.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</TableCell>
                   <TableCell>
                     <div className="flex gap-2 justify-end">
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button size="sm" variant="ghost">
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                          <DialogHeader>
+                            <DialogTitle>Feedback Details</DialogTitle>
+                          </DialogHeader>
+                          <div className="space-y-4 pt-4">
+                            <div className="grid grid-cols-2 gap-4">
+                              <div>
+                                <p className="text-sm font-medium text-muted-foreground">Name</p>
+                                <p className="text-sm font-semibold">{f.name}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium text-muted-foreground">Email</p>
+                                <p className="text-sm">{f.email}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium text-muted-foreground">Rating</p>
+                                <p className="text-sm">⭐ {f.rating}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium text-muted-foreground">Status</p>
+                                <p className="text-sm">{f.deleted ? "Deleted" : f.approved ? "Approved" : "Pending"}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium text-muted-foreground">Date</p>
+                                <p className="text-sm">{new Date(f.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
+                              </div>
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium text-muted-foreground mb-2">Message</p>
+                              <div className="bg-muted/50 p-4 rounded-md">
+                                <p className="text-sm whitespace-pre-wrap">{f.message}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
                       {f.deleted ? (
                         <Button size="sm" onClick={() => restoreOne(f.id)} disabled={isPending}>Restore</Button>
                       ) : (

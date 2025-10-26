@@ -35,9 +35,14 @@ export default async function AdminPage() {
       <div className="max-w-7xl mx-auto space-y-6">
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold">Feedback Moderation</h1>
-          <a href="/api/logout">
-            <Button variant="ghost">Logout</Button>
-          </a>
+          <div className="flex gap-2">
+            <a href="/admin/deleted">
+              <Button variant="outline">Deleted</Button>
+            </a>
+            <a href="/api/logout">
+              <Button variant="ghost">Logout</Button>
+            </a>
+          </div>
         </div>
 
         {/* Stats */}

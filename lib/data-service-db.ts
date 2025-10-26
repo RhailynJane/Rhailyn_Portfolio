@@ -40,7 +40,7 @@ export const dataService = {
       image_url: p.imageUrl,
       figma_url: p.figmaUrl,
       featured: p.featured,
-      status: p.status,
+  // status removed from schema
       created_at: p.createdAt.toISOString(),
       updated_at: p.updatedAt.toISOString(),
     }))
@@ -64,7 +64,7 @@ export const dataService = {
       image_url: p.imageUrl,
       figma_url: p.figmaUrl,
       featured: p.featured,
-      status: p.status,
+  // status removed from schema
       created_at: p.createdAt.toISOString(),
       updated_at: p.updatedAt.toISOString(),
     }))
@@ -88,7 +88,7 @@ export const dataService = {
       image_url: project.imageUrl,
       figma_url: project.figmaUrl,
       featured: project.featured,
-      status: project.status,
+  // status removed from schema
       created_at: project.createdAt.toISOString(),
       updated_at: project.updatedAt.toISOString(),
     }
@@ -112,7 +112,7 @@ export const dataService = {
       image_url: p.imageUrl,
       figma_url: p.figmaUrl,
       featured: p.featured,
-      status: p.status,
+  // status removed from schema
       created_at: p.createdAt.toISOString(),
       updated_at: p.updatedAt.toISOString(),
     }))

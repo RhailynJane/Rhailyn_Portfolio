@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { isUUID } from "@/lib/validation"
 
 function isAuthorized(req: Request) {
   const header = req.headers.get("authorization") || ""
@@ -24,7 +25,9 @@ export async function PATCH(req: Request) {
   if (!isAuthorized(req)) return new NextResponse("Unauthorized", { status: 401 })
   try {
     const body = await req.json()
-    await prisma.feedback.update({ where: { id: body.id }, data: { approved: true } })
+    const id = body?.id
+    if (!isUUID(id)) return NextResponse.json({ success: false, error: "Invalid id" }, { status: 400 })
+    await prisma.feedback.update({ where: { id }, data: { approved: true } })
     return NextResponse.json({ success: true })
   } catch (e) {
     console.error("Database error in moderation PATCH:", e)
@@ -37,6 +40,7 @@ export async function DELETE(req: Request) {
   try {
     const { searchParams } = new URL(req.url)
     const id = searchParams.get("id") as string
+    if (!isUUID(id)) return NextResponse.json({ success: false, error: "Invalid id" }, { status: 400 })
     await (prisma as any).feedback.update({ where: { id }, data: { deleted: true, approved: false } })
     return NextResponse.json({ success: true })
   } catch (e) {
