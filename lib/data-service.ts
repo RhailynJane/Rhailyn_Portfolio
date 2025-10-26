@@ -147,7 +147,7 @@ const mockProjects: Project[] = [
       "Personal portfolio website showcasing projects and skills with responsive design and project showcase features.",
     technologies: ["JavaScript", "Web Development"],
     category: "Web Application",
-    github_url: "https://github.com/RhailynJane/Portfolio",
+  github_url: "https://github.com/RhailynJane/rhailyn_portfolio.git",
     demo_url: null,
     video_url: null,
     image_url: "/portfolio.png",
